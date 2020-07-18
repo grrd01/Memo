@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+* grrd's Memo
+* Copyright (c) 2020 Gerard Tyedmers, grrd@gmx.net
+* Licensed under the MPL 2.0 License
+-->
+<html lang="en">
+<head>
+    <title>grrd's Memo</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="manifest" href="manifest/appmanifest.json">
+    <link rel="apple-touch-icon" href="images/icon_ios.png">
+    <link rel="apple-touch-startup-image" href="images/icon_512.png">
+    <meta name="description" content="grrd's Memo is a HTML5 Game that works offline"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#444"/>
+    <meta name="apple-mobile-web-app-title" content="Memo">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" >
+    <link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+    <div id="grid">
+
+    </div>
+    <div class="dummy">
+        <div class="flip-container">
+            <div class="flipper">
+                <div class="front">
+                    <img src="images/back.svg" alt="back">
+                </div>
+                <div class="back">
+                    <img class="image" src="images/back.svg" alt="front">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
