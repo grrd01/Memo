@@ -48,6 +48,7 @@ body {
 /* hide back of pane during swap */
 .front, .back {
     position: absolute;
+    backface-visibility: hidden;
 }
 
 /* front pane, placed above back */
