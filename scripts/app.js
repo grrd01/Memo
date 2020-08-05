@@ -12,26 +12,40 @@
 (function () {
     "use strict";
 
+    const $ = function (id) {
+        return document.getElementById(id);
+    };
+    const iPopupInfo = $("iPopupInfo");
+    const iPopupScore = $("iPopupScore");
+    const iTitle = $("iTitle");
+    const iGame = $("iGame");
+
     // Karten-Template
     let oFlipContainer;
     // Liste aller spielbaren Karten für Click-Handler
-    const lFlipContainer = document.getElementById("grid").getElementsByClassName("flip-container");
+    const lFlipContainer = $("grid").getElementsByClassName("flip-container");
     // Zähler für Schlaufen
     let nIndex;
     // Liste der aktuell umgedrehten Karten
     let lFlipped = [];
     // Anzahl maximal möglicher Paare
     let nMaxPairs = 24;
+    // verfügbare Themen
+    const lThemes = ["animals", "flowers"]
     // Ausgewähltes Thema
-    let cCurrentTheme = "animals";
+    let nCurrentTheme = 0;
+    // verfügbare Themen
+    const lAnzCards = [6, 12, 24, 32, 48]
     // Anzahl Karten fürs aktuelle Spiel
-    let nAnzCards = 24;
+    let nAnzCards = 2;
     // Spieler, der aktuell am Zug ist
     let nCurrentPlayer;
     // Anzahl Spieler
     let nAnzPlayer = 2;
     // Punktestand pro Spieler
     let lScore = [];
+
+
 
     // Mischen eines Arrays
     function fShuffle(lArray) {
@@ -40,6 +54,44 @@
             [lArray[nIndex], lArray[nIndex2]] = [lArray[nIndex2], lArray[nIndex]];
         }
         return lArray;
+    }
+
+    // Popup Info
+    function fShowPopupInfo() {
+        iPopupInfo.classList.remove("popup-init");
+        iPopupInfo.classList.remove("popup-hide");
+        iPopupInfo.classList.add("popup-show");
+    }
+    function fHidePopupInfo() {
+        iPopupInfo.classList.remove("popup-show");
+        iPopupInfo.classList.add("popup-hide");
+    }
+
+    // Theme wechseln
+    function fChangeTheme(event) {
+        let nStep = parseInt(event.target.getAttribute("data-step"));
+        if (nCurrentTheme + nStep >= 0 && nCurrentTheme + nStep < lThemes.length) {
+            nCurrentTheme += nStep;
+            $("lTheme").innerHTML = lThemes[nCurrentTheme];
+        }
+    }
+
+    // Anzahl Karten wechseln
+    function fChangeAnzCards(event) {
+        let nStep = parseInt(event.target.getAttribute("data-step"));
+        if (nAnzCards + nStep >= 0 && nAnzCards + nStep < lAnzCards.length) {
+            nAnzCards += nStep;
+            $("lCards").innerHTML = lAnzCards[nAnzCards];
+        }
+    }
+
+    // Anzahl Spieler wechseln
+    function fChangeAnzPlayers(event) {
+        let nStep = parseInt(event.target.getAttribute("data-step"));
+        if (nAnzPlayer + nStep > 0 && nAnzPlayer + nStep < 6) {
+            nAnzPlayer += nStep;
+            $("lPlayers").innerHTML = nAnzPlayer;
+        }
     }
 
     // Karte umdrehen
@@ -81,7 +133,7 @@
 
         oCard.classList.toggle("turned");
 
-        if (document.getElementsByClassName("turned").length === nAnzCards) {
+        if (document.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
             let nWinner = lScore.indexOf(Math.max(...lScore));
             let nWinnerScore = (Math.max(...lScore));
             console.log("Spieler " + (nWinner + 1) + " gewinnt mit " + nWinnerScore + " Paaren.");
@@ -98,7 +150,7 @@
 
         // Werte initialisieren
         // alte Karten löschen
-        document.getElementById("grid").innerHTML = "";
+        $("grid").innerHTML = "";
         // Punktestand initialisieren
         lScore = new Array(nAnzPlayer).fill(0);
         // erster Spieler
@@ -110,16 +162,16 @@
         }
         fShuffle(lPairs);
         // Mischen der Karten fürs neue Spiel
-        for (nIndex = 0; nIndex < nAnzCards / 2; nIndex += 1) {
+        for (nIndex = 0; nIndex < lAnzCards[nAnzCards] / 2; nIndex += 1) {
             lCards.push(lPairs[nIndex]);
             lCards.push(lPairs[nIndex]);
         }
         fShuffle(lCards);
         // generieren der Karten fürs neue Spiel
-        for (nIndex = 0; nIndex < nAnzCards; nIndex += 1) {
+        for (nIndex = 0; nIndex < lAnzCards[nAnzCards]; nIndex += 1) {
             oFlipContainer = document.getElementsByClassName("dummy")[0].getElementsByClassName("flip-container")[0].cloneNode(true);
-            oFlipContainer.getElementsByClassName("image")[0].src = "images/" + cCurrentTheme + "/" + lCards[nIndex] + ".jpg";
-            document.getElementById("grid").appendChild(oFlipContainer);
+            oFlipContainer.getElementsByClassName("image")[0].src = "images/" + lThemes[nCurrentTheme] + "/" + lCards[nIndex] + ".jpg";
+            $("grid").appendChild(oFlipContainer);
         }
 
         for (nIndex = 0; nIndex < lFlipContainer.length; nIndex += 1) {
@@ -128,9 +180,26 @@
                 fFlipCard(this);
             }
         }
+
+        iTitle.classList.remove("swipe-out-right");
+        iGame.classList.remove("swipe-in-left");
+        iTitle.classList.add("swipe-out");
+        iGame.classList.add("swipe-in");
     }
 
-    fStartGame();
+    function fInit() {
+        $("iInfo").addEventListener("click", fShowPopupInfo);
+        $("iInfoClose").addEventListener("click", fHidePopupInfo);
+        $("iNextTheme").addEventListener("click", fChangeTheme);
+        $("iPrevTheme").addEventListener("click", fChangeTheme);
+        $("iCardsUp").addEventListener("click", fChangeAnzCards);
+        $("iCardsDown").addEventListener("click", fChangeAnzCards);
+        $("iPlayersUp").addEventListener("click", fChangeAnzPlayers);
+        $("iPlayersDown").addEventListener("click", fChangeAnzPlayers);
+        $("iStart").addEventListener("click", fStartGame);
+    }
+
+    fInit();
 
 }());
 
