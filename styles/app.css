@@ -29,6 +29,13 @@ body {
     margin: 5px;
 }
 
+.title1 {
+    stroke: none;
+    fill: white;
+    font: 3.8em/1 "Times New Roman", Times, serif;
+    text-shadow: none;
+}
+
 #iGame {
     transform: translateX(100vw);
     opacity: 0;
@@ -202,6 +209,18 @@ nav, .mini-buttonlist, .close-button, .xs {
 }
 .w60 {
     width: 60px;
+}
+a:link {
+    color: #40C4FF;
+}
+a:visited {
+    color: #00B0FF;
+}
+a:hover {
+    color: #80D8FF;
+}
+a:active {
+    color: #80D8FF;
 }
 
 
@@ -387,7 +406,7 @@ nav, .mini-buttonlist, .close-button, .xs {
     border-radius: 10px;
     box-shadow: 0 0 0.5vmin 2px #000;
     text-shadow: 1px 1px 2px #500000;
-    background-image: linear-gradient(#ff0142, #830110), linear-gradient(#ffbabc, #e33a33 12px, #55010a 100%);
+    background-image: linear-gradient(#26C6DA, #006064), linear-gradient(#80DEEA, #00ACC1 12px, #00838F 100%);
     background-origin: border-box;
     background-clip: content-box, border-box;
     padding: 1px;
@@ -399,10 +418,10 @@ nav, .mini-buttonlist, .close-button, .xs {
     font-weight: bold;
 }
 .button:hover {
-    background-image: linear-gradient(#ff2162, #931120), linear-gradient(#ffcacc, #f34a43 12px, #65111a 100%);
+    background-image: linear-gradient(#51d1e1, #009499), linear-gradient(#a7e8f1, #00cbe6 12px, #00a4b3 100%);
 }
 .button:active {
-    background-image: linear-gradient(#830110, #de0139), linear-gradient(#55010a, #e33a33 calc(100% - 12px), #ffbabc 100%);;
+    background-image: linear-gradient(#1e9eae, #004a4d), linear-gradient(#65d7e6, #008799 calc(100% - 12px), #005e66 100%);;
 }
 .button-span {
     margin-top: 8px;
@@ -431,7 +450,7 @@ nav, .mini-buttonlist, .close-button, .xs {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 1rem;
+    border-radius: 20px;
 }
 
 .dummy {

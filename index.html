@@ -25,7 +25,41 @@
     <div class="page" id="iTitle">
         <div class="content">
             <header>
-                <h1>grrd's Memo</h1>
+                <svg viewBox="0 0 170 90" width="35%">
+                    <text class="title1" x="5px" y="75%" dy="0">grrd's</text>
+                </svg>
+                <svg viewBox="0 0 320 90" width="60%">
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#26C6DA;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00838F;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#64FFDA;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00BFA5;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(2,12) rotate(-4)">
+                        <rect width="70" height="70" rx="5" fill="url(#grad)" stroke="white" stroke-width="5"/>
+                        <text x="6" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">M</text>
+                    </g>
+                    <g transform="translate(85,12) rotate(2)">
+                        <rect width="70" height="70" rx="5" fill="url(#grad3)" stroke="white" stroke-width="5"/>
+                        <text x="10" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">E</text>
+                    </g>
+                    <g transform="translate(160,10) rotate(-1)">
+                        <rect width="70" height="70" rx="5" fill="url(#grad)" stroke="white" stroke-width="5"/>
+                        <text x="6" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">M</text>
+                    </g>
+                    <g transform="translate(240,5) rotate(3)">
+                        <rect width="70" height="70" rx="5" fill="url(#grad2)" stroke="white" stroke-width="5"/>
+                        <text x="8" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">O</text>
+                    </g>
+                </svg>
                 <div class="right">
                     <div class="mini-buttonlist">
                         <div id="iInfo" class="mini-button">
@@ -35,7 +69,8 @@
                 </div>
             </header>
             <div class="right">
-                <p id="lTheme">Theme</p>
+                <p>Theme: </p>
+                <p id="lTheme">Animals</p>
                 <div class="mini-buttonlist">
                     <div id="iNextTheme" class="mini-button">
                         <img class="mini-img" src="images/prev.svg" alt="previous" data-step="-1">
@@ -46,7 +81,8 @@
                 </div>
             </div>
             <div class="right">
-                <p id="lCards">Cards</p>
+                <p>Cards: </p>
+                <p id="lCards">24</p>
                 <div class="mini-buttonlist">
                     <div id="iCardsDown" class="mini-button">
                         <img class="mini-img" src="images/prev.svg" alt="minus" data-step="-1">
@@ -56,7 +92,8 @@
                 </div>
             </div>
             <div class="right">
-                <p id="lPlayers">Players</p>
+                <p>Players: </p>
+                <p id="lPlayers">2</p>
                 <div class="mini-buttonlist">
                     <div id="iPlayersDown" class="mini-button">
                         <img class="mini-img" src="images/prev.svg" alt="minus" data-step="-1">
@@ -72,27 +109,65 @@
         <div id="iPopupInfo" class="overflow popup-init">
             <div class="popup">
                 <div class="popup-head">
-                    <h1>grrd's Memo</h1>
+                    <svg viewBox="0 0 170 90" width="35%">
+                        <text class="title1" x="5px" y="75%" dy="0">grrd's</text>
+                    </svg>
+                    <svg viewBox="0 0 320 90" width="60%">
+                        <defs>
+                            <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#26C6DA;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00838F;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#64FFDA;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00BFA5;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <g transform="translate(2,12) rotate(-4)">
+                            <rect width="70" height="70" rx="5" fill="url(#grad)" stroke="white" stroke-width="5"/>
+                            <text x="6" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">M</text>
+                        </g>
+                        <g transform="translate(85,12) rotate(2)">
+                            <rect width="70" height="70" rx="5" fill="url(#grad3)" stroke="white" stroke-width="5"/>
+                            <text x="10" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">E</text>
+                        </g>
+                        <g transform="translate(160,10) rotate(-1)">
+                            <rect width="70" height="70" rx="5" fill="url(#grad)" stroke="white" stroke-width="5"/>
+                            <text x="6" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">M</text>
+                        </g>
+                        <g transform="translate(240,5) rotate(3)">
+                            <rect width="70" height="70" rx="5" fill="url(#grad2)" stroke="white" stroke-width="5"/>
+                            <text x="8" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">O</text>
+                        </g>
+                    </svg>
                 </div>
                 <div id="iInfoBody" class="popup-body">
                     <div class="popup-content">Flip the cards and find the pairs. Is your memory good enough to remember?</div>
                     <div class="popup-content">Developed by Gérard Tyedmers</div>
                     <table id="tLinks">
                         <tr>
-                            <td class="w20"><a href="https://grrd01.github.io/Puzzle" target="_blank" rel="noopener"><img src="images/puzzle.svg" alt="Puzzle" class="w60"></a></td>
-                            <td class="w80"><span id="iPuzzle"></span> <a href="https://grrd01.github.io/Puzzle" target="_blank" rel="noopener">grrd's Puzzle</a></td>
+                            <td><a href="https://grrd01.github.io/Puzzle" target="_blank" rel="noopener"><img src="images/puzzle.svg" alt="Puzzle" class="w60"></a></td>
+                            <td><span id="iPuzzle"></span> <a href="https://grrd01.github.io/Puzzle" target="_blank" rel="noopener">grrd's Puzzle</a></td>
                         </tr>
                         <tr>
-                            <td class="w20"><a href="https://grrd01.github.io/Dice/" target="_blank" rel="noopener"><img src="images/dice.svg" alt="Puzzle" class="w60"></a></td>
-                            <td class="w80"><span id="iDice"></span> <a href="https://grrd01.github.io/Dice/" target="_blank" rel="noopener">grrd's Dice</a></td>
+                            <td><a href="https://grrd01.github.io/Dice/" target="_blank" rel="noopener"><img src="images/dice.svg" alt="Puzzle" class="w60"></a></td>
+                            <td><span id="iDice"></span> <a href="https://grrd01.github.io/Dice/" target="_blank" rel="noopener">grrd's Dice</a></td>
                         </tr>
                         <tr>
-                            <td class="w20"><a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener"><img src="images/4inarow.svg" alt="4 in a Row" class="w60"></a></td>
-                            <td class="w80"><span id="iRow"></span> <a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener">grrd's 4 in a Row</a></td>
+                            <td><a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener"><img src="images/4inarow.svg" alt="4 in a Row" class="w60"></a></td>
+                            <td><span id="iRow"></span> <a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener">grrd's 4 in a Row</a></td>
                         </tr>
                         <tr>
-                            <td class="w20"><a href="mailto:grrd@gmx.net"><img src="images/mail.svg" alt="Mail" class="w60"></a></td>
-                            <td class="w80">E-mail: <a href="mailto:grrd@gmx.net">grrd@gmx.net</a></td>
+                            <td><a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener"><img src="images/tictactoe.svg" alt="TicTacToe" class="w60"></a></td>
+                            <td><span id="iTicTacToe"></span> <a href="https://grrd01.github.io/TicTacToe/" target="_blank" rel="noopener">grrd's Tic Tac Toe</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="mailto:grrd@gmx.net"><img src="images/mail.svg" alt="Mail" class="w60"></a></td>
+                            <td>E-mail: <a href="mailto:grrd@gmx.net">grrd@gmx.net</a></td>
                         </tr>
                     </table>
                 </div>
@@ -108,9 +183,9 @@
 
     </div>
     <div class="page" id="iGame">
-        <main>
-            <div>
-                <div id="iMessage"></div>
+        <main class="content">
+            <div class="buffer">
+                <div id="iMessage">Player 1 begins</div>
                 <div id="iClose" class="close-button">
                     <img class="" src="images/x.svg" alt="close">
                 </div>
@@ -121,9 +196,46 @@
             <div id="iPopupScore" class="overflow popup-init">
                 <div class="popup">
                     <div class="popup-head">
+                        <svg viewBox="0 0 170 90" width="35%">
+                            <text class="title1" x="5px" y="75%" dy="0">grrd's</text>
+                        </svg>
+                        <svg viewBox="0 0 320 90" width="60%">
+                            <defs>
+                                <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#26C6DA;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00838F;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#64FFDA;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#00BFA5;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <g transform="translate(2,12) rotate(-4)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad)" stroke="white" stroke-width="5"/>
+                                <text x="6" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">M</text>
+                            </g>
+                            <g transform="translate(85,12) rotate(2)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad3)" stroke="white" stroke-width="5"/>
+                                <text x="10" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">E</text>
+                            </g>
+                            <g transform="translate(160,10) rotate(-1)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad)" stroke="white" stroke-width="5"/>
+                                <text x="6" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">M</text>
+                            </g>
+                            <g transform="translate(240,5) rotate(3)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad2)" stroke="white" stroke-width="5"/>
+                                <text x="8" y="60" font-family="Arial" font-size="70" fill="white" stroke="white" stroke-width="5px" stroke-linejoin="round" stroke-linecap="round">O</text>
+                            </g>
+                        </svg>
                     </div>
                     <div class="popup-body">
-                        <div class="popup-content"></div>
+                        <div class="popup-content">
+                            <p id="lWinner"></p>
+                        </div>
                     </div>
                     <div class="popup-footer">
                         <div id="iOK" class="button">

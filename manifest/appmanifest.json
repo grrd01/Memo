@@ -1,8 +1,8 @@
 {
-  "name": "grrd's Tic Tac Toe",
-  "short_name": "TicTacToe",
+  "name": "grrd's Memo",
+  "short_name": "Memo",
   "version": "1.0",
-  "description": "grrd’s Tic Tac Toe is a HTML5 Game that works offline. You can play against the computer or a second player.",
+  "description": "grrd’s Memo is a HTML5 Game that works offline. Flip the cards and find the pairs. Is your memory good enough to remember?",
   "default_locale": "en",
   "icons": [
     {

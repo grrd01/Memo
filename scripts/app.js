@@ -117,7 +117,7 @@
                 // falls die zwei Karten gleich sind
                 // aktueller Spieler + 1 Punkt
                 lScore[nCurrentPlayer] += 1;
-                console.log("Spieler " +  (nCurrentPlayer + 1) + " hat nun " + lScore[nCurrentPlayer] + " Paare.");
+                $("iMessage").innerHTML = "Spieler " +  (nCurrentPlayer + 1) + " hat nun " + lScore[nCurrentPlayer] + " Paare.";
                 // umgedrehte Karten zurücksetzen
                 lFlipped = [];
             } else {
@@ -128,6 +128,7 @@
                 if (nCurrentPlayer === nAnzPlayer) {
                     nCurrentPlayer = 0;
                 }
+                $("iMessage").innerHTML = "Spieler " +  (nCurrentPlayer + 1) + " ist nun am Zug.";
             }
         }
 
@@ -136,8 +137,11 @@
         if (document.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
             let nWinner = lScore.indexOf(Math.max(...lScore));
             let nWinnerScore = (Math.max(...lScore));
-            console.log("Spieler " + (nWinner + 1) + " gewinnt mit " + nWinnerScore + " Paaren.");
-            fStartGame()
+            $("lWinner").innerHTML = "Spieler " + (nWinner + 1) + " gewinnt mit " + nWinnerScore + " Paaren.";
+
+            iPopupScore.classList.remove("popup-init");
+            iPopupScore.classList.remove("popup-hide");
+            iPopupScore.classList.add("popup-show");
         }
     }
 
@@ -155,6 +159,7 @@
         lScore = new Array(nAnzPlayer).fill(0);
         // erster Spieler
         nCurrentPlayer = 0;
+        $("iMessage").innerHTML = "Spieler 1 beginnt.";
 
         // Auswahl der Paare fürs neue Spiel
         for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
@@ -187,6 +192,15 @@
         iGame.classList.add("swipe-in");
     }
 
+    function fQuitGame() {
+        iTitle.classList.remove("swipe-out");
+        iGame.classList.remove("swipe-in");
+        iTitle.classList.add("swipe-out-right");
+        iGame.classList.add("swipe-in-left");
+        iPopupScore.classList.remove("popup-show");
+        iPopupScore.classList.add("popup-hide");
+    }
+
     function fInit() {
         $("iInfo").addEventListener("click", fShowPopupInfo);
         $("iInfoClose").addEventListener("click", fHidePopupInfo);
@@ -197,6 +211,8 @@
         $("iPlayersUp").addEventListener("click", fChangeAnzPlayers);
         $("iPlayersDown").addEventListener("click", fChangeAnzPlayers);
         $("iStart").addEventListener("click", fStartGame);
+        $("iClose").addEventListener("click", fQuitGame);
+        $("iOK").addEventListener("click", fQuitGame);
     }
 
     fInit();
