@@ -36,6 +36,17 @@ body {
     text-shadow: none;
 }
 
+.title2 {
+    stroke: white;
+    stroke-width: 5px;
+    font-family: Arial, sans-serif;
+    font-size:70px;
+    fill: white;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    text-shadow: none;
+}
+
 #iGame {
     transform: translateX(100vw);
     opacity: 0;

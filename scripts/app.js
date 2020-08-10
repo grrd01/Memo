@@ -12,6 +12,43 @@
 (function () {
     "use strict";
 
+    // Localization
+    var nLang = 0;
+    const lLoc = [{
+        desc: "grrd’s Memo is a HTML5 Game that works offline.",
+        help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
+        themes: "Theme",
+        cards: "Cards",
+        players: "Players",
+        dev: "Developed by Gérard Tyedmers.",
+        look: "Don't miss",
+        and: "and",
+        begin: "begins",
+        play: "plays",
+        win: "wins",
+        player: "Player",
+        won: "has won!",
+        score: "Score:",
+        draw2: "This game ends in a draw."
+    }, {
+        desc: "grrd's Tic Tac Toe ist ein HTML5 Spiel, welches offline funktioniert",
+        help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
+        themes: "Thema",
+        cards: "Karten",
+        players: "Spieler",
+        dev: "Entwickelt von Gérard Tyedmers.",
+        puzzle: "Probier auch",
+        and: "und",
+        begin: "beginnt",
+        play: "spielt",
+        win: "gewinnt",
+        draw: "unentschieden",
+        player: "Spieler",
+        won: "hat gewonnen!",
+        score: "Resultat:",
+        draw2: "Diese Partie endet unentschieden."
+    }];
+
     const $ = function (id) {
         return document.getElementById(id);
     };
@@ -201,7 +238,35 @@
         iPopupScore.classList.add("popup-hide");
     }
 
+    function urlQuery(query) {
+        query = query.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var expr = "[\\?&]" + query + "=([^&#]*)";
+        var regex = new RegExp(expr);
+        var results = regex.exec(window.location.href);
+        if (results !== null) {
+            return results[1];
+        } else {
+            return false;
+        }
+    }
+
     function fInit() {
+        // Localize
+        // Example usage - https://grrd01.github.io/TicTacToe/?lang=en
+        const cLang = (urlQuery("lang") || navigator.language || navigator.browserLanguage || (navigator.languages || ["en"])[0]).substring(0, 2).toLowerCase();
+        if (cLang === "de") {
+            nLang = 1;
+        } else if (cLang === "fr") {
+            nLang = 2;
+        }
+        if (nLang) {
+            document.documentElement.setAttribute("lang", cLang);
+        }
+        $("lThemeLabel").innerHTML = lLoc[nLang].themes + ": ";
+        $("lCardsLabel").innerHTML = lLoc[nLang].cards + ": ";
+        $("lPlayersLabel").innerHTML = lLoc[nLang].players + ": ";
+        document.querySelector("meta[name='description']").setAttribute("content", lLoc[nLang].desc);
+
         $("iInfo").addEventListener("click", fShowPopupInfo);
         $("iInfoClose").addEventListener("click", fHidePopupInfo);
         $("iNextTheme").addEventListener("click", fChangeTheme);
