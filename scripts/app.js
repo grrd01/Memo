@@ -18,15 +18,23 @@
         desc: "grrd’s Memo is a HTML5 Game that works offline.",
         help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
         themes: "Theme",
+        themes_txt: ["Animals", "Flowers"],
         cards: "Cards",
         players: "Players",
+        start: "Start",
         dev: "Developed by Gérard Tyedmers.",
-        look: "Don't miss",
+        look: "Have a look at my other games:",
         and: "and",
-        begin: "begins",
+        begin: "begins.",
         play: "plays",
-        win: "wins",
+        has: "has now",
+        win: "wins with",
+        pair: "pair.",
+        pairs: "pairs.",
+        pairs2: "pairs.",
+        draw: "draw",
         player: "Player",
+        turn: "'s turn.",
         won: "has won!",
         score: "Score:",
         draw2: "This game ends in a draw."
@@ -34,16 +42,23 @@
         desc: "grrd's Tic Tac Toe ist ein HTML5 Spiel, welches offline funktioniert",
         help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
         themes: "Thema",
+        themes_txt: ["Tiere", "Blumen"],
         cards: "Karten",
         players: "Spieler",
+        start: "Start",
         dev: "Entwickelt von Gérard Tyedmers.",
-        puzzle: "Probier auch",
+        look: "Schau dir auch meine anderen Spiele an: ",
         and: "und",
-        begin: "beginnt",
+        begin: "beginnt.",
         play: "spielt",
-        win: "gewinnt",
+        has: "hat nun",
+        win: "gewinnt mit",
+        pair: "Paar.",
+        pairs: "Paare.",
+        pairs2: "Paaren.",
         draw: "unentschieden",
         player: "Spieler",
+        turn: "ist am Zug.",
         won: "hat gewonnen!",
         score: "Resultat:",
         draw2: "Diese Partie endet unentschieden."
@@ -109,7 +124,7 @@
         let nStep = parseInt(event.target.getAttribute("data-step"));
         if (nCurrentTheme + nStep >= 0 && nCurrentTheme + nStep < lThemes.length) {
             nCurrentTheme += nStep;
-            $("lTheme").innerHTML = lThemes[nCurrentTheme];
+            $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
         }
     }
 
@@ -129,6 +144,13 @@
             nAnzPlayer += nStep;
             $("lPlayers").innerHTML = nAnzPlayer;
         }
+    }
+
+    // Kartengrösse festlegen
+    function fCardSize() {
+        let nSize = Math.sqrt((document.documentElement.clientHeight - 40) * document.documentElement.clientWidth / lAnzCards[nAnzCards]) * 0.7;
+        $("grid").setAttribute("style", "grid-template-columns: repeat(auto-fill, minmax(" + nSize + "px, 1fr))");
+
     }
 
     // Karte umdrehen
@@ -154,7 +176,11 @@
                 // falls die zwei Karten gleich sind
                 // aktueller Spieler + 1 Punkt
                 lScore[nCurrentPlayer] += 1;
-                $("iMessage").innerHTML = "Spieler " +  (nCurrentPlayer + 1) + " hat nun " + lScore[nCurrentPlayer] + " Paare.";
+                if (lScore[nCurrentPlayer] === 1) {
+                    $("iMessage").innerHTML = lLoc[nLang].player + " " +  (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pair;
+                } else {
+                    $("iMessage").innerHTML = lLoc[nLang].player + " " +  (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pairs;
+                }
                 // umgedrehte Karten zurücksetzen
                 lFlipped = [];
             } else {
@@ -165,7 +191,7 @@
                 if (nCurrentPlayer === nAnzPlayer) {
                     nCurrentPlayer = 0;
                 }
-                $("iMessage").innerHTML = "Spieler " +  (nCurrentPlayer + 1) + " ist nun am Zug.";
+                $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].turn;
             }
         }
 
@@ -174,7 +200,7 @@
         if (document.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
             let nWinner = lScore.indexOf(Math.max(...lScore));
             let nWinnerScore = (Math.max(...lScore));
-            $("lWinner").innerHTML = "Spieler " + (nWinner + 1) + " gewinnt mit " + nWinnerScore + " Paaren.";
+            $("lWinner").innerHTML = lLoc[nLang].player + " " + (nWinner + 1) + " " + lLoc[nLang].win + " " + nWinnerScore + " " + lLoc[nLang].pairs2;
 
             iPopupScore.classList.remove("popup-init");
             iPopupScore.classList.remove("popup-hide");
@@ -196,7 +222,7 @@
         lScore = new Array(nAnzPlayer).fill(0);
         // erster Spieler
         nCurrentPlayer = 0;
-        $("iMessage").innerHTML = "Spieler 1 beginnt.";
+        $("iMessage").innerHTML = lLoc[nLang].player + " 1 " + lLoc[nLang].begin;
 
         // Auswahl der Paare fürs neue Spiel
         for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
@@ -222,6 +248,7 @@
                 fFlipCard(this);
             }
         }
+        fCardSize();
 
         iTitle.classList.remove("swipe-out-right");
         iGame.classList.remove("swipe-in-left");
@@ -265,6 +292,9 @@
         $("lThemeLabel").innerHTML = lLoc[nLang].themes + ": ";
         $("lCardsLabel").innerHTML = lLoc[nLang].cards + ": ";
         $("lPlayersLabel").innerHTML = lLoc[nLang].players + ": ";
+        $("lDev").innerHTML = lLoc[nLang].dev;
+        $("lInstr").innerHTML = lLoc[nLang].help;
+        $("lLook").innerHTML = lLoc[nLang].look;
         document.querySelector("meta[name='description']").setAttribute("content", lLoc[nLang].desc);
 
         $("iInfo").addEventListener("click", fShowPopupInfo);
@@ -279,6 +309,10 @@
         $("iClose").addEventListener("click", fQuitGame);
         $("iOK").addEventListener("click", fQuitGame);
     }
+
+    window.addEventListener("resize", function () {
+        fCardSize();
+    });
 
     fInit();
 

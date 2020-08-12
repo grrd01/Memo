@@ -28,7 +28,7 @@
                 <svg viewBox="0 0 170 90" width="35%">
                     <text class="title1" x="5px" y="75%" dy="0">grrd's</text>
                 </svg>
-                <svg viewBox="0 0 320 90" width="60%" class="title2">
+                <svg viewBox="0 0 320 90" width="63%" class="title2">
                     <defs>
                         <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#26C6DA;stop-opacity:1" />
@@ -68,40 +68,66 @@
                     </div>
                 </div>
             </header>
-            <div class="right">
-                <p id="lThemeLabel">Theme: </p>
-                <p id="lTheme">Animals</p>
-                <div class="mini-buttonlist">
-                    <div id="iNextTheme" class="mini-button" data-step="-1">
-                        <img class="mini-img" src="images/prev.svg" alt="previous">
+            <div class="controlgroup">
+                <div class="control">
+                    <div class="left">
+                        <img src="images/photo.svg" class="shadow">
                     </div>
-                    <div id="iPrevTheme" class="mini-button" data-step="1">
-                        <img class="mini-img" src="images/next.svg" alt="next">
+                    <div class="center">
+                        <p id="lThemeLabel">Theme: </p>&nbsp;
+                        <p id="lTheme">Animals</p>
+                    </div>
+                    <div class="right">
+                        <div class="mini-buttonlist">
+                            <div id="iNextTheme" class="mini-button" data-step="-1">
+                                <img class="mini-img" src="images/prev.svg" alt="previous">
+                            </div>
+                            <div id="iPrevTheme" class="mini-button" data-step="1">
+                                <img class="mini-img" src="images/next.svg" alt="next">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="control">
+                    <div class="left">
+                        <img src="images/cards.svg" class="shadow">
+                    </div>
+                    <div class="center">
+                        <p id="lCardsLabel">Cards: </p>&nbsp;
+                        <p id="lCards">24</p>
+                    </div>
+                    <div class="right">
+                        <div class="mini-buttonlist">
+                            <div id="iCardsDown" class="mini-button"  data-step="-1">
+                                <img class="mini-img" src="images/prev.svg" alt="minus">
+                            </div>
+                            <div id="iCardsUp" class="mini-button" data-step="1">
+                                <img class="mini-img" src="images/next.svg" alt="plus">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="control">
+                    <div class="left">
+                        <img src="images/2player.svg" class="shadow">
+                    </div>
+                    <div class="center">
+                        <p id="lPlayersLabel">Players: </p>&nbsp;
+                        <p id="lPlayers">2</p>
+                    </div>
+                    <div class="right">
+                        <div class="mini-buttonlist">
+                            <div id="iPlayersDown" class="mini-button"  data-step="-1">
+                                <img class="mini-img" src="images/prev.svg" alt="minus">
+                            </div>
+                            <div id="iPlayersUp" class="mini-button" data-step="1">
+                                <img class="mini-img" src="images/next.svg" alt="plus">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="right">
-                <p id="lCardsLabel">Cards: </p>
-                <p id="lCards">24</p>
-                <div class="mini-buttonlist">
-                    <div id="iCardsDown" class="mini-button"  data-step="-1">
-                        <img class="mini-img" src="images/prev.svg" alt="minus">
-                    </div><div id="iCardsUp" class="mini-button" data-step="1">
-                    <img class="mini-img" src="images/next.svg" alt="plus">
-                </div>
-                </div>
-            </div>
-            <div class="right">
-                <p id="lPlayersLabel">Players: </p>
-                <p id="lPlayers">2</p>
-                <div class="mini-buttonlist">
-                    <div id="iPlayersDown" class="mini-button"  data-step="-1">
-                        <img class="mini-img" src="images/prev.svg" alt="minus">
-                    </div><div id="iPlayersUp" class="mini-button" data-step="1">
-                    <img class="mini-img" src="images/next.svg" alt="plus">
-                </div>
-                </div>
-            </div>
+            <br>
             <div id="iStart" class="button">
                 <div class="button-span"><img class="w25" src="images/ok.svg" alt="Start">&nbsp;Start</div>
             </div>
@@ -146,8 +172,9 @@
                     </svg>
                 </div>
                 <div id="iInfoBody" class="popup-body">
-                    <div class="popup-content">Flip the cards and find the pairs. Is your memory good enough to remember?</div>
-                    <div class="popup-content">Developed by Gérard Tyedmers</div>
+                    <p id="lInstr" class="popup-content"></p>
+                    <p id="lDev" class="popup-content"></p>
+                    <p id="lLook"></p>
                     <table id="tLinks">
                         <tr>
                             <td><a href="https://grrd01.github.io/Puzzle" target="_blank" rel="noopener"><img src="images/puzzle.svg" alt="Puzzle" class="w60"></a></td>

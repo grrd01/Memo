@@ -32,8 +32,7 @@ body {
 .title1 {
     stroke: none;
     fill: white;
-    font: 3.8em/1 "Times New Roman", Times, serif;
-    text-shadow: none;
+    font: 3.8em/1 "Calibri", Times, serif;
 }
 
 .title2 {
@@ -45,6 +44,10 @@ body {
     stroke-linejoin: round;
     stroke-linecap: round;
     text-shadow: none;
+    filter: drop-shadow( 5px 5px 2px #111);
+}
+.shadow {
+    filter: drop-shadow( 2px 2px 2px #111);
 }
 
 #iGame {
@@ -202,6 +205,7 @@ nav, .mini-buttonlist, .close-button, .xs {
 .mini-img {
     margin: 5px 15px 5px 15px;
     max-height: calc(100% - 10px);
+    pointer-events: none;
 }
 .close-button {
     border-radius: 20px;
@@ -211,12 +215,42 @@ nav, .mini-buttonlist, .close-button, .xs {
     top: 5px;
     right: 5px;
 }
+.controlgroup {
+    display: flex;
+    flex-direction: column;
+}
+.control {
+    display: grid;
+    grid-template-columns: 110px minmax(150px, auto) 121px;
+    grid-gap: 5px;
+    box-sizing: border-box;
+    width: 100%;
+    align-items: center;
+}
+.left {
+    display: flex;
+    justify-content: flex-start;
+}
+.center {
+    display: flex;
+}
 .right {
     display: flex;
-    justify-content: flex-end
+    justify-content: flex-end;
 }
+@media screen and (orientation:landscape) {
+    .control {
+        width: 33.33%;
+        display: flex;
+        flex-direction: column;
+    }
+    .controlgroup {
+        flex-direction: row;
+    }
+}
+
 .w25 {
-    width: calc(25% - 4px);
+    width: 21px;
 }
 .w60 {
     width: 60px;
@@ -369,7 +403,6 @@ a:active {
     }
 }
 .popup-head {
-    height: 50px;
     margin: 10px;
 }
 .popup-body {
@@ -422,7 +455,7 @@ a:active {
     background-clip: content-box, border-box;
     padding: 1px;
     height: 40px;
-    width: 100px;
+    width: 120px;
     margin: 5px;
     cursor: pointer;
     text-align: center;
@@ -449,7 +482,7 @@ a:active {
 #grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 1rem;
+    grid-gap: 0.5rem;
 }
 #grid > div {
     position: relative;
@@ -461,7 +494,7 @@ a:active {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 20px;
+    border-radius: 10%;
 }
 
 .dummy {
