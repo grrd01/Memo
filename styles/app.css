@@ -504,8 +504,6 @@ a:active {
 /* entire container, keeps perspective */
 .flip-container {
     perspective: 1000px;
-    -webkit-perspective: 1000px;
-    -moz-perspective: 1000px;
 }
 /* flip the pane when hovered */
 .flip-container.turned .flipper {
