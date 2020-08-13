@@ -526,6 +526,8 @@ a:active {
 .front, .back {
     position: absolute;
     backface-visibility: hidden;
+    top: 0;
+	left: 0;
 }
 
 /* front pane, placed above back */
@@ -537,5 +539,6 @@ a:active {
 
 /* back, initially hidden pane */
 .back {
+    z-index: 3;
     transform: rotateY(180deg);
 }
