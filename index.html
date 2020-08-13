@@ -9,7 +9,10 @@
             width: 200px;
             height: 200px;
             position: relative;
-            perspective: 1000px;
+            perspective: 800px;
+            -webkit-perspective: 800px;
+            -o-perspective: 800px;
+            -moz-perspective: 800px;
         }
         .flipper {
             width: 100%;
@@ -17,6 +20,12 @@
             position: absolute;
             transform-style: preserve-3d;
             transition: transform 1s;
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition: -webkit-transform 1s;
+            -o-transform-style: preserve-3d;
+            -o-transition: -o-transform 1s;
+            -moz-transform-style: preserve-3d;
+            -moz-transition: -moz-transform 1s;
         }
         .flipper figure {
             margin: 0;
@@ -25,13 +34,22 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            -o-backface-visibility: hidden;
         }
 
         .back {
             transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            -o-transform: rotateY(180deg);
         }
         .flipper.flipped {
             transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -webkit-transform: rotateY(180deg);
+            -o-transform: rotateY(180deg);
         }
         img {
             width: 200px;
