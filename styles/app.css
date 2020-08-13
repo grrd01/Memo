@@ -509,6 +509,20 @@ a:active {
 .flip-container.turned .flipper {
     transform: rotateY(180deg);
 }
+.flip-container.turned .front {
+    animation: 0.3s hideFront;
+    animation-fill-mode: forwards;
+    visibility: visible;
+}
+
+@keyframes hideFront {
+    99% {
+        visibility: visible;
+    }
+    100% {
+        visibility: hidden;
+    }
+}
 
 .flip-container, .front, .back {
     width: 100%;
@@ -520,7 +534,6 @@ a:active {
     transition: 0.6s;
     transform-style: preserve-3d;
     position: relative;
-    backface-visibility: hidden;
 }
 
 /* hide back of pane during swap */
