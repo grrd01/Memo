@@ -33,6 +33,9 @@ body {
     stroke: none;
     fill: white;
     font: 3.8em/1 "Calibri", Times, serif;
+    max-height: calc(100vh - 330px);
+    width: calc(35% - 5px);
+    max-width: calc((100vh - 330px) / 9 * 17);
 }
 
 .title2 {
@@ -45,6 +48,9 @@ body {
     stroke-linecap: round;
     text-shadow: none;
     filter: drop-shadow( 5px 5px 2px #111);
+    max-height: calc(100vh - 330px);
+    width: calc(65% - 5px);
+    max-width: calc((100vh - 330px) / 9 * 32);
 }
 .shadow {
     filter: drop-shadow( 2px 2px 2px #111);
@@ -221,7 +227,7 @@ nav, .mini-buttonlist, .close-button, .xs {
 }
 .control {
     display: grid;
-    grid-template-columns: 110px minmax(150px, auto) 121px;
+    grid-template-columns: minmax(60px, 200px) minmax(150px, auto) 121px;
     grid-gap: 5px;
     box-sizing: border-box;
     width: 100%;
@@ -238,7 +244,7 @@ nav, .mini-buttonlist, .close-button, .xs {
     display: flex;
     justify-content: flex-end;
 }
-@media screen and (orientation:landscape) {
+@media screen and (orientation: landscape) {
     .control {
         width: 33.33%;
         display: flex;
@@ -248,12 +254,20 @@ nav, .mini-buttonlist, .close-button, .xs {
         flex-direction: row;
     }
 }
+@media screen and (orientation: portrait) {
+    .control {
+        min-height: calc((100vh - 200px)/5);
+    }
+}
 
 .w25 {
     width: 21px;
 }
 .w60 {
     width: 60px;
+}
+.w100 {
+    width: 100%;
 }
 a:link {
     color: #40C4FF;
@@ -526,6 +540,8 @@ a:active {
 .front, .back {
     position: absolute;
     backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* front pane, placed above back */
