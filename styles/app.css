@@ -520,9 +520,6 @@ a:active {
     transition: 0.6s;
     transform-style: preserve-3d;
     position: relative;
-    -webkit-transform-style: preserve-3d;
-    -webkit-transition: -webkit-transform 0.6s;
-    -moz-transition: -moz-transform 0.6s;
 }
 
 /* hide back of pane during swap */
