@@ -18,7 +18,7 @@
         desc: "grrd’s Memo is a HTML5 Game that works offline.",
         help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
         themes: "Theme",
-        themes_txt: ["Animals", "Flowers"],
+        themes_txt: ["Animals", "Flowers", "Masha"],
         cards: "Cards",
         players: "Players",
         start: "Start",
@@ -42,7 +42,7 @@
         desc: "grrd's Tic Tac Toe ist ein HTML5 Spiel, welches offline funktioniert",
         help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
         themes: "Thema",
-        themes_txt: ["Tiere", "Blumen"],
+        themes_txt: ["Tiere", "Blumen", "Mascha"],
         cards: "Karten",
         players: "Spieler",
         start: "Start",
@@ -83,7 +83,7 @@
     // Anzahl maximal möglicher Paare
     let nMaxPairs = 24;
     // verfügbare Themen
-    const lThemes = ["animals", "flowers"]
+    const lThemes = ["animals", "flowers", "mascha"]
     // Ausgewähltes Thema
     let nCurrentTheme = 0;
     // verfügbare Themen
