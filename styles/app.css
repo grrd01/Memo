@@ -15,6 +15,11 @@ body {
     text-shadow: 1px 1px 2px #000;
 }
 
+header {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .page {
     width: 100vw;
     position: fixed;
@@ -33,9 +38,11 @@ body {
     stroke: none;
     fill: white;
     font: 3.8em/1 "Calibri", Times, serif;
-    max-height: calc(100vh - 330px);
+    max-height: calc(100vh - 280px);
+    min-height: 55px;
     width: calc(35% - 5px);
-    max-width: calc((100vh - 330px) / 9 * 17);
+    max-width: calc((100vh - 280px) / 9 * 17);
+    min-width: calc(55px / 9 * 17);
 }
 
 .title2 {
@@ -48,9 +55,11 @@ body {
     stroke-linecap: round;
     text-shadow: none;
     filter: drop-shadow( 5px 5px 2px #111);
-    max-height: calc(100vh - 330px);
+    max-height: calc(100vh - 280px);
+    min-height: 55px;
     width: calc(65% - 5px);
-    max-width: calc((100vh - 330px) / 9 * 32);
+    max-width: calc((100vh - 280px) / 9 * 32);
+    min-width: calc(55px / 9 * 32);
 }
 .shadow {
     filter: drop-shadow( 2px 2px 2px #111);
@@ -240,6 +249,9 @@ nav, .mini-buttonlist, .close-button, .xs {
 .center {
     display: flex;
 }
+.flex-right {
+    margin-left: auto;
+}
 .right {
     display: flex;
     justify-content: flex-end;
@@ -268,6 +280,7 @@ nav, .mini-buttonlist, .close-button, .xs {
 }
 .w100 {
     width: 100%;
+    max-height: calc(100vh - 260px);
 }
 a:link {
     color: #40C4FF;

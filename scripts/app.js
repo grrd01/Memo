@@ -150,7 +150,10 @@
     function fCardSize() {
         let nSize = Math.sqrt((document.documentElement.clientHeight - 40) * document.documentElement.clientWidth / lAnzCards[nAnzCards]) * 0.7;
         $("grid").setAttribute("style", "grid-template-columns: repeat(auto-fill, minmax(" + nSize + "px, 1fr))");
-
+        document.getElementsByTagName("header")[0].setAttribute("style", "display: flex; flex-wrap: wrap;");
+        if($("iStart").getBoundingClientRect().bottom > window.innerHeight) {
+            document.getElementsByTagName("header")[0].setAttribute("style", "display: flex; flex-wrap: nowrap;");
+        }
     }
 
     // Karte umdrehen
@@ -308,6 +311,8 @@
         $("iStart").addEventListener("click", fStartGame);
         $("iClose").addEventListener("click", fQuitGame);
         $("iOK").addEventListener("click", fQuitGame);
+
+        fCardSize();
     }
 
     window.addEventListener("resize", function () {
