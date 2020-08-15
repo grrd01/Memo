@@ -227,8 +227,11 @@ nav, .mini-buttonlist, .close-button, .xs {
     width: 20px;
     height: 20px;
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
+}
+#iMessage {
+    padding: 5px;
 }
 .controlgroup {
     display: flex;
