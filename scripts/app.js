@@ -32,6 +32,7 @@
         pair: "pair.",
         pairs: "pairs.",
         pairs2: "pairs.",
+        tries: "lCards pairs revealed in lTries attempts.",
         draw: "draw",
         player: "Player",
         turn: "'s turn.",
@@ -56,6 +57,7 @@
         pair: "Paar.",
         pairs: "Paare.",
         pairs2: "Paaren.",
+        tries: "lCards Paare in lTries Versuchen aufgedeckt.",
         draw: "unentschieden",
         player: "Spieler",
         turn: "ist am Zug.",
@@ -96,6 +98,8 @@
     let nAnzPlayer = 2;
     // Punktestand pro Spieler
     let lScore = [];
+    // Versuche pro Spieler
+    let lTries = [];
 
 
 
@@ -172,6 +176,7 @@
         }
 
         lFlipped.push(oCard);
+        lTries[nCurrentPlayer] += 1;
 
         if (lFlipped.length === 2) {
             // falls 2 Karten umgedreht sind
@@ -201,10 +206,14 @@
         oCard.classList.toggle("turned");
 
         if (document.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
+            // alle Karten aufgedeckt, Spiel beendet
             let nWinner = lScore.indexOf(Math.max(...lScore));
             let nWinnerScore = (Math.max(...lScore));
-            $("lWinner").innerHTML = lLoc[nLang].player + " " + (nWinner + 1) + " " + lLoc[nLang].win + " " + nWinnerScore + " " + lLoc[nLang].pairs2;
-
+            if (nAnzPlayer === 1) {
+                $("lWinner").innerHTML = lLoc[nLang].tries.replace("lCards",(lAnzCards[nAnzCards] / 2)).replace("lTries",(lTries[0] / 2));
+            } else {
+                $("lWinner").innerHTML = lLoc[nLang].player + " " + (nWinner + 1) + " " + lLoc[nLang].win + " " + nWinnerScore + " " + lLoc[nLang].pairs2;
+            }
             iPopupScore.classList.remove("popup-init");
             iPopupScore.classList.remove("popup-hide");
             iPopupScore.classList.add("popup-show");
@@ -223,8 +232,13 @@
         $("grid").innerHTML = "";
         // Punktestand initialisieren
         lScore = new Array(nAnzPlayer).fill(0);
+        // Versuche initialisieren
+        lTries = new Array(nAnzPlayer).fill(0);
         // erster Spieler
         nCurrentPlayer = 0;
+        // umgedrehte Karten zurücksetzen
+        lFlipped = [];
+
         $("iMessage").innerHTML = lLoc[nLang].player + " 1 " + lLoc[nLang].begin;
 
         // Auswahl der Paare fürs neue Spiel
