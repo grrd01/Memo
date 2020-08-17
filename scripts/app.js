@@ -307,6 +307,7 @@
             document.documentElement.setAttribute("lang", cLang);
         }
         $("lThemeLabel").innerHTML = lLoc[nLang].themes + ": ";
+        $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
         $("lCardsLabel").innerHTML = lLoc[nLang].cards + ": ";
         $("lPlayersLabel").innerHTML = lLoc[nLang].players + ": ";
         $("lDev").innerHTML = lLoc[nLang].dev;

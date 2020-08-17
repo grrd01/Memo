@@ -56,6 +56,7 @@ module.exports = function(grunt) {
                     ]
             }
         },
+        /*
         image_resize: {
             resize: {
                 options: {
@@ -65,6 +66,7 @@ module.exports = function(grunt) {
                 dest: '../../2_Build/Memo/images/animals/'
             }
         },
+        */
         imagemin: {
             dynamic: {
                 options: {
@@ -141,8 +143,8 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'terser',
         'svgmin',
-        'image_resize',
-        // 'imagemin',
+        // 'image_resize',
+        'imagemin',
         'cssmin',
         'htmlmin',
         'replace',
