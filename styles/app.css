@@ -153,54 +153,43 @@ header {
     }
 }
 
-.list-button, .mini-button, .close-button {
+.mini-button, .close-button {
     border:  1px transparent;
     background-image: linear-gradient(#444,#2d2d2d), linear-gradient(#999, #444 10px, #111 100%);
     background-origin: border-box;
     background-clip: content-box, border-box;
     cursor: pointer;
+    padding: 1px;
 }
-.list-button {
-    display: inline-block;
-    width: calc(50vw - 12px);
-    text-align: center;
-    padding: 1px 0 1px 0;
-    margin-left: 1px;
-}
-.list-button:first-child, .mini-buttonlist > .mini-button:first-child {
+.mini-buttonlist > .mini-button:first-child {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     padding: 1px 0 1px 1px;
     margin-left: 0;
 }
-.list-button:last-child, .mini-buttonlist > .mini-button:last-child {
+.mini-buttonlist > .mini-button:last-child {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 1px 1px 1px 0;
     margin-left: 1px;
 }
-.mini-button, .close-button {
-    padding: 1px;
-}
-nav, .mini-buttonlist {
+.mini-buttonlist {
+    height: 42px;
     margin: 5px 5px 10px 5px;
     background-color: #111;
     display: flex;
 }
-nav, .mini-buttonlist, .close-button, .xs {
+.mini-buttonlist, .close-button {
     border-radius: 10px;
     box-shadow: 0 0 0.5vmin 2px #111;
 }
-.list-button:hover, .mini-button:hover, .close-button:hover {
+.mini-button:hover, .close-button:hover {
     background-image: linear-gradient(#555555, #383838), linear-gradient(#ccc, #555 10px, #222 100%);
 }
-.list-button:active, .mini-button:active, .close-button:active {
+.mini-button:active, .close-button:active {
     background-image: linear-gradient(#202020, #2c2c2c), linear-gradient(#222, #111 calc(100% - 10px), #aaa 100%);
 }
-.selected {
-    background-image: linear-gradient(#ff0142, #830110), linear-gradient(#ffbabc, #e33a33 12px, #55010a 100%);
-}
-.mini-button:active > img, .list-button:active > img {
+.mini-button:active > img {
     margin-top: 7px;
     margin-bottom: 3px;
 }
@@ -213,9 +202,6 @@ nav, .mini-buttonlist, .close-button, .xs {
     height: 40px;
     padding: 1px 0 1px 0;
     display: inline-block;
-}
-.mini-buttonlist {
-    height: 42px;
 }
 .mini-img {
     margin: 5px 15px 5px 15px;
@@ -284,6 +270,7 @@ nav, .mini-buttonlist, .close-button, .xs {
 .w100 {
     width: 100%;
     max-height: calc(100vh - 260px);
+    pointer-events: none;
 }
 a:link {
     color: #40C4FF;
@@ -326,25 +313,6 @@ a:active {
     animation: 1s zoomIn;
     animation-fill-mode: forwards;
 }
-.popup-show-draw {
-    animation: 2s fadeInDraw;
-    animation-fill-mode: forwards;
-}
-.popup-show-draw > div:first-child {
-    animation: 2s zoomInDraw;
-    animation-fill-mode: forwards;
-}
-.popup-show-slow {
-    /*visibility: visible;
-    transition: opacity 0.5s ease-in-out;
-    opacity: 1;*/
-    animation: 3s fadeInSlow;
-    animation-fill-mode: forwards;
-}
-.popup-show-slow > div:first-child {
-    animation: 3s zoomInSlow;
-    animation-fill-mode: forwards;
-}
 .popup-hide {
     animation: 1s fadeOut;
     animation-fill-mode: forwards;
@@ -365,50 +333,6 @@ a:active {
 }
 @keyframes zoomIn {
     0% {
-        transform: scale(0.75);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-@keyframes fadeInSlow {
-    0% {
-        opacity: 0;
-    }
-    66% {
-        opacity: 0;
-    }
-    100% {
-        visibility: visible;
-        opacity: 1;
-    }
-}
-@keyframes zoomInSlow {
-    0% {
-    }
-    66% {
-        transform: scale(0.75);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-@keyframes fadeInDraw {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        visibility: visible;
-        opacity: 1;
-    }
-}
-@keyframes zoomInDraw {
-    0% {
-    }
-    50% {
         transform: scale(0.75);
     }
     100% {
@@ -525,6 +449,7 @@ a:active {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10%;
+    pointer-events: none;
 }
 
 .dummy {

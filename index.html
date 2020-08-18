@@ -21,14 +21,10 @@
     <link rel="stylesheet" href="styles/app.css">
 </head>
 <body>
-
     <div class="page" id="iTitle">
         <div class="content">
             <header>
-                <svg class="title1" viewBox="0 0 170 90">
-                    <text x="5px" y="75%" dy="0">grrd's</text>
-                </svg>
-                <svg class="title2" viewBox="0 0 317 90">
+                <svg width="0" height="0" viewBox="0 0 0 0">
                     <defs>
                         <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#26C6DA;stop-opacity:1" />
@@ -43,6 +39,11 @@
                             <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
                         </linearGradient>
                     </defs>
+                </svg>
+                <svg class="title1" viewBox="0 0 170 90">
+                    <text x="5px" y="75%" dy="0">grrd's</text>
+                </svg>
+                <svg class="title2" viewBox="0 0 317 90">
                     <g transform="translate(2,12) rotate(-4)">
                         <rect width="70" height="70" rx="5" fill="url(#grad)"/>
                         <text x="6" y="60">M</text>
@@ -71,7 +72,7 @@
             <div class="controlgroup">
                 <div class="control">
                     <div class="left">
-                        <img src="images/photo.svg" class="shadow w100">
+                        <img src="images/photo.svg" class="shadow w100" alt="Theme">
                     </div>
                     <div class="center">
                         <p id="lThemeLabel"></p>&nbsp;
@@ -90,7 +91,7 @@
                 </div>
                 <div class="control">
                     <div class="left">
-                        <img src="images/cards.svg" class="shadow w100">
+                        <img src="images/cards.svg" class="shadow w100" alt="Cards">
                     </div>
                     <div class="center">
                         <p id="lCardsLabel">Cards: </p>&nbsp;
@@ -109,7 +110,7 @@
                 </div>
                 <div class="control">
                     <div class="left">
-                        <img src="images/2player.svg" class="shadow w100">
+                        <img src="images/2player.svg" class="shadow w100" alt="Players">
                     </div>
                     <div class="center">
                         <p id="lPlayersLabel">Players: </p>&nbsp;
@@ -134,43 +135,7 @@
         </div>
         <div id="iPopupInfo" class="overflow popup-init">
             <div class="popup">
-                <div class="popup-head">
-                    <svg class="title1" viewBox="0 0 170 90">
-                        <text x="5px" y="75%" dy="0">grrd's</text>
-                    </svg>
-                    <svg class="title2" viewBox="0 0 317 90">
-                        <defs>
-                            <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#26C6DA;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#00838F;stop-opacity:1" />
-                            </linearGradient>
-                            <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#64FFDA;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#00BFA5;stop-opacity:1" />
-                            </linearGradient>
-                            <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <g transform="translate(2,12) rotate(-4)">
-                            <rect width="70" height="70" rx="5" fill="url(#grad)"/>
-                            <text x="6" y="60">M</text>
-                        </g>
-                        <g transform="translate(85,12) rotate(2)">
-                            <rect width="70" height="70" rx="5" fill="url(#grad3)"/>
-                            <text x="10" y="60">E</text>
-                        </g>
-                        <g transform="translate(160,10) rotate(-1)">
-                            <rect width="70" height="70" rx="5" fill="url(#grad)"/>
-                            <text x="6" y="60">M</text>
-                        </g>
-                        <g transform="translate(240,5) rotate(3)">
-                            <rect width="70" height="70" rx="5" fill="url(#grad2)"/>
-                            <text x="8" y="60">O</text>
-                        </g>
-                    </svg>
-                </div>
+                <div class="popup-head"></div>
                 <div id="iInfoBody" class="popup-body">
                     <p id="lInstr" class="popup-content"></p>
                     <p id="lDev" class="popup-content"></p>
@@ -222,43 +187,7 @@
 
             <div id="iPopupScore" class="overflow popup-init">
                 <div class="popup">
-                    <div class="popup-head">
-                        <svg class="title1" viewBox="0 0 170 90">
-                            <text x="5px" y="75%" dy="0">grrd's</text>
-                        </svg>
-                        <svg class="title2" viewBox="0 0 317 90">
-                            <defs>
-                                <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#26C6DA;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#00838F;stop-opacity:1" />
-                                </linearGradient>
-                                <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#64FFDA;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#00BFA5;stop-opacity:1" />
-                                </linearGradient>
-                                <linearGradient id="grad3" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#4FC3F7;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#0277BD;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <g transform="translate(2,12) rotate(-4)">
-                                <rect width="70" height="70" rx="5" fill="url(#grad)"/>
-                                <text x="6" y="60">M</text>
-                            </g>
-                            <g transform="translate(85,12) rotate(2)">
-                                <rect width="70" height="70" rx="5" fill="url(#grad3)"/>
-                                <text x="10" y="60">E</text>
-                            </g>
-                            <g transform="translate(160,10) rotate(-1)">
-                                <rect width="70" height="70" rx="5" fill="url(#grad)"/>
-                                <text x="6" y="60">M</text>
-                            </g>
-                            <g transform="translate(240,5) rotate(3)">
-                                <rect width="70" height="70" rx="5" fill="url(#grad2)"/>
-                                <text x="8" y="60">O</text>
-                            </g>
-                        </svg>
-                    </div>
+                    <div class="popup-head"></div>
                     <div class="popup-body">
                         <div class="popup-content">
                             <p id="lWinner"></p>

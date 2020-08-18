@@ -7,13 +7,13 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-/*jslint browser:true, long: true, devel: true, for: true, this: true */
+/*jslint browser:true, long: true, for: true */
 
 (function () {
     "use strict";
 
     // Localization
-    var nLang = 0;
+    let nLang = 0;
     const lLoc = [{
         desc: "grrd’s Memo is a HTML5 Game that works offline.",
         help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
@@ -74,10 +74,12 @@
     const iTitle = $("iTitle");
     const iGame = $("iGame");
 
+    // Raster für Karten
+    const oGrid = $("grid");
     // Karten-Template
     let oFlipContainer;
     // Liste aller spielbaren Karten für Click-Handler
-    const lFlipContainer = $("grid").getElementsByClassName("flip-container");
+    const lFlipContainer = oGrid.getElementsByClassName("flip-container");
     // Zähler für Schlaufen
     let nIndex;
     // Liste der aktuell umgedrehten Karten
@@ -85,11 +87,11 @@
     // Anzahl maximal möglicher Paare
     let nMaxPairs = 24;
     // verfügbare Themen
-    const lThemes = ["animals", "flowers", "mascha"]
+    const lThemes = ["animals", "flowers", "mascha"];
     // Ausgewähltes Thema
     let nCurrentTheme = 0;
-    // verfügbare Themen
-    const lAnzCards = [6, 12, 24, 32, 48]
+    // verfügbare Anzahl Karten
+    const lAnzCards = [6, 12, 24, 32, 48];
     // Anzahl Karten fürs aktuelle Spiel
     let nAnzCards = 2;
     // Spieler, der aktuell am Zug ist
@@ -153,9 +155,9 @@
     // Kartengrösse festlegen
     function fCardSize() {
         let nSize = Math.sqrt((document.documentElement.clientHeight - 40) * document.documentElement.clientWidth / lAnzCards[nAnzCards]) * 0.7;
-        $("grid").setAttribute("style", "grid-template-columns: repeat(auto-fill, minmax(" + nSize + "px, 1fr))");
+        oGrid.setAttribute("style", "grid-template-columns: repeat(auto-fill, minmax(" + nSize + "px, 1fr))");
         document.getElementsByTagName("header")[0].setAttribute("style", "display: flex; flex-wrap: wrap;");
-        if($("iStart").getBoundingClientRect().bottom > window.innerHeight) {
+        if ($("iStart").getBoundingClientRect().bottom > window.innerHeight) {
             document.getElementsByTagName("header")[0].setAttribute("style", "display: flex; flex-wrap: nowrap;");
         }
     }
@@ -185,9 +187,9 @@
                 // aktueller Spieler + 1 Punkt
                 lScore[nCurrentPlayer] += 1;
                 if (lScore[nCurrentPlayer] === 1) {
-                    $("iMessage").innerHTML = lLoc[nLang].player + " " +  (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pair;
+                    $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pair;
                 } else {
-                    $("iMessage").innerHTML = lLoc[nLang].player + " " +  (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pairs;
+                    $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pairs;
                 }
                 // umgedrehte Karten zurücksetzen
                 lFlipped = [];
@@ -210,7 +212,7 @@
             let nWinner = lScore.indexOf(Math.max(...lScore));
             let nWinnerScore = (Math.max(...lScore));
             if (nAnzPlayer === 1) {
-                $("lWinner").innerHTML = lLoc[nLang].tries.replace("lCards",(lAnzCards[nAnzCards] / 2)).replace("lTries",(lTries[0] / 2));
+                $("lWinner").innerHTML = lLoc[nLang].tries.replace("lCards", (lAnzCards[nAnzCards] / 2)).replace("lTries", (lTries[0] / 2));
             } else {
                 $("lWinner").innerHTML = lLoc[nLang].player + " " + (nWinner + 1) + " " + lLoc[nLang].win + " " + nWinnerScore + " " + lLoc[nLang].pairs2;
             }
@@ -218,6 +220,13 @@
             iPopupScore.classList.remove("popup-hide");
             iPopupScore.classList.add("popup-show");
         }
+    }
+
+    // Click-Handler generieren
+    function fClickHandler(oCard) {
+        return function () {
+            fFlipCard(oCard);
+        };
     }
 
     // neues Spiel beginnen
@@ -229,7 +238,7 @@
 
         // Werte initialisieren
         // alte Karten löschen
-        $("grid").innerHTML = "";
+        oGrid.innerHTML = "";
         // Punktestand initialisieren
         lScore = new Array(nAnzPlayer).fill(0);
         // Versuche initialisieren
@@ -256,14 +265,12 @@
         for (nIndex = 0; nIndex < lAnzCards[nAnzCards]; nIndex += 1) {
             oFlipContainer = document.getElementsByClassName("dummy")[0].getElementsByClassName("flip-container")[0].cloneNode(true);
             oFlipContainer.getElementsByClassName("image")[0].src = "images/" + lThemes[nCurrentTheme] + "/" + lCards[nIndex] + ".jpg";
-            $("grid").appendChild(oFlipContainer);
+            oGrid.appendChild(oFlipContainer);
         }
 
         for (nIndex = 0; nIndex < lFlipContainer.length; nIndex += 1) {
             // Click-Event auf Karten legen
-            lFlipContainer[nIndex].onclick = function(ignore) {
-                fFlipCard(this);
-            }
+            lFlipContainer[nIndex].onclick = fClickHandler(lFlipContainer[nIndex]);
         }
         fCardSize();
 
@@ -274,21 +281,20 @@
     }
 
     function fQuitGame() {
-        iTitle.classList.remove("swipe-out");
-        iGame.classList.remove("swipe-in");
-        iTitle.classList.add("swipe-out-right");
-        iGame.classList.add("swipe-in-left");
         iPopupScore.classList.remove("popup-show");
         iPopupScore.classList.add("popup-hide");
+        setTimeout(function () {
+            iTitle.classList.remove("swipe-out");
+            iGame.classList.remove("swipe-in");
+            iTitle.classList.add("swipe-out-right");
+            iGame.classList.add("swipe-in-left");
+        }, 1000);
     }
 
-    function urlQuery(query) {
-        query = query.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-        var expr = "[\\?&]" + query + "=([^&#]*)";
-        var regex = new RegExp(expr);
-        var results = regex.exec(window.location.href);
-        if (results !== null) {
-            return results[1];
+    function fUrlParam(cKey) {
+        let searchParams = new URLSearchParams(window.location.search);
+        if (searchParams.has(cKey)) {
+            return searchParams.get(cKey);
         } else {
             return false;
         }
@@ -297,7 +303,7 @@
     function fInit() {
         // Localize
         // Example usage - https://grrd01.github.io/TicTacToe/?lang=en
-        const cLang = (urlQuery("lang") || navigator.language || navigator.browserLanguage || (navigator.languages || ["en"])[0]).substring(0, 2).toLowerCase();
+        const cLang = (fUrlParam("lang") || navigator.language || navigator.browserLanguage || (navigator.languages || ["en"])[0]).substring(0, 2).toLowerCase();
         if (cLang === "de") {
             nLang = 1;
         } else if (cLang === "fr") {
@@ -327,6 +333,11 @@
         $("iClose").addEventListener("click", fQuitGame);
         $("iOK").addEventListener("click", fQuitGame);
 
+        document.querySelectorAll(".popup-head").forEach(function (oPopupHead) {
+            oPopupHead.appendChild(document.getElementsByClassName("title1")[0].cloneNode(true));
+            oPopupHead.appendChild(document.getElementsByClassName("title2")[0].cloneNode(true));
+        });
+
         fCardSize();
     }
 
@@ -337,8 +348,3 @@
     fInit();
 
 }());
-
-
-
-
-
