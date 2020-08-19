@@ -23,7 +23,8 @@
     {
       "src": "../images/icon_256.png",
       "type": "image/png",
-      "sizes": "256x256"
+      "sizes": "256x256",
+      "purpose": "maskable any"
     },
     {
       "src": "../images/icon_512.png",
