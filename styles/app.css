@@ -68,6 +68,7 @@ header {
 #iGame {
     transform: translateX(100vw);
     opacity: 0;
+    visibility: hidden;
 }
 
 .swipe-in {
@@ -80,14 +81,17 @@ header {
     0% {
         transform: translateX(100vw);
         opacity: 0;
+        visibility: hidden;
     }
     1% {
         transform: translateX(100vw);
         opacity: 1;
+        visibility: visible;
     }
     100% {
         transform: translateX(0);
         opacity: 1;
+        visibility: visible;
     }
 }
 
@@ -101,14 +105,17 @@ header {
     0% {
         transform: translateX(0);
         opacity: 1;
+        visibility: visible;
     }
     99% {
         transform: translateX(-100vw);
         opacity: 1;
+        visibility: visible;
     }
     100% {
         transform: translateX(-100vw);
         opacity: 0;
+        visibility: hidden;
     }
 }
 .swipe-in-left {
@@ -121,14 +128,17 @@ header {
     0% {
         transform: translateX(0);
         opacity: 1;
+        visibility: visible;
     }
     99% {
         transform: translateX(100vw);
         opacity: 1;
+        visibility: visible;
     }
     100% {
         transform: translateX(100vw);
         opacity: 0;
+        visibility: hidden;
     }
 }
 
@@ -142,14 +152,17 @@ header {
     0% {
         transform: translateX(-100vw);
         opacity: 0;
+        visibility: hidden;
     }
     1% {
         transform: translateX(-100vw);
         opacity: 1;
+        visibility: visible;
     }
     100% {
         transform: translateX(0);
         opacity: 1;
+        visibility: visible;
     }
 }
 

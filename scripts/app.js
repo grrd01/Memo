@@ -281,14 +281,18 @@
     }
 
     function fQuitGame() {
+        iTitle.classList.remove("swipe-out");
+        iGame.classList.remove("swipe-in");
+        iTitle.classList.add("swipe-out-right");
+        iGame.classList.add("swipe-in-left");
+    }
+
+    function fCloseScore() {
         iPopupScore.classList.remove("popup-show");
         iPopupScore.classList.add("popup-hide");
         setTimeout(function () {
-            iTitle.classList.remove("swipe-out");
-            iGame.classList.remove("swipe-in");
-            iTitle.classList.add("swipe-out-right");
-            iGame.classList.add("swipe-in-left");
-        }, 1000);
+            fQuitGame();
+        }, 600);
     }
 
     function fUrlParam(cKey) {
@@ -331,7 +335,7 @@
         $("iPlayersDown").addEventListener("click", fChangeAnzPlayers);
         $("iStart").addEventListener("click", fStartGame);
         $("iClose").addEventListener("click", fQuitGame);
-        $("iOK").addEventListener("click", fQuitGame);
+        $("iOK").addEventListener("click", fCloseScore);
 
         document.querySelectorAll(".popup-head").forEach(function (oPopupHead) {
             oPopupHead.appendChild(document.getElementsByClassName("title1")[0].cloneNode(true));
