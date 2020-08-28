@@ -46,6 +46,7 @@ header {
 }
 
 .title2 {
+    display: flex;
     stroke: white;
     stroke-width: 5px;
     font-family: Arial, sans-serif;
@@ -60,6 +61,9 @@ header {
     width: calc(65% - 5px);
     max-width: calc((100vh - 280px) / 9 * 32);
     min-width: calc(55px / 9 * 32);
+}
+.title2card {
+    flex: 1;
 }
 .shadow {
     filter: drop-shadow( 2px 2px 2px #111);
@@ -371,6 +375,7 @@ a:active {
 }
 .popup-head {
     margin: 10px;
+    display: flex;
 }
 .popup-body {
     margin: 20px;
@@ -473,12 +478,12 @@ a:active {
 .flip-container {
     perspective: 1000px;
 }
-/* flip the pane when hovered */
+
 .flip-container.turned .flipper {
     transform: rotateY(180deg);
 }
 
-.flip-container, .front, .back {
+#grid>.flip-container, #grid .front, #grid .back {
     width: 100%;
     padding-bottom: 100%;
 }

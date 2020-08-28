@@ -17,7 +17,6 @@
     const lLoc = [{
         desc: "grrd’s Memo is a HTML5 Game that works offline.",
         help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
-        themes: "Theme",
         themes_txt: ["Animals", "Flowers", "Masha"],
         cards: "Cards",
         players: "Players",
@@ -42,7 +41,6 @@
     }, {
         desc: "grrd's Tic Tac Toe ist ein HTML5 Spiel, welches offline funktioniert",
         help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
-        themes: "Thema",
         themes_txt: ["Tiere", "Blumen", "Mascha"],
         cards: "Karten",
         players: "Spieler",
@@ -73,6 +71,8 @@
     const iPopupScore = $("iPopupScore");
     const iTitle = $("iTitle");
     const iGame = $("iGame");
+
+    const lTitle2Cards = document.getElementsByClassName("title2card");
 
     // Raster für Karten
     const oGrid = $("grid");
@@ -140,6 +140,7 @@
         if (nAnzCards + nStep >= 0 && nAnzCards + nStep < lAnzCards.length) {
             nAnzCards += nStep;
             $("lCards").innerHTML = lAnzCards[nAnzCards];
+            $("iCards").src = "images/cards" + lAnzCards[nAnzCards] + ".svg";
         }
     }
 
@@ -149,6 +150,7 @@
         if (nAnzPlayer + nStep > 0 && nAnzPlayer + nStep < 6) {
             nAnzPlayer += nStep;
             $("lPlayers").innerHTML = nAnzPlayer;
+            $("iPlayers").src = "images/player" + nAnzPlayer + ".svg";
         }
     }
 
@@ -222,10 +224,16 @@
         }
     }
 
-    // Click-Handler generieren
+    // Click-Handler für Karten generieren
     function fClickHandler(oCard) {
         return function () {
             fFlipCard(oCard);
+        };
+    }
+    // Click-Handler für Karten generieren
+    function fClickHandlerTitle(oCard) {
+        return function () {
+            oCard.classList.toggle("turned");
         };
     }
 
@@ -316,10 +324,9 @@
         if (nLang) {
             document.documentElement.setAttribute("lang", cLang);
         }
-        $("lThemeLabel").innerHTML = lLoc[nLang].themes + ": ";
         $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
-        $("lCardsLabel").innerHTML = lLoc[nLang].cards + ": ";
-        $("lPlayersLabel").innerHTML = lLoc[nLang].players + ": ";
+        $("lCardsLabel").innerHTML = lLoc[nLang].cards;
+        $("lPlayersLabel").innerHTML = lLoc[nLang].players;
         $("lDev").innerHTML = lLoc[nLang].dev;
         $("lInstr").innerHTML = lLoc[nLang].help;
         $("lLook").innerHTML = lLoc[nLang].look;
@@ -337,10 +344,47 @@
         $("iClose").addEventListener("click", fQuitGame);
         $("iOK").addEventListener("click", fCloseScore);
 
+        document.querySelectorAll("tspan").forEach(function ( oTspan ) {
+            oTspan.innerHTML = "grrd's Memo grrd's Memo grrd's Memo grrd's Memo grrd's Memo";
+        });
+
         document.querySelectorAll(".popup-head").forEach(function (oPopupHead) {
             oPopupHead.appendChild(document.getElementsByClassName("title1")[0].cloneNode(true));
             oPopupHead.appendChild(document.getElementsByClassName("title2")[0].cloneNode(true));
         });
+
+        Array.from(lTitle2Cards).forEach(function(lTitle2Card) {
+            lTitle2Card.onclick = fClickHandlerTitle(lTitle2Card);
+        });
+
+        document.querySelectorAll(".popup-head .title2card").forEach(function ( oCard ) {
+            oCard.classList.add("turned");
+        });
+
+        setTimeout(function(){
+            document.getElementsByClassName("cardM")[0].classList.add("turned");
+        }, 500);
+        setTimeout(function(){
+            document.getElementsByClassName("cardE")[0].classList.add("turned");
+        }, 1000);
+        setTimeout(function(){
+            document.getElementsByClassName("cardM")[0].classList.remove("turned");
+        }, 1700);
+        setTimeout(function(){
+            document.getElementsByClassName("cardE")[0].classList.remove("turned");
+        }, 1900);
+        setTimeout(function(){
+            document.getElementsByClassName("cardM2")[0].classList.add("turned");
+        }, 2500);
+        setTimeout(function(){
+            document.getElementsByClassName("cardM")[0].classList.add("turned");
+        }, 3000);
+        setTimeout(function(){
+            document.getElementsByClassName("cardE")[0].classList.add("turned");
+        }, 3700);
+        setTimeout(function(){
+            document.getElementsByClassName("cardO")[0].classList.add("turned");
+        }, 4300);
 
         fCardSize();
     }

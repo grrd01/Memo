@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="108px" height="71px" viewBox="-50 -5 257 170" stroke="white" stroke-width="8" fill="none" >
+  <g transform="scale(0.58, 0.58) translate(-15 -2)">
+    <ellipse cx="75" cy="72" rx="47" ry="59" transform="rotate(-5)"   />
+    <ellipse cx="70" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <ellipse cx="93" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <path stroke-linecap="round" d="M62 85 C70 95, 96 95, 104 86"   />
+  </g>
+  <g transform="scale(-0.55,0.55) translate(-285 -3)">
+    <ellipse cx="75" cy="72" rx="47" ry="59" transform="rotate(-5)"   />
+    <ellipse cx="70" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <ellipse cx="93" cy="55" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <path stroke-linecap="round" d="M62 84 C70 95, 98 95, 104 84"   />
+  </g>
+
+  <g transform="scale(0.6, 0.6) translate(-55 105)">
+    <ellipse cx="75" cy="72" rx="47" ry="59" transform="rotate(-5)"   />
+    <ellipse cx="70" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <ellipse cx="93" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <path stroke-linecap="round" d="M62 87 C70 95, 96 95, 104 86"   />
+    <path stroke-linecap="round" d="M35 155 C70 110, 96 120, 130 145"   />
+  </g>
+  <g transform="scale(-0.65,0.65) translate(-300 85)">
+    <ellipse cx="75" cy="72" rx="47" ry="59" transform="rotate(-5)"   />
+    <ellipse cx="70" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <ellipse cx="93" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <path stroke-linecap="round" d="M62 87 C70 95, 96 95, 104 86"   />
+    <path stroke-linecap="round" d="M35 155 C70 110, 96 120, 130 145"   />
+  </g>
+  <g transform="scale(0.7, 0.7) translate(30 75)">
+    <ellipse cx="75" cy="72" rx="47" ry="59" transform="rotate(-5)"   />
+    <ellipse cx="70" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <ellipse cx="93" cy="56" rx="7" ry="11" stroke="none" fill="white" transform="rotate(-2)"/>
+    <path stroke-linecap="round" d="M62 87 C70 95, 96 95, 104 86"   />
+    <path stroke-linecap="round" d="M35 155 C70 110, 96 120, 130 145"   />
+  </g>
+</svg>

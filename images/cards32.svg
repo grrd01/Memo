@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="108px" height="71px" viewBox="-15 -5 200 180" stroke="white" stroke-width="10" fill="none" >
+  <g transform="rotate(10 50 100)
+                translate(0 20)
+                skewX(-20)
+                scale(0.44 0.5)">>
+    <rect x="0" y="0" rx="10" ry="10" width="45" height="45"/>
+    <rect x="60" y="0" rx="10" ry="10" width="45" height="45"/>
+    <rect x="120" y="0" rx="10" ry="10" width="45" height="45"/>
+    <rect x="180" y="0" rx="10" ry="10" width="45" height="45"/>
+    <rect x="240" y="0" rx="10" ry="10" width="45" height="45"/>
+    <rect x="300" y="0" rx="10" ry="10" width="45" height="45"/>
+    <rect x="0" y="60" rx="10" ry="10" width="45" height="45"/>
+    <rect x="60" y="60" rx="10" ry="10" width="45" height="45"/>
+    <rect x="120" y="60" rx="10" ry="10" width="45" height="45"/>
+    <rect x="180" y="60" rx="10" ry="10" width="45" height="45"/>
+    <rect x="240" y="60" rx="10" ry="10" width="45" height="45"/>
+    <rect x="300" y="60" rx="10" ry="10" width="45" height="45"/>
+    <rect x="0" y="120" rx="10" ry="10" width="45" height="45"/>
+    <rect x="60" y="120" rx="10" ry="10" width="45" height="45"/>
+    <rect x="120" y="120" rx="10" ry="10" width="45" height="45"/>
+    <rect x="180" y="120" rx="10" ry="10" width="45" height="45"/>
+    <rect x="240" y="120" rx="10" ry="10" width="45" height="45"/>
+    <rect x="300" y="120" rx="10" ry="10" width="45" height="45"/>
+    <rect x="0" y="180" rx="10" ry="10" width="45" height="45"/>
+    <rect x="60" y="180" rx="10" ry="10" width="45" height="45"/>
+    <rect x="120" y="180" rx="10" ry="10" width="45" height="45"/>
+    <rect x="180" y="180" rx="10" ry="10" width="45" height="45"/>
+    <rect x="240" y="180" rx="10" ry="10" width="45" height="45"/>
+    <rect x="300" y="180" rx="10" ry="10" width="45" height="45"/>
+    <rect x="360" y="0" rx="10" ry="10" width="45" height="45"/>
+    <rect x="360" y="60" rx="10" ry="10" width="45" height="45"/>
+    <rect x="360" y="120" rx="10" ry="10" width="45" height="45"/>
+    <rect x="360" y="180" rx="10" ry="10" width="45" height="45"/>
+    <rect x="420" y="0" rx="10" ry="10" width="45" height="45"/>
+    <rect x="420" y="60" rx="10" ry="10" width="45" height="45"/>
+    <rect x="420" y="120" rx="10" ry="10" width="45" height="45"/>
+    <rect x="420" y="180" rx="10" ry="10" width="45" height="45"/>
+
+  </g>
+
+</svg>
