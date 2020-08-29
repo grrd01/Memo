@@ -20,7 +20,7 @@
         themes_txt: ["Animals", "Flowers", "Masha"],
         cards: "Cards",
         players: "Players",
-        start: "Start",
+        start: "Play",
         dev: "Developed by Gérard Tyedmers.",
         look: "Have a look at my other games:",
         and: "and",
@@ -131,6 +131,7 @@
         if (nCurrentTheme + nStep >= 0 && nCurrentTheme + nStep < lThemes.length) {
             nCurrentTheme += nStep;
             $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
+            $("iTheme").src = "images/" + lThemes[nCurrentTheme] + ".svg";
         }
     }
 
@@ -209,7 +210,7 @@
 
         oCard.classList.toggle("turned");
 
-        if (document.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
+        if (oGrid.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
             // alle Karten aufgedeckt, Spiel beendet
             let nWinner = lScore.indexOf(Math.max(...lScore));
             let nWinnerScore = (Math.max(...lScore));
@@ -327,6 +328,7 @@
         $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
         $("lCardsLabel").innerHTML = lLoc[nLang].cards;
         $("lPlayersLabel").innerHTML = lLoc[nLang].players;
+        $("lStart").innerHTML = lLoc[nLang].start;
         $("lDev").innerHTML = lLoc[nLang].dev;
         $("lInstr").innerHTML = lLoc[nLang].help;
         $("lLook").innerHTML = lLoc[nLang].look;

@@ -61,6 +61,7 @@ header {
     width: calc(65% - 5px);
     max-width: calc((100vh - 280px) / 9 * 32);
     min-width: calc(55px / 9 * 32);
+    padding-bottom: 20px;
 }
 .title2card {
     flex: 1;
