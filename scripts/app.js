@@ -152,6 +152,11 @@
             nAnzPlayer += nStep;
             $("lPlayers").innerHTML = nAnzPlayer;
             $("iPlayers").src = "images/player" + nAnzPlayer + ".svg";
+            if (nAnzPlayer === 1) {
+                $("lPlayersLabel").innerHTML = lLoc[nLang].player;
+            } else {
+                $("lPlayersLabel").innerHTML = lLoc[nLang].players;
+            }
         }
     }
 
