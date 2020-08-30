@@ -61,11 +61,14 @@ header {
     width: calc(65% - 5px);
     max-width: calc((100vh - 280px) / 9 * 32);
     min-width: calc(55px / 9 * 32);
-    padding-bottom: 20px;
 }
 .title2card {
     flex: 1;
 }
+.title2 .front, .title2 .back {
+    max-height: 100%;
+}
+
 .shadow {
     filter: drop-shadow( 2px 2px 2px #111);
 }
@@ -249,6 +252,10 @@ header {
     width: 100%;
     align-items: center;
 }
+.control-icon {
+    max-height: calc(100vh - 260px);
+    pointer-events: none;
+}
 .left {
     display: flex;
     justify-content: flex-start;
@@ -272,10 +279,16 @@ header {
     .controlgroup {
         flex-direction: row;
     }
+    .control-icon {
+        min-height: calc(50vh - 260px);
+    }
 }
 @media screen and (orientation: portrait) {
     .control {
         min-height: calc((100vh - 200px)/5);
+    }
+    .control-icon {
+        width: 100%;
     }
 }
 
@@ -284,11 +297,6 @@ header {
 }
 .w60 {
     width: 60px;
-}
-.w100 {
-    width: 100%;
-    max-height: calc(100vh - 260px);
-    pointer-events: none;
 }
 a:link {
     color: #40C4FF;
