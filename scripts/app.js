@@ -19,49 +19,45 @@
         help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
         themes_txt: ["Animals", "Flowers", "Masha"],
         cards: "Cards",
+        player: "Player",
         players: "Players",
         start: "Play",
         dev: "Developed by Gérard Tyedmers.",
         look: "Have a look at my other games:",
-        and: "and",
         begin: "begins.",
-        play: "plays",
         has: "has now",
+        and: "and",
         win: "wins with",
-        pair: "pair.",
-        pairs: "pairs.",
-        pairs2: "pairs.",
-        tries: "lCards pairs revealed in lTries attempts.",
-        draw: "draw",
-        player: "Player",
-        turn: "'s turn.",
-        won: "has won!",
-        score: "Score:",
-        draw2: "This game ends in a draw."
+        win2: "win with",
+        pair: "pair",
+        pairs: "pairs",
+        pairs2: "pairs",
+        tries: "tries",
+        rank: "rank",
+        stats: "lCards pairs revealed in lTries attempts.",
+        turn: "'s turn."
     }, {
-        desc: "grrd's Tic Tac Toe ist ein HTML5 Spiel, welches offline funktioniert",
+        desc: "grrd's Memo ist ein HTML5 Spiel, welches offline funktioniert",
         help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
         themes_txt: ["Tiere", "Blumen", "Mascha"],
         cards: "Karten",
+        player: "Spieler",
         players: "Spieler",
         start: "Start",
         dev: "Entwickelt von Gérard Tyedmers.",
         look: "Schau dir auch meine anderen Spiele an: ",
-        and: "und",
         begin: "beginnt.",
-        play: "spielt",
         has: "hat nun",
+        and: "und",
         win: "gewinnt mit",
-        pair: "Paar.",
-        pairs: "Paare.",
-        pairs2: "Paaren.",
-        tries: "lCards Paare in lTries Versuchen aufgedeckt.",
-        draw: "unentschieden",
-        player: "Spieler",
-        turn: "ist am Zug.",
-        won: "hat gewonnen!",
-        score: "Resultat:",
-        draw2: "Diese Partie endet unentschieden."
+        win2: "gewinnen mit",
+        pair: "Paar",
+        pairs: "Paare",
+        pairs2: "Paaren",
+        tries: "Versuche",
+        rank: "Rang",
+        stats: "lCards Paare in lTries Versuchen aufgedeckt.",
+        turn: "ist am Zug."
     }];
 
     const $ = function (id) {
@@ -71,6 +67,8 @@
     const iPopupScore = $("iPopupScore");
     const iTitle = $("iTitle");
     const iGame = $("iGame");
+    const tScore = $("tScore");
+    const lDev = $("lDev");
 
     const lTitle2Cards = document.getElementsByClassName("title2card");
 
@@ -90,6 +88,9 @@
     const lThemes = ["animals", "flowers", "mascha"];
     // Ausgewähltes Thema
     let nCurrentTheme = 0;
+    // Mascha ein/ausblenden
+    let nMaschaClick = 0;
+    let nMascha = -1;
     // verfügbare Anzahl Karten
     const lAnzCards = [6, 12, 24, 32, 48];
     // Anzahl Karten fürs aktuelle Spiel
@@ -102,7 +103,8 @@
     let lScore = [];
     // Versuche pro Spieler
     let lTries = [];
-
+    // Rangliste
+    let lScoreBoard = [];
 
 
     // Mischen eines Arrays
@@ -125,10 +127,17 @@
         iPopupInfo.classList.add("popup-hide");
     }
 
+    function fShowMascha() {
+        nMaschaClick += 1;
+        if (nMaschaClick === 3) {
+            nMascha = 0;
+        }
+    }
+
     // Theme wechseln
     function fChangeTheme(event) {
         let nStep = parseInt(event.target.getAttribute("data-step"));
-        if (nCurrentTheme + nStep >= 0 && nCurrentTheme + nStep < lThemes.length) {
+        if (nCurrentTheme + nStep >= 0 && nCurrentTheme + nStep < lThemes.length + nMascha) {
             nCurrentTheme += nStep;
             $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
             $("iTheme").src = "images/" + lThemes[nCurrentTheme] + ".svg";
@@ -172,16 +181,23 @@
 
     // Karte umdrehen
     function fFlipCard(oCard) {
+        // klick auf aufgedeckte Karten
         if (oCard.classList.contains("turned")) {
-            // Aufgedeckte Karten nicht spielbar
+            // unpassendes Paar wieder umdrehen
+            if (lFlipped.length === 2 && lFlipped.includes(oCard)) {
+                // aufgedeckte unpassendes Paar wieder umdrehen
+                lFlipped[0].classList.remove("turned");
+                lFlipped[1].classList.remove("turned");
+                lFlipped = [];
+            }
+            // passende Aufgedeckte Karten nicht spielbar
             return;
         }
 
         if (lFlipped.length === 2) {
-            // Karten wieder umdrehen
+            // aufgedeckte unpassendes Paar wieder umdrehen
             lFlipped[0].classList.remove("turned");
             lFlipped[1].classList.remove("turned");
-            // umgedrehte Karten zurücksetzen
             lFlipped = [];
         }
 
@@ -195,15 +211,14 @@
                 // aktueller Spieler + 1 Punkt
                 lScore[nCurrentPlayer] += 1;
                 if (lScore[nCurrentPlayer] === 1) {
-                    $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pair;
+                    $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pair + ".";
                 } else {
-                    $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pairs;
+                    $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pairs + ".";
                 }
                 // umgedrehte Karten zurücksetzen
                 lFlipped = [];
             } else {
                 // falls die zwei Karten unterschiedlich sind
-
                 // nächster Spieler am Zug
                 nCurrentPlayer += 1;
                 if (nCurrentPlayer === nAnzPlayer) {
@@ -217,12 +232,58 @@
 
         if (oGrid.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
             // alle Karten aufgedeckt, Spiel beendet
-            let nWinner = lScore.indexOf(Math.max(...lScore));
-            let nWinnerScore = (Math.max(...lScore));
             if (nAnzPlayer === 1) {
-                $("lWinner").innerHTML = lLoc[nLang].tries.replace("lCards", (lAnzCards[nAnzCards] / 2)).replace("lTries", (lTries[0] / 2));
+                tScore.classList.add("hidden");
+                $("lWinner").innerHTML = lLoc[nLang].stats.replace("lCards", (lAnzCards[nAnzCards] / 2)).replace("lTries", (lTries[0] / 2));
             } else {
-                $("lWinner").innerHTML = lLoc[nLang].player + " " + (nWinner + 1) + " " + lLoc[nLang].win + " " + nWinnerScore + " " + lLoc[nLang].pairs2;
+                const tHeadScore = document.createElement("tbody");
+                let tRow;
+                let tCell;
+                let cWinner = "";
+                let nLastComma;
+
+                tScore.classList.remove("hidden");
+                lScoreBoard = [];
+
+                tScore.replaceChild(tHeadScore, tScore.getElementsByTagName("tbody")[0]);
+
+                for (nIndex = 0; nIndex < nAnzPlayer; nIndex += 1) {
+                    lScoreBoard.push({
+                        player: nIndex + 1,
+                        pairs: lScore[nIndex],
+                        tries: lTries[nIndex] / 2
+                    });
+                }
+                lScoreBoard.sort((a, b) => b.pairs - a.pairs || a.tries - b.tries);
+
+                for (nIndex = 0; nIndex < nAnzPlayer; nIndex += 1) {
+                    lScoreBoard[nIndex].rank = nIndex + 1;
+                    if (nIndex > 0 && lScoreBoard[nIndex - 1].pairs === lScoreBoard[nIndex].pairs) {
+                        lScoreBoard[nIndex].rank = lScoreBoard[nIndex - 1].rank;
+                    }
+                    if (lScoreBoard[nIndex].rank === 1) {
+                        cWinner += ", " + lScoreBoard[nIndex].player;
+                    }
+                    tRow = tHeadScore.insertRow();
+                    tCell = tRow.insertCell(0);
+                    tCell.innerHTML = lScoreBoard[nIndex].rank;
+                    tCell = tRow.insertCell(1);
+                    tCell.innerHTML = lLoc[nLang].player + " " + lScoreBoard[nIndex].player;
+                    tCell = tRow.insertCell(2);
+                    tCell.innerHTML = lScoreBoard[nIndex].pairs;
+                    tCell = tRow.insertCell(3);
+                    tCell.innerHTML = lScoreBoard[nIndex].tries;
+                }
+                nLastComma = cWinner.lastIndexOf(",");
+
+                if (nLastComma > 0) {
+                    // mehrere Gewinner
+                    cWinner = cWinner.substring(2, nLastComma) + " " + lLoc[nLang].and + cWinner.substring(nLastComma + 1);
+                    $("lWinner").innerHTML = lLoc[nLang].players + " " + cWinner + " " + lLoc[nLang].win2 + " " + lScoreBoard[0].pairs + " " + lLoc[nLang].pairs2 + ".";
+                } else {
+                    // ein Gewinner
+                    $("lWinner").innerHTML = lLoc[nLang].player + " " + lScoreBoard[0].player + " " + lLoc[nLang].win + " " + lScoreBoard[0].pairs + " " + lLoc[nLang].pairs2 + ".";
+                }
             }
             iPopupScore.classList.remove("popup-init");
             iPopupScore.classList.remove("popup-hide");
@@ -277,7 +338,7 @@
         fShuffle(lCards);
         // generieren der Karten fürs neue Spiel
         for (nIndex = 0; nIndex < lAnzCards[nAnzCards]; nIndex += 1) {
-            oFlipContainer = document.getElementsByClassName("dummy")[0].getElementsByClassName("flip-container")[0].cloneNode(true);
+            oFlipContainer = $("iDummy").getElementsByClassName("flip-container")[0].cloneNode(true);
             oFlipContainer.getElementsByClassName("image")[0].src = "images/" + lThemes[nCurrentTheme] + "/" + lCards[nIndex] + ".jpg";
             oGrid.appendChild(oFlipContainer);
         }
@@ -334,9 +395,13 @@
         $("lCardsLabel").innerHTML = lLoc[nLang].cards;
         $("lPlayersLabel").innerHTML = lLoc[nLang].players;
         $("lStart").innerHTML = lLoc[nLang].start;
-        $("lDev").innerHTML = lLoc[nLang].dev;
+        lDev.innerHTML = lLoc[nLang].dev;
         $("lInstr").innerHTML = lLoc[nLang].help;
         $("lLook").innerHTML = lLoc[nLang].look;
+        $("thRank").innerHTML = lLoc[nLang].rank;
+        $("thPlayer").innerHTML = lLoc[nLang].player;
+        $("thPairs").innerHTML = lLoc[nLang].pairs;
+        $("thTries").innerHTML = lLoc[nLang].tries;
         document.querySelector("meta[name='description']").setAttribute("content", lLoc[nLang].desc);
 
         $("iInfo").addEventListener("click", fShowPopupInfo);
@@ -350,8 +415,13 @@
         $("iStart").addEventListener("click", fStartGame);
         $("iClose").addEventListener("click", fQuitGame);
         $("iOK").addEventListener("click", fCloseScore);
+        lDev.addEventListener("click", fShowMascha);
 
-        document.querySelectorAll("tspan").forEach(function ( oTspan ) {
+        if (fUrlParam("mascha") === "true") {
+            nMascha = 0;
+        }
+
+        document.querySelectorAll("tspan").forEach(function (oTspan) {
             oTspan.innerHTML = "grrd's Memo grrd's Memo grrd's Memo grrd's Memo grrd's Memo";
         });
 
@@ -360,36 +430,36 @@
             oPopupHead.appendChild(document.getElementsByClassName("title2")[0].cloneNode(true));
         });
 
-        Array.from(lTitle2Cards).forEach(function(lTitle2Card) {
+        Array.from(lTitle2Cards).forEach(function (lTitle2Card) {
             lTitle2Card.onclick = fClickHandlerTitle(lTitle2Card);
         });
 
-        document.querySelectorAll(".popup-head .title2card").forEach(function ( oCard ) {
+        document.querySelectorAll(".popup-head .title2card").forEach(function (oCard) {
             oCard.classList.add("turned");
         });
 
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName("cardM")[0].classList.add("turned");
         }, 500);
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName("cardE")[0].classList.add("turned");
         }, 1000);
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName("cardM")[0].classList.remove("turned");
         }, 1700);
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName("cardE")[0].classList.remove("turned");
         }, 1900);
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName("cardM2")[0].classList.add("turned");
         }, 2500);
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName("cardM")[0].classList.add("turned");
         }, 3000);
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName("cardE")[0].classList.add("turned");
         }, 3700);
-        setTimeout(function(){
+        setTimeout(function () {
             document.getElementsByClassName("cardO")[0].classList.add("turned");
         }, 4300);
 

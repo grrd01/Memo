@@ -295,6 +295,9 @@ header {
 .w60 {
     width: 60px;
 }
+.w100 {
+    width: 100%;
+}
 a:link {
     color: #40C4FF;
 }
@@ -306,6 +309,16 @@ a:hover {
 }
 a:active {
     color: #80D8FF;
+}
+
+#thRank, #thPairs, #thTries {
+    text-transform:capitalize;
+}
+#tScore td:nth-child(3), #tScore td:nth-child(4), #tScore th:nth-child(3), #tScore th:nth-child(4) {
+    text-align: right;
+}
+#tScore th:nth-child(1), #tScore th:nth-child(2) {
+    text-align: left;
 }
 
 
@@ -477,7 +490,7 @@ a:active {
     pointer-events: none;
 }
 
-.dummy {
+.hidden {
     display: none;
 }
 
