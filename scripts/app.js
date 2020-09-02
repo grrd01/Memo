@@ -35,7 +35,7 @@
         tries: "tries",
         rank: "rank",
         stats: "lCards pairs revealed in lTries attempts.",
-        turn: "'s turn."
+        turn: "lPlayer 's turn."
     }, {
         desc: "grrd's Memo ist ein HTML5 Spiel, welches offline funktioniert",
         help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
@@ -57,7 +57,51 @@
         tries: "Versuche",
         rank: "Rang",
         stats: "lCards Paare in lTries Versuchen aufgedeckt.",
-        turn: "ist am Zug."
+        turn: "lPlayer ist am Zug."
+    }, {
+        desc: "grrd's Memo est un jeu en HTML5 qui fonctionne hors ligne.",
+        help: "Retournez les cartes et trouvez les paires. Votre mémoire est-elle assez bonne?",
+        themes_txt: ["Animaux", "Fleurs", "Mascha"],
+        cards: "Cartes",
+        player: "Joueur",
+        players: "Joueurs",
+        start: "Jouer",
+        dev: "Développé par Gérard Tyedmers.",
+        look: "Regardez aussi mes autres jeux: ",
+        begin: "commence.",
+        has: "a maintenant",
+        and: "et",
+        win: "gagne avec",
+        win2: "gagnent avec",
+        pair: "paire",
+        pairs: "paires",
+        pairs2: "paires",
+        tries: "Essais",
+        rank: "Rang",
+        stats: "lCards paires révélées en lTries essais.",
+        turn: "Au tour du lPlayer."
+    }, {
+        desc: "grrd's Memo es un juego HTML5 que funciona fuera de línea.",
+        help: "Voltea las cartas y encuentra los pares. ¿Es tu memoria lo suficientemente buena?",
+        themes_txt: ["Animales", "Flores", "Masha"],
+        cards: "Cartas",
+        player: "Jugador",
+        players: "Jugadores",
+        start: "Juega",
+        dev: "Desarrollado por Gérard Tyedmers.",
+        look: "Echa un vistazo a mis otros juegos:",
+        begin: "comienza.",
+        has: "tiene ahora",
+        and: "y",
+        win: "gana con",
+        win2: "ganan con",
+        pair: "par",
+        pairs: "pares",
+        pairs2: "pares",
+        tries: "intentos",
+        rank: "rango",
+        stats: "lCards pares revelados en lTries intentos.",
+        turn: "Turno del lPlayer"
     }];
 
     const $ = function (id) {
@@ -149,7 +193,7 @@
         let nStep = parseInt(event.target.getAttribute("data-step"));
         if (nAnzCards + nStep >= 0 && nAnzCards + nStep < lAnzCards.length) {
             nAnzCards += nStep;
-            $("lCards").innerHTML = lAnzCards[nAnzCards];
+            $("lCards").innerHTML = lAnzCards[nAnzCards] + "\xa0" + lLoc[nLang].cards;
             $("iCards").src = "images/cards" + lAnzCards[nAnzCards] + ".svg";
         }
     }
@@ -159,12 +203,11 @@
         let nStep = parseInt(event.target.getAttribute("data-step"));
         if (nAnzPlayer + nStep > 0 && nAnzPlayer + nStep < 6) {
             nAnzPlayer += nStep;
-            $("lPlayers").innerHTML = nAnzPlayer;
             $("iPlayers").src = "images/player" + nAnzPlayer + ".svg";
             if (nAnzPlayer === 1) {
-                $("lPlayersLabel").innerHTML = lLoc[nLang].player;
+                $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].player;
             } else {
-                $("lPlayersLabel").innerHTML = lLoc[nLang].players;
+                $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].players;
             }
         }
     }
@@ -224,7 +267,7 @@
                 if (nCurrentPlayer === nAnzPlayer) {
                     nCurrentPlayer = 0;
                 }
-                $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].turn;
+                $("iMessage").innerHTML = lLoc[nLang].turn.replace("lPlayer", lLoc[nLang].player + " " + (nCurrentPlayer + 1));
             }
         }
 
@@ -387,13 +430,15 @@
             nLang = 1;
         } else if (cLang === "fr") {
             nLang = 2;
+        }else if (cLang === "es") {
+            nLang = 3;
         }
         if (nLang) {
             document.documentElement.setAttribute("lang", cLang);
         }
         $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
-        $("lCardsLabel").innerHTML = lLoc[nLang].cards;
-        $("lPlayersLabel").innerHTML = lLoc[nLang].players;
+        $("lCards").innerHTML = lAnzCards[nAnzCards] + "\xa0" + lLoc[nLang].cards;
+        $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].players;
         $("lStart").innerHTML = lLoc[nLang].start;
         lDev.innerHTML = lLoc[nLang].dev;
         $("lInstr").innerHTML = lLoc[nLang].help;

@@ -17,7 +17,9 @@ body {
 
 header {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .page {
@@ -33,20 +35,28 @@ header {
 .content {
     margin: 5px;
 }
+#iTitle .content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: calc(100vh - 10px);
+}
 
 .title1 {
+    width: 35%;
     stroke: none;
     fill: white;
     font: 3.8em/1 "Calibri", Times, serif;
     max-height: calc(100vh - 280px);
     min-height: 55px;
-    width: calc(35% - 5px);
     max-width: calc((100vh - 280px) / 9 * 17);
     min-width: calc(55px / 9 * 17);
 }
 
 .title2 {
+    width:65%;
     display: flex;
+    flex-direction: row;
     stroke: white;
     stroke-width: 5px;
     font-family: Arial, sans-serif;
@@ -58,7 +68,6 @@ header {
     filter: drop-shadow( 5px 5px 2px #111);
     max-height: calc(100vh - 280px);
     min-height: 55px;
-    width: calc(65% - 5px);
     max-width: calc((100vh - 280px) / 9 * 32);
     min-width: calc(55px / 9 * 32);
 }
@@ -238,54 +247,50 @@ header {
     padding: 5px;
 }
 .controlgroup {
+    flex-grow: 1;
     display: flex;
-    flex-direction: column;
 }
 .control {
-    display: grid;
-    grid-template-columns: minmax(60px, 200px) minmax(150px, auto) 121px;
-    grid-gap: 5px;
-    box-sizing: border-box;
-    width: 100%;
-    align-items: center;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
 }
 .control-icon {
-    max-height: calc(100vh - 260px);
     pointer-events: none;
 }
-.left {
-    display: flex;
-    justify-content: flex-start;
-}
-.center {
-    display: flex;
+.footer {
+    display: flex; flex-direction: row; justify-content: flex-end;
 }
 .flex-right {
+    align-self: flex-start;
     margin-left: auto;
 }
-.right {
-    display: flex;
-    justify-content: flex-end;
-}
 @media screen and (orientation: landscape) {
-    .control {
-        width: 33.33%;
-        display: flex;
-        flex-direction: column;
-    }
     .controlgroup {
         flex-direction: row;
     }
+    .control {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
     .control-icon {
         min-height: calc(50vh - 260px);
+        max-height: calc(100vh - 260px);
     }
 }
 @media screen and (orientation: portrait) {
+    .controlgroup {
+        flex-direction: column;
+    }
     .control {
-        min-height: calc((100vh - 200px)/5);
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
     .control-icon {
-        width: 100%;
+        width: 30vw;
+        max-height: calc(100vh - 260px);
     }
 }
 
