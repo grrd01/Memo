@@ -54,7 +54,6 @@
         }
         .title2card {
             flex: 1;
-            display: flex;
         }
         .controlgroup {
             flex-grow: 1;
@@ -106,6 +105,48 @@
                 max-height: calc(100vh - 260px);
             }
         }
+
+        /* entire container, keeps perspective */
+        .flip-container {
+            perspective: 1000px;
+        }
+
+        .flip-container.turned .flipper {
+            transform: rotateY(180deg);
+        }
+
+        #grid>.flip-container, #grid .front, #grid .back {
+            width: 100%;
+            padding-bottom: 100%;
+        }
+
+        /* flip speed goes here */
+        .flipper {
+            transition: 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        /* hide back of pane during swap */
+        .front, .back {
+            position: absolute;
+            backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        /* front pane, placed above back */
+        .front {
+            z-index: 2;
+            /* for firefox 31 */
+            transform: rotateY(0deg);
+        }
+
+        /* back, initially hidden pane */
+        .back {
+            transform: rotateY(180deg);
+        }
+
     </style>
 </head>
 <body>
@@ -115,37 +156,70 @@
                 <text x="5px" y="75%" dy="0">grrd's</text>
             </svg>
             <div class="title2">
-                <div class="title2card">
-                    <svg viewBox="0 0 80 85" width="100%" class="back">
-                        <g transform="translate(2,12) rotate(-4)">
-                            <rect width="70" height="70" rx="5" fill="url(#grad)"/>
-                            <text x="6" y="60">M</text>
-                        </g>
-                    </svg>
+                <div class="title2card flip-container" onclick="this.classList.toggle('turned')">
+                    <div class="flipper">
+                        <svg viewBox="0 0 80 85" width="100%" class="back">
+                            <g transform="translate(2,12) rotate(-4)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad)"/>
+                                <text x="6" y="60">M</text>
+                            </g>
+                        </svg>
+                        <svg viewBox="0 0 80 85" width="100%" class="front">
+                            <g transform="translate(2,12) rotate(-4)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad)"/>
+                            </g>
+                        </svg>
+                    </div>
+
                 </div>
-                <div class="title2card">
-                    <svg viewBox="0 0 80 87" width="100%" class="back">
-                        <g transform="translate(5,12) rotate(2)">
-                            <rect width="70" height="70" rx="5" fill="url(#grad3)"/>
-                            <text x="10" y="60">E</text>
-                        </g>
-                    </svg>
+                <div class="title2card flip-container" onclick="this.classList.toggle('turned')">
+                    <div class="flipper">
+                        <svg viewBox="0 0 80 87" width="100%" class="back">
+                            <g transform="translate(5,12) rotate(2)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad3)"/>
+                                <text x="10" y="60">E</text>
+                            </g>
+                        </svg>
+                        <svg viewBox="0 0 80 87" width="100%" class="front">
+                            <g transform="translate(5,12) rotate(2)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad3)"/>
+                                <text x="10" y="60"></text>
+                            </g>
+                        </svg>
+                    </div>
                 </div>
-                <div class="title2card">
-                    <svg viewBox="0 0 80 85" width="100%" class="back">
-                        <g transform="translate(2,10) rotate(-1)">
-                            <rect width="70" height="70" rx="5" fill="url(#grad)"/>
-                            <text x="6" y="60">M</text>
-                        </g>
-                    </svg>
+                <div class="title2card flip-container" onclick="this.classList.toggle('turned')">
+                    <div class="flipper">
+                        <svg viewBox="0 0 80 85" width="100%" class="back">
+                            <g transform="translate(2,10) rotate(-1)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad)"/>
+                                <text x="6" y="60">M</text>
+                            </g>
+                        </svg>
+                        <svg viewBox="0 0 80 85" width="100%" class="front">
+                            <g transform="translate(2,10) rotate(-1)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad)"/>
+                                <text x="6" y="60"></text>
+                            </g>
+                        </svg>
+                    </div>
                 </div>
-                <div class="title2card">
-                    <svg viewBox="0 0 80 85" width="100%" class="back">
-                        <g transform="translate(6,5) rotate(3)">
-                            <rect width="70" height="70" rx="5" fill="url(#grad2)"/>
-                            <text x="8" y="60">O</text>
-                        </g>
-                    </svg>
+                <div class="title2card flip-container" onclick="this.classList.toggle('turned')">
+                    <div class="flipper">
+                        <svg viewBox="0 0 80 85" width="100%" class="back">
+                            <g transform="translate(6,5) rotate(3)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad2)"/>
+                                <text x="8" y="60">O</text>
+                            </g>
+                        </svg>
+                        <svg viewBox="0 0 80 85" width="100%" class="front">
+                            <g transform="translate(6,5) rotate(3)">
+                                <rect width="70" height="70" rx="5" fill="url(#grad2)"/>
+                                <text x="8" y="60"></text>
+                            </g>
+                        </svg>
+                    </div>
+
                 </div>
             </div>
             <div class="flex-right">?</div>
