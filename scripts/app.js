@@ -167,9 +167,9 @@
 
     function setFullScreenIcon() {
         if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
-            $("img_fullscreen").src = "Images/escfullscreen.svg";
+            $("img_fullscreen").src = "images/escfullscreen.svg";
         } else {
-            $("img_fullscreen").src = "Images/fullscreen.svg";
+            $("img_fullscreen").src = "images/fullscreen.svg";
         }
     }
 
