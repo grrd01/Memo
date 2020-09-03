@@ -49,7 +49,7 @@ header {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    height: calc(100vh - 10px);
+    height: calc(100% - 10px);
 }
 
 .title1 {
