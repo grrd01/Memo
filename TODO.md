@@ -1,6 +1,10 @@
 ## ToDo
 #### Bugs
 - Front/Back in Title2 height
+- ios-Safari: Adressbar-height 
+  - https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/ 
+  - https://github.com/postcss/postcss-100vh-fix
+  - window.scrollTo(0,1)
 - ~~Back in Title2 missing~~
 - ~~1 Player"s"~~
 #### Features
@@ -13,13 +17,15 @@
   - dark/bright
   - language
 - Languages
-    - French
-    - Spanish
-- Fullscreen
+  - ~~French~~
+  - ~~Spanish~~
+- Localstorage
+  - Mascha:true
 - ServiceWorker
 - animate Icons-swap
 - title1 font ios
 - link to memo in other apps
+- ~~Fullscreen~~
 - ~~hide Mascha~~
 - ~~dynamic Size Title-icons~~ 
 - ~~turn unmatching pair~~

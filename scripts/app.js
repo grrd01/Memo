@@ -113,6 +113,7 @@
     const iGame = $("iGame");
     const tScore = $("tScore");
     const lDev = $("lDev");
+    const $fullScreen = $("iFullscreen");
 
     const lTitle2Cards = document.getElementsByClassName("title2card");
 
@@ -149,6 +150,28 @@
     let lTries = [];
     // Rangliste
     let lScoreBoard = [];
+
+    function toggleFullScreen() {
+        const doc = window.document;
+        const docEl = doc.documentElement;
+
+        const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+        const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+        if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+            requestFullScreen.call(docEl);
+        } else {
+            cancelFullScreen.call(doc);
+        }
+    }
+
+    function setFullScreenIcon() {
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement) {
+            $("img_fullscreen").src = "Images/escfullscreen.svg";
+        } else {
+            $("img_fullscreen").src = "Images/fullscreen.svg";
+        }
+    }
 
 
     // Mischen eines Arrays
@@ -461,6 +484,26 @@
         $("iClose").addEventListener("click", fQuitGame);
         $("iOK").addEventListener("click", fCloseScore);
         lDev.addEventListener("click", fShowMascha);
+        $fullScreen.addEventListener("click", function () {
+            toggleFullScreen();
+        });
+
+        if (
+            !(
+                document.fullscreenEnabled || /* FullScreen supported, Standard syntax */
+                document.webkitFullscreenEnabled || /* Chrome, Safari and Opera syntax */
+                document.mozFullScreenEnabled ||/* Firefox syntax */
+                document.msFullscreenEnabled/* IE/Edge syntax */
+            ) || (
+                navigator.standalone === true || /* FullScreen not already enabled */
+                document.fullscreenElement || /* Standard syntax */
+                document.webkitFullscreenElement || /* Chrome, Safari and Opera syntax */
+                document.mozFullScreenElement ||/* Firefox syntax */
+                document.msFullscreenElement /* IE/Edge syntax */
+            )
+        ) {
+            $fullScreen.parentNode.removeChild($fullScreen);
+        }
 
         if (fUrlParam("mascha") === "true") {
             nMascha = 0;
@@ -513,6 +556,22 @@
 
     window.addEventListener("resize", function () {
         fCardSize();
+    });
+    /* Standard syntax */
+    document.addEventListener("fullscreenchange", function() {
+        setFullScreenIcon();
+    });
+    /* Firefox */
+    document.addEventListener("mozfullscreenchange", function() {
+        setFullScreenIcon();
+    });
+    /* Chrome, Safari and Opera */
+    document.addEventListener("webkitfullscreenchange", function() {
+        setFullScreenIcon();
+    });
+    /* IE / Edge */
+    document.addEventListener("msfullscreenchange", function() {
+        setFullScreenIcon();
     });
 
     fInit();
