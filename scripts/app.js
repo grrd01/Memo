@@ -151,6 +151,17 @@
     // Rangliste
     let lScoreBoard = [];
 
+    const localStorageOK = (function () {
+        const mod = "modernizr";
+        try {
+            localStorage.setItem(mod, mod);
+            localStorage.removeItem(mod);
+            return true;
+        } catch (ignore) {
+            return false;
+        }
+    }());
+
     function toggleFullScreen() {
         const doc = window.document;
         const docEl = doc.documentElement;
@@ -198,6 +209,9 @@
         nMaschaClick += 1;
         if (nMaschaClick === 3) {
             nMascha = 0;
+            if (localStorageOK) {
+                localStorage.setItem("s_mascha", "true");
+            }
         }
     }
 
@@ -506,6 +520,10 @@
         }
 
         if (fUrlParam("mascha") === "true") {
+            nMaschaClick = 2;
+            fShowMascha();
+        }
+        if (localStorageOK && localStorage.getItem("s_mascha") === "true") {
             nMascha = 0;
         }
 

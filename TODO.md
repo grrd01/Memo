@@ -15,7 +15,7 @@
   - dark/bright
   - language
 - Localstorage:
-  - Mascha:true
+  - ~~Mascha:true~~
   - Singleplayer Scoreboard
   - Own Images
 - ServiceWorker
@@ -23,7 +23,7 @@
 - Link to Memo in other apps:
   - Puzzle
   - 4 in a Row
-  - Dice
+  - ~~Dice~~
   - ~~TicTacToe~~
 - Languages:
   - ~~French~~
