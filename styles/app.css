@@ -15,13 +15,25 @@ body {
     text-shadow: 1px 1px 2px #000;
 }
 
-/* Avoid Chrome to see Safari hack */
+/* fix safari.ios bugs */
 @supports (-webkit-touch-callout: none) {
     html {
         height: -webkit-fill-available;
     }
     body {
         height: -webkit-fill-available;
+    }
+    header .title1 {
+        height: 18vw;
+    }
+    header .title2 {
+        height: 19vw;
+    }
+    .popup-head .title1 {
+        height: 75px;
+    }
+    .popup-head .title2 {
+        height: 75px;
     }
 }
 

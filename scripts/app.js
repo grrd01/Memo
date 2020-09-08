@@ -486,6 +486,17 @@
         $("thTries").innerHTML = lLoc[nLang].tries;
         document.querySelector("meta[name='description']").setAttribute("content", lLoc[nLang].desc);
 
+        // ServiceWorker initialisieren
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("sw.js").then(function (registration) {
+                    console.log("ServiceWorker registration successful with scope: ", registration.scope);
+                }, function (err) {
+                    console.log("ServiceWorker registration failed: ", err);
+                });
+            });
+        }
+
         $("iInfo").addEventListener("click", fShowPopupInfo);
         $("iInfoClose").addEventListener("click", fHidePopupInfo);
         $("iNextTheme").addEventListener("click", fChangeTheme);
