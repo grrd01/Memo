@@ -28,6 +28,18 @@ module.exports = function(grunt) {
                 files: {
                     '../../2_Build/Memo/sw.js': ['sw.js']
                 }
+            },
+            three: {
+                options: {
+                    compress: true,
+                    mangle: true,
+                    output: {
+                        comments: 'some'
+                    }
+                },
+                files: {
+                    '../../2_Build/Memo/scripts/exif.js': ['scripts/exif.js']
+                }
             }
         },
         svgmin: {
@@ -64,6 +76,7 @@ module.exports = function(grunt) {
                     {'../../2_Build/Memo/images/player5.svg': 'images/player5.svg'},
                     {'../../2_Build/Memo/images/prev.svg': 'images/prev.svg'},
                     {'../../2_Build/Memo/images/puzzle.svg': 'images/puzzle.svg'},
+                    {'../../2_Build/Memo/images/settings.svg': 'images/settings.svg'},
                     {'../../2_Build/Memo/images/tictactoe.svg': 'images/tictactoe.svg'},
                     {'../../2_Build/Memo/images/x.svg': 'images/x.svg'}
                     ]

@@ -220,7 +220,6 @@ header {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     padding: 1px 1px 1px 0;
-    margin-left: 1px;
 }
 .mini-buttonlist {
     height: 42px;
@@ -251,6 +250,7 @@ header {
     height: 40px;
     padding: 1px 0 1px 0;
     display: inline-block;
+    margin-left: 1px;
 }
 .mini-img {
     margin: 5px 15px 5px 15px;
@@ -495,6 +495,16 @@ a:active {
 .button-span > img {
     margin-bottom: -3px;
 }
+
+#settingsgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    grid-gap: 0.5rem;
+}
+#settingsgrid img {
+    border-radius: 10%;
+}
+
 
 
 

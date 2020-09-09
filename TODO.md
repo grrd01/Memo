@@ -1,11 +1,9 @@
 ## ToDo
 #### Bugs
-- Front/Back in Title2 height
-- ~~ios-Safari: Adressbar-height~~
-  - ~~window.scrollTo(0,1)~~
-- ~~Back in Title2 missing~~
-- ~~1 Player"s"~~
+- ~~Puzzle: BrowserAutoRotates~~
+- 4inaRow: BrowserAutoRotates
 #### Features
+- animate Icons-swap
 - Theme: 
   - Car Brands
   - Food
@@ -14,20 +12,30 @@
   - Sound
   - dark/bright
   - language
+  - own images
 - Localstorage:
-  - ~~Mascha:true~~
   - Singleplayer Scoreboard
-  - Own Images
-- ServiceWorker
-- animate Icons-swap
+  - ~~Mascha:true~~
+  - ~~Own Images~~
 - Link to Memo in other apps:
-  - Puzzle
   - 4 in a Row
+  - ~~Puzzle~~
   - ~~Dice~~
   - ~~TicTacToe~~
 - Languages:
   - ~~French~~
   - ~~Spanish~~
+
+## Done
+#### Bugs
+- ~~Front/Back in Title2 height~~
+- ~~ios-Safari: Adressbar-height~~
+  - ~~window.scrollTo(0,1)~~
+- ~~Back in Title2 missing~~
+- ~~1 Player"s"~~
+
+#### Features
+- ~~ServiceWorker~~
 - ~~title1 font ios~~
 - ~~Fullscreen~~
 - ~~hide Mascha~~

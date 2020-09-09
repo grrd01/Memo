@@ -150,6 +150,9 @@
                         <div id="iInfo" class="mini-button">
                             <img class="mini-img shadow" src="images/info.svg" alt="Info">
                         </div>
+                        <div id="iSettings" class="mini-button">
+                            <img class="mini-img shadow" src="images/settings.svg" alt="Settings">
+                        </div>
                         <div id="iFullscreen" class="mini-button">
                             <img id="img_fullscreen" class="mini-img shadow" src="images/fullscreen.svg" alt="Fullscreen">
                         </div>
@@ -238,6 +241,46 @@
             </div>
             <div class="buffer"></div>
         </div>
+        <div id="iPopupSettings" class="overflow popup-init">
+            <div class="popup">
+                <div class="popup-head"></div>
+                <div class="popup-body">
+                    <p id="lOwnImg" class="popup-content">Click on a Card to choose an image.</p>
+                    <div id="settingsgrid">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                    </div>
+                </div>
+                <div class="popup-footer">
+                    <div id="iSettingsClose" class="button">
+                        <div class="button-span"><img class="w25 shadow" src="images/ok.svg" alt="OK">&nbsp;OK</div>
+                    </div>
+                </div>
+            </div>
+            <div class="buffer"></div>
+        </div>
     </div>
     <div class="page" id="iGame">
         <main class="content">
@@ -293,6 +336,7 @@
                 </div>
             </div>
         </div>
+        <input type="file" id="b_image_input" accept="image/*">
     </div>
     <svg width="0" height="0" viewBox="0 0 0 0">
         <defs>
@@ -313,6 +357,7 @@
             </clipPath>
         </defs>
     </svg>
+    <script src='scripts/exif.js'></script>
     <script src="scripts/app.js"></script>
 </body>
 </html>

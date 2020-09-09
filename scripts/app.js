@@ -15,9 +15,10 @@
     // Localization
     let nLang = 0;
     const lLoc = [{
+        lang: "English",
         desc: "grrd’s Memo is a HTML5 Game that works offline.",
         help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
-        themes_txt: ["Animals", "Flowers", "Masha"],
+        themes_txt: ["Own Images","Animals", "Flowers", "Masha"],
         cards: "Cards",
         player: "Player",
         players: "Players",
@@ -37,9 +38,10 @@
         stats: "lCards pairs revealed in lTries attempts.",
         turn: "lPlayer 's turn."
     }, {
+        lang: "Deutsch",
         desc: "grrd's Memo ist ein HTML5 Spiel, welches offline funktioniert",
         help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
-        themes_txt: ["Tiere", "Blumen", "Mascha"],
+        themes_txt: ["Eigene Bilder", "Tiere", "Blumen", "Mascha"],
         cards: "Karten",
         player: "Spieler",
         players: "Spieler",
@@ -59,9 +61,10 @@
         stats: "lCards Paare in lTries Versuchen aufgedeckt.",
         turn: "lPlayer ist am Zug."
     }, {
+        lang: "Français",
         desc: "grrd's Memo est un jeu en HTML5 qui fonctionne hors ligne.",
         help: "Retournez les cartes et trouvez les paires. Votre mémoire est-elle assez bonne?",
-        themes_txt: ["Animaux", "Fleurs", "Mascha"],
+        themes_txt: ["Images personnelles", "Animaux", "Fleurs", "Mascha"],
         cards: "Cartes",
         player: "Joueur",
         players: "Joueurs",
@@ -81,9 +84,10 @@
         stats: "lCards paires révélées en lTries essais.",
         turn: "Au tour du lPlayer."
     }, {
+        lang: "Español",
         desc: "grrd's Memo es un juego HTML5 que funciona fuera de línea.",
         help: "Voltea las cartas y encuentra los pares. ¿Es tu memoria lo suficientemente buena?",
-        themes_txt: ["Animales", "Flores", "Masha"],
+        themes_txt: ["Imágenes personales", "Animales", "Flores", "Masha"],
         cards: "Cartas",
         player: "Jugador",
         players: "Jugadores",
@@ -108,6 +112,7 @@
         return document.getElementById(id);
     };
     const iPopupInfo = $("iPopupInfo");
+    const iPopupSettings = $("iPopupSettings");
     const iPopupScore = $("iPopupScore");
     const iTitle = $("iTitle");
     const iGame = $("iGame");
@@ -128,11 +133,11 @@
     // Liste der aktuell umgedrehten Karten
     let lFlipped = [];
     // Anzahl maximal möglicher Paare
-    let nMaxPairs = 24;
+    const nMaxPairs = 24;
     // verfügbare Themen
-    const lThemes = ["animals", "flowers", "mascha"];
+    const lThemes = ["photo", "animals", "flowers", "mascha"];
     // Ausgewähltes Thema
-    let nCurrentTheme = 0;
+    let nCurrentTheme = 1;
     // Mascha ein/ausblenden
     let nMaschaClick = 0;
     let nMascha = -1;
@@ -150,6 +155,10 @@
     let lTries = [];
     // Rangliste
     let lScoreBoard = [];
+    // Button für eigenes Bild
+    let oOwnImg;
+    // rotiert Browser Bilder automatisch?
+    let bAutorotate;
 
     const localStorageOK = (function () {
         const mod = "modernizr";
@@ -184,7 +193,6 @@
         }
     }
 
-
     // Mischen eines Arrays
     function fShuffle(lArray) {
         for (nIndex = lArray.length - 1; nIndex > 0; nIndex -= 1) {
@@ -203,6 +211,16 @@
     function fHidePopupInfo() {
         iPopupInfo.classList.remove("popup-show");
         iPopupInfo.classList.add("popup-hide");
+    }
+    // Popup Settings
+    function fShowPopupSettings() {
+        iPopupSettings.classList.remove("popup-init");
+        iPopupSettings.classList.remove("popup-hide");
+        iPopupSettings.classList.add("popup-show");
+    }
+    function fHidePopupSettings() {
+        iPopupSettings.classList.remove("popup-show");
+        iPopupSettings.classList.add("popup-hide");
     }
 
     function fShowMascha() {
@@ -377,10 +395,108 @@
             fFlipCard(oCard);
         };
     }
-    // Click-Handler für Karten generieren
+    // Click-Handler für Titel-Karten generieren
     function fClickHandlerTitle(oCard) {
         return function () {
             oCard.classList.toggle("turned");
+        };
+    }
+    // Click-Handler für EigeneBilder-Karten generieren
+    function fClickHandlerOwnImg(oCard) {
+        return function () {
+            oOwnImg = oCard;
+            $("b_image_input").click();
+        };
+    }
+
+    // returns a promise that resolves to true  if the browser automatically
+    // rotates images based on exif data and false otherwise
+    function fBrowserAutoRotates () {
+        return new Promise((resolve, reject) => {
+            // load an image with exif rotation and see if the browser rotates it
+            const image = new Image();
+            image.onload = () => {
+                resolve(image.naturalWidth === 1);
+            };
+            image.onerror = reject;
+            // this jpeg is 2x1 with orientation=6 so it should rotate to 1x2
+            image.src = "data:image/jpeg;base64,/9j/4QBiRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAYAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAAITAAMAAAABAAEAAAAAAAAAAABIAAAAAQAAAEgAAAAB/9sAQwAEAwMEAwMEBAMEBQQEBQYKBwYGBgYNCQoICg8NEBAPDQ8OERMYFBESFxIODxUcFRcZGRsbGxAUHR8dGh8YGhsa/9sAQwEEBQUGBQYMBwcMGhEPERoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoa/8IAEQgAAQACAwERAAIRAQMRAf/EABQAAQAAAAAAAAAAAAAAAAAAAAf/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAF/P//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQH//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z";
+        });
+    }
+
+    function fResizeImage(file) {
+        const fileLoader = new FileReader();
+        const canvas = document.createElement("canvas");
+        let context = null;
+        const imageObj = new Image();
+        const max_width = 500;
+        const max_height = 500;
+        const g_exif = {Orientation: undefined};
+
+        //create a hidden canvas object we can use to create the new re-sized image data
+        canvas.id = "hiddenCanvas";
+        canvas.width = max_width;
+        canvas.height = max_height;
+        canvas.style.visibility = "hidden";
+        document.body.appendChild(canvas);
+
+        //get the context to use
+        context = canvas.getContext("2d");
+
+        // check for an image then
+        //trigger the file loader to get the data from the image
+        if (file.target.files[0].type.match("image.*")) {
+            fileLoader.readAsDataURL(file.target.files[0]);
+        } else {
+            console.log("File is not an image");
+        }
+
+        // setup the file loader onload function
+        // once the file loader has the data it passes it to the
+        // image object which, once the image has loaded,
+        // triggers the images onload function
+        fileLoader.onload = function () {
+            const data = this.result;
+            EXIF.getData(file.target.files[0], function () {
+                g_exif.Orientation = EXIF.getTag(this, "Orientation");
+                imageObj.src = data;
+            });
+
+        };
+
+        // set up the images onload function which clears the hidden canvas context,
+        // draws the new image then gets the blob data from it
+        imageObj.onload = function () {
+            let nTop = 0;
+            let nLeft = 0;
+            let nMin = Math.min(this.width, this.height);
+            // Check for empty images
+            if (this.width === 0 || this.height === 0) {
+                console.log("Image is empty");
+            } else {
+                if (!bAutorotate) {
+                    if (g_exif.Orientation === 5 || g_exif.Orientation === 6) {
+                        context.rotate(90 * Math.PI / 180);
+                        nLeft = -1 * max_width;
+                    }
+                    if (g_exif.Orientation === 3 || g_exif.Orientation === 4) {
+                        context.rotate(180 * Math.PI / 180);
+                        nLeft = -1 * max_width - 4;
+                        nTop = -1 * max_height + 4;
+                    }
+                    if (g_exif.Orientation === 7 || g_exif.Orientation === 8) {
+                        context.rotate(270 * Math.PI / 180);
+                        nTop = -1 * max_height;
+                    }
+                }
+                context.clearRect(0, 0, max_width, max_height);
+                context.drawImage(imageObj, (this.width / 2) - (nMin / 2) , (this.height / 2) - (nMin / 2), (nMin), (nMin), nTop, nLeft, max_width, max_height);
+                oOwnImg.src = canvas.toDataURL("image/jpeg");
+                if (localStorageOK) {
+                    nIndex = [...oOwnImg.parentElement.children].indexOf(oOwnImg);
+                    localStorage.setItem("s_image" + nIndex, canvas.toDataURL("image/jpeg"));
+                }
+            }
         };
     }
 
@@ -407,7 +523,14 @@
 
         // Auswahl der Paare fürs neue Spiel
         for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
-            lPairs.push(nIndex + 1);
+            if (nCurrentTheme === 0) {
+                // eigene Bilder
+                if (!$("settingsgrid").children.item(nIndex).src.endsWith("images/back.svg")) {
+                    lPairs.push(nIndex);
+                }
+            } else {
+                lPairs.push(nIndex + 1);
+            }
         }
         fShuffle(lPairs);
         // Mischen der Karten fürs neue Spiel
@@ -419,7 +542,11 @@
         // generieren der Karten fürs neue Spiel
         for (nIndex = 0; nIndex < lAnzCards[nAnzCards]; nIndex += 1) {
             oFlipContainer = $("iDummy").getElementsByClassName("flip-container")[0].cloneNode(true);
-            oFlipContainer.getElementsByClassName("image")[0].src = "images/" + lThemes[nCurrentTheme] + "/" + lCards[nIndex] + ".jpg";
+            if (nCurrentTheme === 0) {
+                oFlipContainer.getElementsByClassName("image")[0].src = $("settingsgrid").children.item(lCards[nIndex]).src;
+            } else {
+                oFlipContainer.getElementsByClassName("image")[0].src = "images/" + lThemes[nCurrentTheme] + "/" + lCards[nIndex] + ".jpg";
+            }
             oGrid.appendChild(oFlipContainer);
         }
 
@@ -499,6 +626,8 @@
 
         $("iInfo").addEventListener("click", fShowPopupInfo);
         $("iInfoClose").addEventListener("click", fHidePopupInfo);
+        $("iSettings").addEventListener("click", fShowPopupSettings);
+        $("iSettingsClose").addEventListener("click", fHidePopupSettings);
         $("iNextTheme").addEventListener("click", fChangeTheme);
         $("iPrevTheme").addEventListener("click", fChangeTheme);
         $("iCardsUp").addEventListener("click", fChangeAnzCards);
@@ -534,8 +663,16 @@
             nMaschaClick = 2;
             fShowMascha();
         }
-        if (localStorageOK && localStorage.getItem("s_mascha") === "true") {
-            nMascha = 0;
+        if (localStorageOK) {
+            if (localStorage.getItem("s_mascha") === "true") {
+                nMascha = 0;
+            }
+            // eigene Bilder aus LocalStorage laden
+            for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
+                if (localStorage.getItem("s_image" + nIndex) !== null) {
+                    $("settingsgrid").children.item(nIndex).src = localStorage.getItem("s_image" + nIndex);
+                }
+            }
         }
 
         document.querySelectorAll("tspan").forEach(function (oTspan) {
@@ -549,6 +686,11 @@
 
         Array.from(lTitle2Cards).forEach(function (lTitle2Card) {
             lTitle2Card.onclick = fClickHandlerTitle(lTitle2Card);
+        });
+        document.getElementById("b_image_input").addEventListener("change", fResizeImage, false);
+
+        Array.from(document.getElementsByClassName("ownimg")).forEach(function (lOwnImg) {
+            lOwnImg.onclick = fClickHandlerOwnImg(lOwnImg);
         });
 
         document.querySelectorAll(".popup-head .title2card").forEach(function (oCard) {
@@ -579,6 +721,8 @@
         setTimeout(function () {
             document.getElementsByClassName("cardO")[0].classList.add("turned");
         }, 4300);
+
+        bAutorotate = fBrowserAutoRotates();
 
         fCardSize();
     }

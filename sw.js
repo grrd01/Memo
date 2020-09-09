@@ -41,9 +41,11 @@ var urlsToCache = [
     "images/player5.svg",
     "images/prev.svg",
     "images/puzzle.svg",
+    "images/settings.svg",
     "images/tictactoe.svg",
     "images/x.svg",
     "scripts/app.js",
+    "scripts/exif.js",
     "styles/app.css"
 ];
 
