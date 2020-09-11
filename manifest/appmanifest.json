@@ -34,9 +34,19 @@
   ],
   "screenshots": [
     {
-      "src": "../images/screenshots/svg.png",
+      "src": "../images/screenshots/grrdsmemo1.png",
       "type": "image/png",
-      "sizes": "1280x800"
+      "sizes": "750x1334"
+    },
+    {
+      "src": "../images/screenshots/grrdsmemo2.png",
+      "type": "image/png",
+      "sizes": "750x1334"
+    },
+    {
+      "src": "../images/screenshots/grrdsmemo3.png",
+      "type": "image/png",
+      "sizes": "750x1334"
     }
   ],
   "categories": ["games", "logic games", "casual games", "family games"],
