@@ -36,7 +36,13 @@
         tries: "tries",
         rank: "rank",
         stats: "lCards pairs revealed in lTries attempts.",
-        turn: "lPlayer 's turn."
+        turn: "lPlayer 's turn.",
+        own: "Click on a card to choose your image.",
+        ownanz: "lAnz images needed to start the game.",
+        ownanz2: "lAnz more images needed to start the game.",
+        ownanz3: "lAnz more image needed to start the game.",
+        ownanz4: "Press Play to start the game.",
+        cancel: "Cancel"
     }, {
         lang: "Deutsch",
         desc: "grrd's Memo ist ein HTML5 Spiel, welches offline funktioniert",
@@ -45,7 +51,7 @@
         cards: "Karten",
         player: "Spieler",
         players: "Spieler",
-        start: "Start",
+        start: "Play",
         dev: "Entwickelt von Gérard Tyedmers.",
         look: "Schau dir auch meine anderen Spiele an: ",
         begin: "beginnt.",
@@ -59,7 +65,13 @@
         tries: "Versuche",
         rank: "Rang",
         stats: "lCards Paare in lTries Versuchen aufgedeckt.",
-        turn: "lPlayer ist am Zug."
+        turn: "lPlayer ist am Zug.",
+        own: "Klick auf eine Karte, um dein Bild zu wählen.",
+        ownanz: "Wähle lAnz Bilder, um das Spiel zu beginnen.",
+        ownanz2: "Wähle noch lAnz Bilder, um das Spiel zu beginnen.",
+        ownanz3: "Wähle noch lAnz Bild, um das Spiel zu beginnen.",
+        ownanz4: "Drücke auf Play, um das Spiel zu beginnen.",
+        cancel: "Abbrechen"
     }, {
         lang: "Français",
         desc: "grrd's Memo est un jeu en HTML5 qui fonctionne hors ligne.",
@@ -68,7 +80,7 @@
         cards: "Cartes",
         player: "Joueur",
         players: "Joueurs",
-        start: "Jouer",
+        start: "Play",
         dev: "Développé par Gérard Tyedmers.",
         look: "Regardez aussi mes autres jeux: ",
         begin: "commence.",
@@ -82,7 +94,13 @@
         tries: "Essais",
         rank: "Rang",
         stats: "lCards paires révélées en lTries essais.",
-        turn: "Au tour du lPlayer."
+        turn: "Au tour du lPlayer.",
+        own: "Cliquez sur une carte pour choisir votre image.",
+        ownanz: "Sélectionnez lAnz images pour commencer le jeu.",
+        ownanz2: "Sélectionnez lAnz autres images pour commencer le jeu.",
+        ownanz3: "Sélectionnez lAnz autre image pour commencer le jeu.",
+        ownanz4: "Appuyez sur la touche Play pour commencer le jeu.",
+        cancel: "Annuler"
     }, {
         lang: "Español",
         desc: "grrd's Memo es un juego HTML5 que funciona fuera de línea.",
@@ -91,7 +109,7 @@
         cards: "Cartas",
         player: "Jugador",
         players: "Jugadores",
-        start: "Juega",
+        start: "Play",
         dev: "Desarrollado por Gérard Tyedmers.",
         look: "Echa un vistazo a mis otros juegos:",
         begin: "comienza.",
@@ -105,7 +123,13 @@
         tries: "intentos",
         rank: "rango",
         stats: "lCards pares revelados en lTries intentos.",
-        turn: "Turno del lPlayer"
+        turn: "Turno del lPlayer",
+        own: "Haz clic en una carta para elegir tu imagen.",
+        ownanz: "Selecciona lAnz imágenes para iniciar el juego.",
+        ownanz2: "Selecciona lAnz imágenes más para empezar el juego.",
+        ownanz3: "Selecciona lAnz imagen más para empezar el juego.",
+        ownanz4: "Pulsa Play para iniciar el juego.",
+        cancel: "Cancelar"
     }];
 
     const $ = function (id) {
@@ -157,6 +181,8 @@
     let lScoreBoard = [];
     // Button für eigenes Bild
     let oOwnImg;
+    // Anzahl eigene Bilder
+    let nAnzOwnImg;
     // rotiert Browser Bilder automatisch?
     let bAutorotate;
 
@@ -214,6 +240,7 @@
     }
     // Popup Settings
     function fShowPopupSettings() {
+        fCountOwnImg();
         iPopupSettings.classList.remove("popup-init");
         iPopupSettings.classList.remove("popup-hide");
         iPopupSettings.classList.add("popup-show");
@@ -221,6 +248,9 @@
     function fHidePopupSettings() {
         iPopupSettings.classList.remove("popup-show");
         iPopupSettings.classList.add("popup-hide");
+        setTimeout(function () {
+            iPopupSettings.classList.remove("play");
+        }, 600);
     }
 
     function fShowMascha() {
@@ -236,11 +266,14 @@
     // Theme wechseln
     function fChangeTheme(event) {
         let nStep = parseInt(event.target.getAttribute("data-step"));
-        if (nCurrentTheme + nStep >= 0 && nCurrentTheme + nStep < lThemes.length + nMascha) {
-            nCurrentTheme += nStep;
-            $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
-            $("iTheme").src = "images/" + lThemes[nCurrentTheme] + ".svg";
+        nCurrentTheme += nStep;
+        if (nCurrentTheme < 0) {
+            nCurrentTheme = lThemes.length + nMascha - 1;
+        } else if (nCurrentTheme > lThemes.length + nMascha - 1) {
+            nCurrentTheme = 0;
         }
+        $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
+        $("iTheme").src = "images/" + lThemes[nCurrentTheme] + ".svg";
     }
 
     // Anzahl Karten wechseln
@@ -409,6 +442,31 @@
         };
     }
 
+    // Eigene Bilder zählen
+    function fCountOwnImg () {
+        nAnzOwnImg = 0;
+        $("iSettingsPlay").classList.add("disabled");
+        for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
+            if (!$("settingsgrid").children.item(nIndex).src.endsWith("images/back.svg")) {
+                nAnzOwnImg += 1;
+            }
+        }
+        if (nAnzOwnImg === 0) {
+            // Kein eigenes Bild
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz.replace("lAnz", (lAnzCards[nAnzCards] / 2));
+        } else if ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg > 1) {
+            // mehrere eigene Bilder zu wenig
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz2.replace("lAnz", ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg));
+        } else if ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg === 1) {
+            // ein eigenes Bild zu wenig
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz3.replace("lAnz", "1");
+        } else {
+            // genug eigene Bilder
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz4;
+            $("iSettingsPlay").classList.remove("disabled");
+        }
+    }
+
     // returns a promise that resolves to true  if the browser automatically
     // rotates images based on exif data and false otherwise
     function fBrowserAutoRotates () {
@@ -496,6 +554,7 @@
                     nIndex = [...oOwnImg.parentElement.children].indexOf(oOwnImg);
                     localStorage.setItem("s_image" + nIndex, canvas.toDataURL("image/jpeg"));
                 }
+                fCountOwnImg();
             }
         };
     }
@@ -586,6 +645,15 @@
         }
     }
 
+    function fStartInit() {
+        if (nCurrentTheme === 0) {
+            iPopupSettings.classList.add("play");
+            fShowPopupSettings();
+        } else {
+            fStartGame();
+        }
+    }
+
     function fInit() {
         // Localize
         // Example usage - https://grrd01.github.io/TicTacToe/?lang=en
@@ -611,6 +679,7 @@
         $("thPlayer").innerHTML = lLoc[nLang].player;
         $("thPairs").innerHTML = lLoc[nLang].pairs;
         $("thTries").innerHTML = lLoc[nLang].tries;
+        $("lOwnImg").innerHTML = lLoc[nLang].own;
         document.querySelector("meta[name='description']").setAttribute("content", lLoc[nLang].desc);
 
         // ServiceWorker initialisieren
@@ -628,13 +697,16 @@
         $("iInfoClose").addEventListener("click", fHidePopupInfo);
         $("iSettings").addEventListener("click", fShowPopupSettings);
         $("iSettingsClose").addEventListener("click", fHidePopupSettings);
+        $("iSettingsCancel").addEventListener("click", fHidePopupSettings);
+        $("iSettingsPlay").addEventListener("click", fHidePopupSettings);
+        $("iSettingsPlay").addEventListener("click", fStartGame);
         $("iNextTheme").addEventListener("click", fChangeTheme);
         $("iPrevTheme").addEventListener("click", fChangeTheme);
         $("iCardsUp").addEventListener("click", fChangeAnzCards);
         $("iCardsDown").addEventListener("click", fChangeAnzCards);
         $("iPlayersUp").addEventListener("click", fChangeAnzPlayers);
         $("iPlayersDown").addEventListener("click", fChangeAnzPlayers);
-        $("iStart").addEventListener("click", fStartGame);
+        $("iStart").addEventListener("click", fStartInit);
         $("iClose").addEventListener("click", fQuitGame);
         $("iOK").addEventListener("click", fCloseScore);
         lDev.addEventListener("click", fShowMascha);

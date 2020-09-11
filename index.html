@@ -150,7 +150,7 @@
                         <div id="iInfo" class="mini-button">
                             <img class="mini-img shadow" src="images/info.svg" alt="Info">
                         </div>
-                        <div id="iSettings" class="mini-button">
+                        <div id="iSettings" class="mini-button hidden">
                             <img class="mini-img shadow" src="images/settings.svg" alt="Settings">
                         </div>
                         <div id="iFullscreen" class="mini-button">
@@ -246,34 +246,43 @@
                 <div class="popup-head"></div>
                 <div class="popup-body">
                     <p id="lOwnImg" class="popup-content">Click on a Card to choose an image.</p>
+                    <p id="lOwnImgAnz" class="popup-content playownimg">4 more images needed to start the game.</p>
                     <div id="settingsgrid">
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
-                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image" />
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                        <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
                     </div>
                 </div>
-                <div class="popup-footer">
+                <div class="popup-footer playownimg">
+                    <div id="iSettingsPlay" class="button disabled">
+                        <div class="button-span"><img class="w25 shadow" src="images/next.svg" alt="Play">&nbsp;Play</div>
+                    </div>
+                    <div id="iSettingsCancel" class="button">
+                        <div class="button-span"><img class="w25 shadow" src="images/x.svg" alt="Cancel">&nbsp;Cancel</div>
+                    </div>
+                </div>
+                <div class="popup-footer settings">
                     <div id="iSettingsClose" class="button">
                         <div class="button-span"><img class="w25 shadow" src="images/ok.svg" alt="OK">&nbsp;OK</div>
                     </div>

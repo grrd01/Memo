@@ -1,7 +1,6 @@
 ## ToDo
 #### Bugs
-- ~~Puzzle: BrowserAutoRotates~~
-- 4inaRow: BrowserAutoRotates
+
 #### Features
 - animate Icons-swap
 - Theme: 
@@ -18,7 +17,7 @@
   - ~~Mascha:true~~
   - ~~Own Images~~
 - Link to Memo in other apps:
-  - 4 in a Row
+  - ~~4 in a Row~~
   - ~~Puzzle~~
   - ~~Dice~~
   - ~~TicTacToe~~
@@ -33,6 +32,8 @@
   - ~~window.scrollTo(0,1)~~
 - ~~Back in Title2 missing~~
 - ~~1 Player"s"~~
+- ~~Puzzle: BrowserAutoRotates~~
+- ~~4inaRow: BrowserAutoRotates~~
 
 #### Features
 - ~~ServiceWorker~~

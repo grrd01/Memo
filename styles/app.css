@@ -265,6 +265,9 @@ header {
     top: 10px;
     right: 10px;
 }
+.close-button img {
+    width: 20px;
+}
 #iMessage {
     padding: 5px;
 }
@@ -280,8 +283,8 @@ header {
 .control-icon {
     pointer-events: none;
 }
-.footer {
-    display: flex; flex-direction: row; justify-content: flex-end;
+.footer, .popup-footer {
+    display: flex; flex-direction: row-reverse; justify-content: space-between;
 }
 .flex-right {
     align-self: flex-start;
@@ -317,7 +320,7 @@ header {
 }
 
 .w25 {
-    width: 21px;
+    width: 30px;
 }
 .w60 {
     width: 60px;
@@ -464,7 +467,6 @@ a:active {
     height: 40px;
 }
 .button {
-    float: right;
     border: 1px transparent;
     border-radius: 10px;
     box-shadow: 0 0 0.5vmin 2px #000;
@@ -486,14 +488,19 @@ a:active {
 .button:active {
     background-image: linear-gradient(#1e9eae, #004a4d), linear-gradient(#65d7e6, #008799 calc(100% - 12px), #005e66 100%);;
 }
+.button.disabled {
+    background-image: linear-gradient(#d4d4d4, #535454),
+    linear-gradient(#e6e6e6, #ababab 12px, #7d7d7d 100%);
+    pointer-events: none;
+}
 .button-span {
-    margin-top: 8px;
+    margin-top: 5px;
 }
 .button-span:active {
-    margin-top: 10px;
+    margin-top: 7px;
 }
 .button-span > img {
-    margin-bottom: -3px;
+    margin-bottom: -8px;
 }
 
 #settingsgrid {
@@ -503,6 +510,18 @@ a:active {
 }
 #settingsgrid img {
     border-radius: 10%;
+}
+.playownimg {
+    display: none;
+}
+.play .playownimg {
+    display: flex;
+}
+.settings {
+    display: flex;
+}
+.play .settings {
+    display: none;
 }
 
 
