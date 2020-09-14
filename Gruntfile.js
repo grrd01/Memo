@@ -28,18 +28,6 @@ module.exports = function(grunt) {
                 files: {
                     '../../2_Build/Memo/sw.js': ['sw.js']
                 }
-            },
-            three: {
-                options: {
-                    compress: true,
-                    mangle: true,
-                    output: {
-                        comments: 'some'
-                    }
-                },
-                files: {
-                    '../../2_Build/Memo/scripts/exif.js': ['scripts/exif.js']
-                }
             }
         },
         svgmin: {

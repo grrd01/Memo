@@ -482,6 +482,55 @@
         });
     }
 
+    // get Exif-Orientation of Own image
+    function fGetOrientation(file, callback) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+
+            let view = new DataView(e.target.result);
+            if (view.getUint16(0, false) !== 0xFFD8)
+            {
+                return callback(-2);
+            }
+            let length = view.byteLength, offset = 2;
+            while (offset < length)
+            {
+                if (view.getUint16(offset+2, false) <= 8) return callback(-1);
+                let marker = view.getUint16(offset, false);
+                offset += 2;
+                if (marker === 0xFFE1)
+                {
+                    if (view.getUint32(offset += 2, false) !== 0x45786966)
+                    {
+                        return callback(-1);
+                    }
+
+                    let little = view.getUint16(offset += 6, false) === 0x4949;
+                    offset += view.getUint32(offset + 4, little);
+                    let tags = view.getUint16(offset, little);
+                    offset += 2;
+                    for (nIndex = 0; nIndex < tags; nIndex += 1)
+                    {
+                        if (view.getUint16(offset + (nIndex * 12), little) === 0x0112)
+                        {
+                            return callback(view.getUint16(offset + (nIndex * 12) + 8, little));
+                        }
+                    }
+                }
+                else if ((marker & 0xFF00) !== 0xFF00)
+                {
+                    break;
+                }
+                else
+                {
+                    offset += view.getUint16(offset, false);
+                }
+            }
+            return callback(-1);
+        };
+        reader.readAsArrayBuffer(file);
+    }
+
     function fResizeImage(file) {
         const fileLoader = new FileReader();
         const canvas = document.createElement("canvas");
@@ -515,11 +564,10 @@
         // triggers the images onload function
         fileLoader.onload = function () {
             const data = this.result;
-            EXIF.getData(file.target.files[0], function () {
-                g_exif.Orientation = EXIF.getTag(this, "Orientation");
+            fGetOrientation(file.target.files[0], function(orientation) {
+                g_exif.Orientation = orientation;
                 imageObj.src = data;
             });
-
         };
 
         // set up the images onload function which clears the hidden canvas context,
@@ -695,7 +743,7 @@
 
         $("iInfo").addEventListener("click", fShowPopupInfo);
         $("iInfoClose").addEventListener("click", fHidePopupInfo);
-        $("iSettings").addEventListener("click", fShowPopupSettings);
+        // $("iSettings").addEventListener("click", fShowPopupSettings);
         $("iSettingsClose").addEventListener("click", fHidePopupSettings);
         $("iSettingsCancel").addEventListener("click", fHidePopupSettings);
         $("iSettingsPlay").addEventListener("click", fHidePopupSettings);
@@ -729,6 +777,11 @@
             )
         ) {
             $fullScreen.parentNode.removeChild($fullScreen);
+        }
+
+        // eigene Bilder aus LocalStorage laden
+        for (nIndex = 1; nIndex < nMaxPairs; nIndex += 1) {
+            $("settingsgrid").appendChild(document.getElementsByClassName("ownimg")[0].cloneNode(true));
         }
 
         if (fUrlParam("mascha") === "true") {

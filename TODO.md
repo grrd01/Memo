@@ -6,21 +6,16 @@
 - Theme: 
   - Car Brands
   - Food
-  - Own Images
+  - ~~Own Images~~
 - Settings-Popup:
   - Sound
   - dark/bright
   - language
-  - own images
+  - ~~own images~~
 - Localstorage:
   - Singleplayer Scoreboard
   - ~~Mascha:true~~
   - ~~Own Images~~
-- Link to Memo in other apps:
-  - ~~4 in a Row~~
-  - ~~Puzzle~~
-  - ~~Dice~~
-  - ~~TicTacToe~~
 - Languages:
   - ~~French~~
   - ~~Spanish~~
@@ -34,6 +29,7 @@
 - ~~1 Player"s"~~
 - ~~Puzzle: BrowserAutoRotates~~
 - ~~4inaRow: BrowserAutoRotates~~
+- ~~Button Info: fix Corners~~
 
 #### Features
 - ~~ServiceWorker~~
@@ -43,4 +39,10 @@
 - ~~dynamic Size Title-icons~~ 
 - ~~turn unmatching pair~~
 - ~~Message for multiple Winners~~
+- ~~Exif: own function~~
 - ~~Scoreboard~~
+- ~~Link to Memo in other apps:~~
+  - ~~4 in a Row~~
+  - ~~Puzzle~~
+  - ~~Dice~~
+  - ~~TicTacToe~~

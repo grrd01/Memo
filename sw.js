@@ -10,7 +10,7 @@
 /*jslint devel: true, browser: true, long: true */ /*global self fetch */
 
 var CACHE_NAME = "grrds-Memo-cache";
-var CACHE_VERSION = "v0.1";
+var CACHE_VERSION = "v2.02";
 var CACHE = CACHE_NAME + "-" + CACHE_VERSION;
 
 var urlsToCache = [
@@ -96,7 +96,6 @@ var urlsToCache = [
     "images/tictactoe.svg",
     "images/x.svg",
     "scripts/app.js",
-    "scripts/exif.js",
     "styles/app.css"
 ];
 
