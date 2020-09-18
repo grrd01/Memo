@@ -15,10 +15,13 @@
     // Localization
     let nLang = 0;
     const lLoc = [{
+        code: "en",
         lang: "English",
+        style: ["Light mode", "Dark mode", "Automatic"],
+        sound: ["Sound: off", "Sound: on"],
         desc: "grrd’s Memo is a HTML5 Game that works offline.",
         help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
-        themes_txt: ["Own Images","Animals", "Flowers", "Masha"],
+        themes_txt: ["Own Images", "Animals", "Flowers", "Masha"],
         cards: "Cards",
         player: "Player",
         players: "Players",
@@ -44,7 +47,10 @@
         ownanz4: "Press Play to start the game.",
         cancel: "Cancel"
     }, {
+        code: "de",
         lang: "Deutsch",
+        style: ["Ansicht: Hell", "Ansicht: Dunkel", "Automatisch"],
+        sound: ["Ton: aus", "Ton: an"],
         desc: "grrd's Memo ist ein HTML5 Spiel, welches offline funktioniert",
         help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
         themes_txt: ["Eigene Bilder", "Tiere", "Blumen", "Mascha"],
@@ -73,7 +79,10 @@
         ownanz4: "Drücke auf Play, um das Spiel zu beginnen.",
         cancel: "Abbrechen"
     }, {
+        code: "fr",
         lang: "Français",
+        style: ["Mode claire", "Mode sombre", "Automatique"],
+        sound: ["Son: muet", "Son: activé"],
         desc: "grrd's Memo est un jeu en HTML5 qui fonctionne hors ligne.",
         help: "Retournez les cartes et trouvez les paires. Votre mémoire est-elle assez bonne?",
         themes_txt: ["Images personnelles", "Animaux", "Fleurs", "Mascha"],
@@ -102,7 +111,10 @@
         ownanz4: "Appuyez sur la touche Play pour commencer le jeu.",
         cancel: "Annuler"
     }, {
+        code: "es",
         lang: "Español",
+        style: ["Modo de luz", "Modo oscuro ", "Automático"],
+        sound: ["Sonido: mudo", "Sonido: en"],
         desc: "grrd's Memo es un juego HTML5 que funciona fuera de línea.",
         help: "Voltea las cartas y encuentra los pares. ¿Es tu memoria lo suficientemente buena?",
         themes_txt: ["Imágenes personales", "Animales", "Flores", "Masha"],
@@ -143,6 +155,7 @@
     const tScore = $("tScore");
     const lDev = $("lDev");
     const $fullScreen = $("iFullscreen");
+    const iSettingsPlay = $("iSettingsPlay");
 
     const lTitle2Cards = document.getElementsByClassName("title2card");
 
@@ -185,6 +198,12 @@
     let nAnzOwnImg;
     // rotiert Browser Bilder automatisch?
     let bAutorotate;
+    // Style: Light, Dark or Auto
+    let nStyle = 1;
+    let bLightModeOn;
+    // Töne abspielen
+    let nSound = 1;
+    let lSound = ["sound_off.svg", "sound_on.svg"];
 
     const localStorageOK = (function () {
         const mod = "modernizr";
@@ -219,6 +238,41 @@
         }
     }
 
+    // Texte übersetzen
+    function fSetLang() {
+        if (nLang) {
+            document.documentElement.setAttribute("lang", lLoc[nLang].code);
+        }
+        $("lLang").innerHTML = lLoc[nLang].lang;
+        $("lStyle").innerHTML = lLoc[nLang].style[nStyle];
+        $("lSound").innerHTML = lLoc[nLang].sound[nSound];
+        $("iSound").src = "images/" + lSound[nSound];
+        $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
+        $("lCards").innerHTML = lAnzCards[nAnzCards] + "\xa0" + lLoc[nLang].cards;
+        $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].players;
+        $("lStart").innerHTML = lLoc[nLang].start;
+        lDev.innerHTML = lLoc[nLang].dev;
+        $("lInstr").innerHTML = lLoc[nLang].help;
+        $("lLook").innerHTML = lLoc[nLang].look;
+        $("thRank").innerHTML = lLoc[nLang].rank;
+        $("thPlayer").innerHTML = lLoc[nLang].player;
+        $("thPairs").innerHTML = lLoc[nLang].pairs;
+        $("thTries").innerHTML = lLoc[nLang].tries;
+        $("lOwnImg").innerHTML = lLoc[nLang].own;
+        $("lOwnImg2").innerHTML = lLoc[nLang].themes_txt[0];
+        document.querySelector("meta[name='description']").setAttribute("content", lLoc[nLang].desc);
+    }
+
+    // Style setzen
+    function fSetStyle() {
+        $("lStyle").innerHTML = lLoc[nLang].style[nStyle];
+        if (nStyle === 0 || (nStyle === 2 && bLightModeOn)) {
+            document.getElementsByTagName('body')[0].classList.add("light");
+        } else {
+            document.getElementsByTagName('body')[0].classList.remove("light");
+        }
+    }
+
     // Mischen eines Arrays
     function fShuffle(lArray) {
         for (nIndex = lArray.length - 1; nIndex > 0; nIndex -= 1) {
@@ -246,6 +300,11 @@
         iPopupSettings.classList.add("popup-show");
     }
     function fHidePopupSettings() {
+        if (localStorageOK) {
+            localStorage.setItem("s_sound", nSound);
+            localStorage.setItem("s_style", nStyle);
+            localStorage.setItem("s_lang", nLang);
+        }
         iPopupSettings.classList.remove("popup-show");
         iPopupSettings.classList.add("popup-hide");
         setTimeout(function () {
@@ -263,9 +322,42 @@
         }
     }
 
+    // Sprache wechseln
+    function fChangeLang(event) {
+        let nStep = parseInt(event.target.getAttribute("data-step"));
+        nLang += nStep;
+        if (nLang < 0) {
+            nLang = lLoc.length - 1;
+        } else if (nLang > lLoc.length - 1) {
+            nLang = 0;
+        }
+        fSetLang();
+    }
+
+    // Style wechseln (light, dark, auto)
+    function fChangeStyle(event) {
+        let nStep = parseInt(event.target.getAttribute("data-step"));
+        nStyle += nStep;
+        if (nStyle < 0) {
+            nStyle = 2;
+        } else if (nStyle > 2) {
+            nStyle = 0;
+        }
+        fSetStyle();
+    }
+
+    // Sound wechseln
+    function fChangeSound() {
+        nSound = 1 - nSound;
+        $("lSound").innerHTML = lLoc[nLang].sound[nSound];
+        $("iSound").src = "images/" + lSound[nSound];
+    }
+
     // Theme wechseln
     function fChangeTheme(event) {
+        let iTheme = $("iTheme");
         let nStep = parseInt(event.target.getAttribute("data-step"));
+        iTheme.children.item(nCurrentTheme).classList.remove("active");
         nCurrentTheme += nStep;
         if (nCurrentTheme < 0) {
             nCurrentTheme = lThemes.length + nMascha - 1;
@@ -273,25 +365,29 @@
             nCurrentTheme = 0;
         }
         $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
-        $("iTheme").src = "images/" + lThemes[nCurrentTheme] + ".svg";
+        iTheme.children.item(nCurrentTheme).classList.add("active");
     }
 
     // Anzahl Karten wechseln
     function fChangeAnzCards(event) {
+        let iCards = $("iCards");
         let nStep = parseInt(event.target.getAttribute("data-step"));
         if (nAnzCards + nStep >= 0 && nAnzCards + nStep < lAnzCards.length) {
+            iCards.children.item(nAnzCards).classList.remove("active");
             nAnzCards += nStep;
             $("lCards").innerHTML = lAnzCards[nAnzCards] + "\xa0" + lLoc[nLang].cards;
-            $("iCards").src = "images/cards" + lAnzCards[nAnzCards] + ".svg";
+            iCards.children.item(nAnzCards).classList.add("active");
         }
     }
 
     // Anzahl Spieler wechseln
     function fChangeAnzPlayers(event) {
+        let iPlayers = $("iPlayers");
         let nStep = parseInt(event.target.getAttribute("data-step"));
         if (nAnzPlayer + nStep > 0 && nAnzPlayer + nStep < 6) {
+            iPlayers.children.item(nAnzPlayer - 1).classList.remove("active");
             nAnzPlayer += nStep;
-            $("iPlayers").src = "images/player" + nAnzPlayer + ".svg";
+            iPlayers.children.item(nAnzPlayer - 1).classList.add("active");
             if (nAnzPlayer === 1) {
                 $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].player;
             } else {
@@ -346,6 +442,12 @@
                 } else {
                     $("iMessage").innerHTML = lLoc[nLang].player + " " + (nCurrentPlayer + 1) + " " + lLoc[nLang].has + " " + lScore[nCurrentPlayer] + " " + lLoc[nLang].pairs + ".";
                 }
+                if (nSound) {
+                    setTimeout(function () {
+                        document.getElementById("ding_sound").play();
+                    }, 500);
+
+                }
                 // umgedrehte Karten zurücksetzen
                 lFlipped = [];
             } else {
@@ -360,6 +462,9 @@
         }
 
         oCard.classList.toggle("turned");
+        if (nSound) {
+            document.getElementById("click_sound").play();
+        }
 
         if (oGrid.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
             // alle Karten aufgedeckt, Spiel beendet
@@ -445,7 +550,7 @@
     // Eigene Bilder zählen
     function fCountOwnImg () {
         nAnzOwnImg = 0;
-        $("iSettingsPlay").classList.add("disabled");
+        iSettingsPlay.classList.add("disabled");
         for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
             if (!$("settingsgrid").children.item(nIndex).src.endsWith("images/back.svg")) {
                 nAnzOwnImg += 1;
@@ -463,7 +568,7 @@
         } else {
             // genug eigene Bilder
             $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz4;
-            $("iSettingsPlay").classList.remove("disabled");
+            iSettingsPlay.classList.remove("disabled");
         }
     }
 
@@ -695,6 +800,8 @@
 
     function fStartInit() {
         if (nCurrentTheme === 0) {
+            $("collapsable").classList.add("show");
+            $("iDown").classList.remove("rotate");
             iPopupSettings.classList.add("play");
             fShowPopupSettings();
         } else {
@@ -713,22 +820,12 @@
         }else if (cLang === "es") {
             nLang = 3;
         }
-        if (nLang) {
-            document.documentElement.setAttribute("lang", cLang);
+        if (localStorageOK) {
+            nSound = localStorage.getItem("s_sound") === null ? 1 : parseInt(localStorage.getItem("s_sound"));
+            nStyle = localStorage.getItem("s_style") === null ? 1 : parseInt(localStorage.getItem("s_style"));
+            nLang = localStorage.getItem("s_lang") === null ? nLang : parseInt(localStorage.getItem("s_lang"));
         }
-        $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
-        $("lCards").innerHTML = lAnzCards[nAnzCards] + "\xa0" + lLoc[nLang].cards;
-        $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].players;
-        $("lStart").innerHTML = lLoc[nLang].start;
-        lDev.innerHTML = lLoc[nLang].dev;
-        $("lInstr").innerHTML = lLoc[nLang].help;
-        $("lLook").innerHTML = lLoc[nLang].look;
-        $("thRank").innerHTML = lLoc[nLang].rank;
-        $("thPlayer").innerHTML = lLoc[nLang].player;
-        $("thPairs").innerHTML = lLoc[nLang].pairs;
-        $("thTries").innerHTML = lLoc[nLang].tries;
-        $("lOwnImg").innerHTML = lLoc[nLang].own;
-        document.querySelector("meta[name='description']").setAttribute("content", lLoc[nLang].desc);
+        fSetLang();
 
         // ServiceWorker initialisieren
         if ("serviceWorker" in navigator) {
@@ -741,13 +838,20 @@
             });
         }
 
+        // Event-Handler auf Buttons
         $("iInfo").addEventListener("click", fShowPopupInfo);
         $("iInfoClose").addEventListener("click", fHidePopupInfo);
-        // $("iSettings").addEventListener("click", fShowPopupSettings);
+        $("iSettings").addEventListener("click", fShowPopupSettings);
         $("iSettingsClose").addEventListener("click", fHidePopupSettings);
         $("iSettingsCancel").addEventListener("click", fHidePopupSettings);
-        $("iSettingsPlay").addEventListener("click", fHidePopupSettings);
-        $("iSettingsPlay").addEventListener("click", fStartGame);
+        iSettingsPlay.addEventListener("click", fHidePopupSettings);
+        iSettingsPlay.addEventListener("click", fStartGame);
+        $("iNextLang").addEventListener("click", fChangeLang);
+        $("iPrevLang").addEventListener("click", fChangeLang);
+        $("iNextStyle").addEventListener("click", fChangeStyle);
+        $("iPrevStyle").addEventListener("click", fChangeStyle);
+        $("iNextSound").addEventListener("click", fChangeSound);
+        $("iPrevSound").addEventListener("click", fChangeSound);
         $("iNextTheme").addEventListener("click", fChangeTheme);
         $("iPrevTheme").addEventListener("click", fChangeTheme);
         $("iCardsUp").addEventListener("click", fChangeAnzCards);
@@ -761,7 +865,19 @@
         $fullScreen.addEventListener("click", function () {
             toggleFullScreen();
         });
+        $("iShowOwnImg").addEventListener("click", function () {
+            $("collapsable").classList.toggle("show");
+            $("iDown").classList.toggle("rotate");
+        });
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
+            bLightModeOn = e.matches;
+            //console.log(`light mode is ${bLightModeOn ? '☀ on' : '🌒 off'}.`);
+            fSetStyle();
+        });
+        bLightModeOn = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        fSetStyle();
 
+        // Full-Screen funktionalität
         if (
             !(
                 document.fullscreenEnabled || /* FullScreen supported, Standard syntax */
@@ -779,7 +895,7 @@
             $fullScreen.parentNode.removeChild($fullScreen);
         }
 
-        // eigene Bilder aus LocalStorage laden
+        // Grid für eigene Bilder aufbauen
         for (nIndex = 1; nIndex < nMaxPairs; nIndex += 1) {
             $("settingsgrid").appendChild(document.getElementsByClassName("ownimg")[0].cloneNode(true));
         }
@@ -822,6 +938,7 @@
             oCard.classList.add("turned");
         });
 
+        // Titel-Animation
         setTimeout(function () {
             document.getElementsByClassName("cardM")[0].classList.add("turned");
         }, 500);

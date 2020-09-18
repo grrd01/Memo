@@ -2,18 +2,22 @@
 #### Bugs
 
 #### Features
-- animate Icons-swap
 - Theme: 
   - Car Brands
   - Food
   - ~~Own Images~~
 - Settings-Popup:
-  - Sound
-  - dark/bright
-  - language
+  - Icons Style, Sound
+  - OwnImages collapsable
+  - ~~Sound~~
+  - ~~dark/bright~~
+  - ~~language~~
   - ~~own images~~
 - Localstorage:
   - Singleplayer Scoreboard
+  - ~~Language~~
+  - ~~Style~~
+  - ~~Sound~~
   - ~~Mascha:true~~
   - ~~Own Images~~
 - Languages:
@@ -32,6 +36,7 @@
 - ~~Button Info: fix Corners~~
 
 #### Features
+- ~~animate Icons-swap~~
 - ~~ServiceWorker~~
 - ~~title1 font ios~~
 - ~~Fullscreen~~
