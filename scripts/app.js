@@ -789,7 +789,7 @@
     function fStartInit() {
         if (nCurrentTheme === 0) {
             $("collapsable").classList.add("show");
-            $("iDown").classList.remove("rotate");
+            $("iDown").classList.add("rotate");
             iPopupSettings.classList.add("play");
             fShowPopupSettings();
         } else {
