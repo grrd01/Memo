@@ -7,7 +7,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-/*jslint browser:true, long: true, for: true */
+/*jslint browser:true, long: true, for: true, this: true, devel: true */
 
 (function () {
     "use strict";
@@ -144,6 +144,7 @@
         cancel: "Cancelar"
     }];
 
+    const cNbrSp = String.fromCharCode(160);
     const $ = function (id) {
         return document.getElementById(id);
     };
@@ -197,7 +198,7 @@
     // Anzahl eigene Bilder
     let nAnzOwnImg;
     // rotiert Browser Bilder automatisch?
-    let bAutorotate;
+    let bAutorotate = false;
     // Style: Light, Dark or Auto
     let nStyle = 1;
     let bLightModeOn;
@@ -248,8 +249,8 @@
         $("lSound").innerHTML = lLoc[nLang].sound[nSound];
         $("iSound").src = "images/" + lSound[nSound];
         $("lTheme").innerHTML = lLoc[nLang].themes_txt[nCurrentTheme];
-        $("lCards").innerHTML = lAnzCards[nAnzCards] + "\xa0" + lLoc[nLang].cards;
-        $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].players;
+        $("lCards").innerHTML = lAnzCards[nAnzCards] + cNbrSp + lLoc[nLang].cards;
+        $("lPlayers").innerHTML = nAnzPlayer + cNbrSp + lLoc[nLang].players;
         $("lStart").innerHTML = lLoc[nLang].start;
         lDev.innerHTML = lLoc[nLang].dev;
         $("lInstr").innerHTML = lLoc[nLang].help;
@@ -267,9 +268,9 @@
     function fSetStyle() {
         $("lStyle").innerHTML = lLoc[nLang].style[nStyle];
         if (nStyle === 0 || (nStyle === 2 && bLightModeOn)) {
-            document.getElementsByTagName('body')[0].classList.add("light");
+            document.getElementsByTagName("body")[0].classList.add("light");
         } else {
-            document.getElementsByTagName('body')[0].classList.remove("light");
+            document.getElementsByTagName("body")[0].classList.remove("light");
         }
     }
 
@@ -301,9 +302,9 @@
     }
     function fHidePopupSettings() {
         if (localStorageOK) {
-            localStorage.setItem("s_sound", nSound);
-            localStorage.setItem("s_style", nStyle);
-            localStorage.setItem("s_lang", nLang);
+            localStorage.setItem("s_memo_sound", nSound);
+            localStorage.setItem("s_memo_style", nStyle);
+            localStorage.setItem("s_memo_lang", nLang);
         }
         iPopupSettings.classList.remove("popup-show");
         iPopupSettings.classList.add("popup-hide");
@@ -317,7 +318,7 @@
         if (nMaschaClick === 3) {
             nMascha = 0;
             if (localStorageOK) {
-                localStorage.setItem("s_mascha", "true");
+                localStorage.setItem("s_memo_mascha", "true");
             }
         }
     }
@@ -375,7 +376,7 @@
         if (nAnzCards + nStep >= 0 && nAnzCards + nStep < lAnzCards.length) {
             iCards.children.item(nAnzCards).classList.remove("active");
             nAnzCards += nStep;
-            $("lCards").innerHTML = lAnzCards[nAnzCards] + "\xa0" + lLoc[nLang].cards;
+            $("lCards").innerHTML = lAnzCards[nAnzCards] + cNbrSp + lLoc[nLang].cards;
             iCards.children.item(nAnzCards).classList.add("active");
         }
     }
@@ -389,9 +390,9 @@
             nAnzPlayer += nStep;
             iPlayers.children.item(nAnzPlayer - 1).classList.add("active");
             if (nAnzPlayer === 1) {
-                $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].player;
+                $("lPlayers").innerHTML = nAnzPlayer + cNbrSp + lLoc[nLang].player;
             } else {
-                $("lPlayers").innerHTML = nAnzPlayer + "\xa0" + lLoc[nLang].players;
+                $("lPlayers").innerHTML = nAnzPlayer + cNbrSp + lLoc[nLang].players;
             }
         }
     }
@@ -575,16 +576,12 @@
     // returns a promise that resolves to true  if the browser automatically
     // rotates images based on exif data and false otherwise
     function fBrowserAutoRotates () {
-        return new Promise((resolve, reject) => {
-            // load an image with exif rotation and see if the browser rotates it
-            const image = new Image();
-            image.onload = () => {
-                resolve(image.naturalWidth === 1);
-            };
-            image.onerror = reject;
-            // this jpeg is 2x1 with orientation=6 so it should rotate to 1x2
-            image.src = "data:image/jpeg;base64,/9j/4QBiRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAYAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAAITAAMAAAABAAEAAAAAAAAAAABIAAAAAQAAAEgAAAAB/9sAQwAEAwMEAwMEBAMEBQQEBQYKBwYGBgYNCQoICg8NEBAPDQ8OERMYFBESFxIODxUcFRcZGRsbGxAUHR8dGh8YGhsa/9sAQwEEBQUGBQYMBwcMGhEPERoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoa/8IAEQgAAQACAwERAAIRAQMRAf/EABQAAQAAAAAAAAAAAAAAAAAAAAf/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAF/P//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQH//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z";
-        });
+        const image = new Image();
+        image.onload = function () {
+            bAutorotate = (image.naturalWidth === 1);
+        };
+        // this jpeg is 2x1 with orientation=6 so it should rotate to 1x2
+        image.src = "data:image/jpeg;base64,/9j/4QBiRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAYAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAAITAAMAAAABAAEAAAAAAAAAAABIAAAAAQAAAEgAAAAB/9sAQwAEAwMEAwMEBAMEBQQEBQYKBwYGBgYNCQoICg8NEBAPDQ8OERMYFBESFxIODxUcFRcZGRsbGxAUHR8dGh8YGhsa/9sAQwEEBQUGBQYMBwcMGhEPERoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGhoa/8IAEQgAAQACAwERAAIRAQMRAf/EABQAAQAAAAAAAAAAAAAAAAAAAAf/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIQAxAAAAF/P//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAQUCf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Bf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Bf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEABj8Cf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8hf//aAAwDAQACAAMAAAAQH//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQMBAT8Qf//EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQIBAT8Qf//EABQQAQAAAAAAAAAAAAAAAAAAAAD/2gAIAQEAAT8Qf//Z";
     }
 
     // get Exif-Orientation of Own image
@@ -597,16 +594,16 @@
             {
                 return callback(-2);
             }
-            let length = view.byteLength, offset = 2;
-            while (offset < length)
-            {
-                if (view.getUint16(offset+2, false) <= 8) return callback(-1);
+            let length = view.byteLength;
+            let offset = 2;
+            while (offset < length) {
+                if (view.getUint16(offset+2, false) <= 8) {
+                    return callback(-1);
+                }
                 let marker = view.getUint16(offset, false);
                 offset += 2;
-                if (marker === 0xFFE1)
-                {
-                    if (view.getUint32(offset += 2, false) !== 0x45786966)
-                    {
+                if (marker === 0xFFE1) {
+                    if (view.getUint32(offset += 2, false) !== 0x45786966) {
                         return callback(-1);
                     }
 
@@ -614,20 +611,15 @@
                     offset += view.getUint32(offset + 4, little);
                     let tags = view.getUint16(offset, little);
                     offset += 2;
-                    for (nIndex = 0; nIndex < tags; nIndex += 1)
-                    {
-                        if (view.getUint16(offset + (nIndex * 12), little) === 0x0112)
-                        {
+                    for (nIndex = 0; nIndex < tags; nIndex += 1) {
+                        if (view.getUint16(offset + (nIndex * 12), little) === 0x0112) {
                             return callback(view.getUint16(offset + (nIndex * 12) + 8, little));
                         }
                     }
                 }
-                else if ((marker & 0xFF00) !== 0xFF00)
-                {
+                else if ((marker & 0xFF00) !== 0xFF00) {
                     break;
-                }
-                else
-                {
+                } else {
                     offset += view.getUint16(offset, false);
                 }
             }
@@ -659,8 +651,6 @@
         //trigger the file loader to get the data from the image
         if (file.target.files[0].type.match("image.*")) {
             fileLoader.readAsDataURL(file.target.files[0]);
-        } else {
-            console.log("File is not an image");
         }
 
         // setup the file loader onload function
@@ -682,9 +672,7 @@
             let nLeft = 0;
             let nMin = Math.min(this.width, this.height);
             // Check for empty images
-            if (this.width === 0 || this.height === 0) {
-                console.log("Image is empty");
-            } else {
+            if (!(this.width === 0 || this.height === 0)) {
                 if (!bAutorotate) {
                     if (g_exif.Orientation === 5 || g_exif.Orientation === 6) {
                         context.rotate(90 * Math.PI / 180);
@@ -705,7 +693,7 @@
                 oOwnImg.src = canvas.toDataURL("image/jpeg");
                 if (localStorageOK) {
                     nIndex = [...oOwnImg.parentElement.children].indexOf(oOwnImg);
-                    localStorage.setItem("s_image" + nIndex, canvas.toDataURL("image/jpeg"));
+                    localStorage.setItem("s_memo_image" + nIndex, canvas.toDataURL("image/jpeg"));
                 }
                 fCountOwnImg();
             }
@@ -821,9 +809,15 @@
             nLang = 3;
         }
         if (localStorageOK) {
-            nSound = localStorage.getItem("s_sound") === null ? 1 : parseInt(localStorage.getItem("s_sound"));
-            nStyle = localStorage.getItem("s_style") === null ? 1 : parseInt(localStorage.getItem("s_style"));
-            nLang = localStorage.getItem("s_lang") === null ? nLang : parseInt(localStorage.getItem("s_lang"));
+            nSound = localStorage.getItem("s_memo_sound") === null
+                ? 1
+                : parseInt(localStorage.getItem("s_memo_sound"));
+            nStyle = localStorage.getItem("s_memo_style") === null
+                ? 1
+                : parseInt(localStorage.getItem("s_memo_style"));
+            nLang = localStorage.getItem("s_memo_lang") === null
+                ? nLang
+                : parseInt(localStorage.getItem("s_memo_lang"));
         }
         fSetLang();
 
@@ -869,12 +863,18 @@
             $("collapsable").classList.toggle("show");
             $("iDown").classList.toggle("rotate");
         });
-        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
-            bLightModeOn = e.matches;
-            //console.log(`light mode is ${bLightModeOn ? '☀ on' : '🌒 off'}.`);
-            fSetStyle();
-        });
-        bLightModeOn = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        try {
+            window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", (e) => {
+                bLightModeOn = e.matches;
+                //console.log(`light mode is ${bLightModeOn ? '☀ on' : '🌒 off'}.`);
+                fSetStyle();
+            });
+        }
+        catch(err) {
+            console.log(err.message);
+        }
+
+        bLightModeOn = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
         fSetStyle();
 
         // Full-Screen funktionalität
@@ -905,13 +905,13 @@
             fShowMascha();
         }
         if (localStorageOK) {
-            if (localStorage.getItem("s_mascha") === "true") {
+            if (localStorage.getItem("s_memo_mascha") === "true") {
                 nMascha = 0;
             }
             // eigene Bilder aus LocalStorage laden
             for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
-                if (localStorage.getItem("s_image" + nIndex) !== null) {
-                    $("settingsgrid").children.item(nIndex).src = localStorage.getItem("s_image" + nIndex);
+                if (localStorage.getItem("s_memo_image" + nIndex) !== null) {
+                    $("settingsgrid").children.item(nIndex).src = localStorage.getItem("s_memo_image" + nIndex);
                 }
             }
         }
@@ -964,7 +964,7 @@
             document.getElementsByClassName("cardO")[0].classList.add("turned");
         }, 4300);
 
-        bAutorotate = fBrowserAutoRotates();
+        fBrowserAutoRotates();
 
         fCardSize();
     }

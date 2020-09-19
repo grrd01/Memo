@@ -1,6 +1,7 @@
 ## ToDo
 #### Bugs
 
+
 #### Features
 - Theme: 
   - Car Brands
@@ -27,6 +28,8 @@
 - ~~Puzzle: BrowserAutoRotates~~
 - ~~4inaRow: BrowserAutoRotates~~
 - ~~Button Info: fix Corners~~
+- ~~Localstorage s_sound setting conflict with puzzle~~
+- ~~iOS: image-rotation broken~~
 
 #### Features
 - ~~animate Icons-swap~~
