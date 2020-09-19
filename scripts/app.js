@@ -463,7 +463,7 @@
 
         oCard.classList.toggle("turned");
         if (nSound) {
-            document.getElementById("click_sound").play();
+            document.getElementById("woosh_sound").play();
         }
 
         if (oGrid.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {

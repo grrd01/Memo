@@ -543,14 +543,14 @@ a:active {
     display: none;
 }
 #iDown {
-    transition: transform 0.25s ease-in;
+    transition: transform 0.25s ease;
 }
 #iOwnImg2 {
     margin-right: -20px;
 }
 .rotate {
     transform: rotate(180deg);
-    transition: transform 0.25s ease-in;
+    transition: transform 0.25s ease;
 }
 #collapsable {
     max-height: 0;

@@ -6,13 +6,6 @@
   - Car Brands
   - Food
   - ~~Own Images~~
-- Settings-Popup:
-  - Icons Style, Sound
-  - OwnImages collapsable
-  - ~~Sound~~
-  - ~~dark/bright~~
-  - ~~language~~
-  - ~~own images~~
 - Localstorage:
   - Singleplayer Scoreboard
   - ~~Language~~
@@ -51,3 +44,10 @@
   - ~~Puzzle~~
   - ~~Dice~~
   - ~~TicTacToe~~
+- ~~Settings-Popup:~~
+  - ~~Icons Style, Sound~~
+  - ~~OwnImages collapsable~~
+  - ~~Sound~~
+  - ~~dark/bright~~
+  - ~~language~~
+  - ~~own images~~

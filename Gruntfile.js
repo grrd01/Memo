@@ -42,16 +42,19 @@ module.exports = function(grunt) {
                     {'../../2_Build/Memo/images/4inarow.svg': 'images/4inarow.svg'},
                     {'../../2_Build/Memo/images/animals.svg': 'images/animals.svg'},
                     {'../../2_Build/Memo/images/back.svg': 'images/back.svg'},
+                    {'../../2_Build/Memo/images/bulp.svg': 'images/bulp.svg'},
                     {'../../2_Build/Memo/images/cards6.svg': 'images/cards6.svg'},
                     {'../../2_Build/Memo/images/cards12.svg': 'images/cards12.svg'},
                     {'../../2_Build/Memo/images/cards24.svg': 'images/cards24.svg'},
                     {'../../2_Build/Memo/images/cards32.svg': 'images/cards32.svg'},
                     {'../../2_Build/Memo/images/cards48.svg': 'images/cards48.svg'},
                     {'../../2_Build/Memo/images/dice.svg': 'images/dice.svg'},
+                    {'../../2_Build/Memo/images/down.svg': 'images/down.svg'},
                     {'../../2_Build/Memo/images/escfullscreen.svg': 'images/escfullscreen.svg'},
                     {'../../2_Build/Memo/images/flowers.svg': 'images/flowers.svg'},
                     {'../../2_Build/Memo/images/fullscreen.svg': 'images/fullscreen.svg'},
                     {'../../2_Build/Memo/images/info.svg': 'images/info.svg'},
+                    {'../../2_Build/Memo/images/language.svg': 'images/language.svg'},
                     {'../../2_Build/Memo/images/mail.svg': 'images/mail.svg'},
                     {'../../2_Build/Memo/images/mascha.svg': 'images/mascha.svg'},
                     {'../../2_Build/Memo/images/next.svg': 'images/next.svg'},
@@ -65,6 +68,8 @@ module.exports = function(grunt) {
                     {'../../2_Build/Memo/images/prev.svg': 'images/prev.svg'},
                     {'../../2_Build/Memo/images/puzzle.svg': 'images/puzzle.svg'},
                     {'../../2_Build/Memo/images/settings.svg': 'images/settings.svg'},
+                    {'../../2_Build/Memo/images/sound_off.svg': 'images/sound_off.svg'},
+                    {'../../2_Build/Memo/images/sound_on.svg': 'images/sound_on.svg'},
                     {'../../2_Build/Memo/images/tictactoe.svg': 'images/tictactoe.svg'},
                     {'../../2_Build/Memo/images/x.svg': 'images/x.svg'}
                     ]
@@ -140,7 +145,8 @@ module.exports = function(grunt) {
                     {expand: true, flatten: true, src: ['manifest/*'], dest: '../../2_Build/Memo/manifest/'},
                     {expand: true, flatten: true, src: ['images/*.ico'], dest: '../../2_Build/Memo/images/'},
                     {expand: true, flatten: true, src: ['**.txt'], dest: '../../2_Build/Memo/'},
-                    {expand: true, flatten: true, src: ['**.md'], dest: '../../2_Build/Memo/'}
+                    {expand: true, flatten: true, src: ['**.md'], dest: '../../2_Build/Memo/'},
+                    {expand: true, flatten: true, src: ['sounds/*'], dest: '../../2_Build/Memo/sounds/'}
                 ]
             }
         }

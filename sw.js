@@ -10,7 +10,7 @@
 /*jslint devel: true, browser: true, long: true */ /*global self fetch */
 
 var CACHE_NAME = "grrds-Memo-cache";
-var CACHE_VERSION = "v2.02";
+var CACHE_VERSION = "v3.0";
 var CACHE = CACHE_NAME + "-" + CACHE_VERSION;
 
 var urlsToCache = [
@@ -69,17 +69,20 @@ var urlsToCache = [
     "images/4inarow.svg",
     "images/animals.svg",
     "images/back.svg",
+    "images/bulp.svg",
     "images/cards6.svg",
     "images/cards12.svg",
     "images/cards24.svg",
     "images/cards32.svg",
     "images/cards48.svg",
     "images/dice.svg",
+    "images/down.svg",
     "images/escfullscreen.svg",
     "images/favicon.ico",
     "images/flowers.svg",
     "images/fullscreen.svg",
     "images/info.svg",
+    "images/language.svg",
     "images/mail.svg",
     "images/mascha.svg",
     "images/next.svg",
@@ -93,10 +96,16 @@ var urlsToCache = [
     "images/prev.svg",
     "images/puzzle.svg",
     "images/settings.svg",
+    "images/sound_off.svg",
+    "images/sound_on.svg",
     "images/tictactoe.svg",
     "images/x.svg",
     "scripts/app.js",
-    "styles/app.css"
+    "styles/app.css",
+    "sounds/woosh.mp3",
+    "sounds/woosh.ogg",
+    "sounds/ding.mp3",
+    "sounds/ding.ogg"
 ];
 
 self.addEventListener("install", function (event) {
