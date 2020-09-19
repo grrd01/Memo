@@ -309,7 +309,7 @@
         iPopupSettings.classList.add("popup-hide");
         setTimeout(function () {
             iPopupSettings.classList.remove("play");
-        }, 600);
+        }, 1000);
     }
 
     function fShowMascha() {
