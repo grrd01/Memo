@@ -548,6 +548,9 @@ a:active {
 #iOwnImg2 {
     margin-right: -20px;
 }
+#lOwnImg {
+    margin-top: 5px;
+}
 .rotate {
     transform: rotate(180deg);
     transition: transform 0.25s ease;
@@ -556,6 +559,7 @@ a:active {
     max-height: 0;
     transition: max-height 0.5s ease-out, opacity 0s 0.5s, visibility 0s 0.5s;
     overflow: hidden;
+    padding: 0 5px 5px 5px;
 }
 #collapsable.show {
     max-height: 900px;
