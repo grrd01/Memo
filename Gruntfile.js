@@ -52,6 +52,7 @@ module.exports = function(grunt) {
                     {'../../2_Build/Memo/images/down.svg': 'images/down.svg'},
                     {'../../2_Build/Memo/images/escfullscreen.svg': 'images/escfullscreen.svg'},
                     {'../../2_Build/Memo/images/flowers.svg': 'images/flowers.svg'},
+                    {'../../2_Build/Memo/images/fruits.svg': 'images/fruits.svg'},
                     {'../../2_Build/Memo/images/fullscreen.svg': 'images/fullscreen.svg'},
                     {'../../2_Build/Memo/images/info.svg': 'images/info.svg'},
                     {'../../2_Build/Memo/images/language.svg': 'images/language.svg'},

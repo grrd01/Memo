@@ -10,7 +10,7 @@
 /*jslint devel: true, browser: true, long: true */ /*global self fetch */
 
 var CACHE_NAME = "grrds-Memo-cache";
-var CACHE_VERSION = "v3.01";
+var CACHE_VERSION = "v4.0";
 var CACHE = CACHE_NAME + "-" + CACHE_VERSION;
 
 var urlsToCache = [
@@ -66,6 +66,31 @@ var urlsToCache = [
     "images/flowers/23.jpg",
     "images/flowers/24.jpg",
 
+    "images/fruits/1.jpg",
+    "images/fruits/2.jpg",
+    "images/fruits/3.jpg",
+    "images/fruits/4.jpg",
+    "images/fruits/5.jpg",
+    "images/fruits/6.jpg",
+    "images/fruits/7.jpg",
+    "images/fruits/8.jpg",
+    "images/fruits/9.jpg",
+    "images/fruits/10.jpg",
+    "images/fruits/11.jpg",
+    "images/fruits/12.jpg",
+    "images/fruits/13.jpg",
+    "images/fruits/14.jpg",
+    "images/fruits/15.jpg",
+    "images/fruits/16.jpg",
+    "images/fruits/17.jpg",
+    "images/fruits/18.jpg",
+    "images/fruits/19.jpg",
+    "images/fruits/20.jpg",
+    "images/fruits/21.jpg",
+    "images/fruits/22.jpg",
+    "images/fruits/23.jpg",
+    "images/fruits/24.jpg",
+
     "images/4inarow.svg",
     "images/animals.svg",
     "images/back.svg",
@@ -80,6 +105,7 @@ var urlsToCache = [
     "images/escfullscreen.svg",
     "images/favicon.ico",
     "images/flowers.svg",
+    "images/fruits.svg",
     "images/fullscreen.svg",
     "images/info.svg",
     "images/language.svg",

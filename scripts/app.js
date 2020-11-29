@@ -21,7 +21,7 @@
         sound: ["Sound: off", "Sound: on"],
         desc: "grrd’s Memo is a HTML5 Game that works offline.",
         help: "Flip the cards and find the pairs. Is your memory good enough to remember?",
-        themes_txt: ["Own Images", "Animals", "Flowers", "Masha"],
+        themes_txt: ["Own Images", "Animals", "Flowers", "Fruits", "Masha"],
         cards: "Cards",
         player: "Player",
         players: "Players",
@@ -53,7 +53,7 @@
         sound: ["Ton: aus", "Ton: an"],
         desc: "grrd's Memo ist ein HTML5 Spiel, welches offline funktioniert",
         help: "Dreh die Karten um und finde die Paare. Ist dein Gedächtnis gut genug?",
-        themes_txt: ["Eigene Bilder", "Tiere", "Blumen", "Mascha"],
+        themes_txt: ["Eigene Bilder", "Tiere", "Blumen", "Früchte", "Mascha"],
         cards: "Karten",
         player: "Spieler",
         players: "Spieler",
@@ -85,7 +85,7 @@
         sound: ["Son: muet", "Son: activé"],
         desc: "grrd's Memo est un jeu en HTML5 qui fonctionne hors ligne.",
         help: "Retournez les cartes et trouvez les paires. Votre mémoire est-elle assez bonne?",
-        themes_txt: ["Images personnelles", "Animaux", "Fleurs", "Mascha"],
+        themes_txt: ["Images personnelles", "Animaux", "Fleurs", "Fruits", "Mascha"],
         cards: "Cartes",
         player: "Joueur",
         players: "Joueurs",
@@ -117,7 +117,7 @@
         sound: ["Sonido: mudo", "Sonido: en"],
         desc: "grrd's Memo es un juego HTML5 que funciona fuera de línea.",
         help: "Voltea las cartas y encuentra los pares. ¿Es tu memoria lo suficientemente buena?",
-        themes_txt: ["Imágenes personales", "Animales", "Flores", "Masha"],
+        themes_txt: ["Imágenes personales", "Animales", "Flores", "Frutas", "Masha"],
         cards: "Cartas",
         player: "Jugador",
         players: "Jugadores",
@@ -142,6 +142,38 @@
         ownanz3: "Selecciona lAnz imagen más para empezar el juego.",
         ownanz4: "Pulsa Play para iniciar el juego.",
         cancel: "Cancelar"
+    }, {
+        code: "ru",
+        lang: "русский",
+        style: ["светлый", "тёмный", "автомат"],
+        sound: ["Звук: выключен", "Звук: включить"],
+        desc: "grrd's Memo - это HTML5-игра, которая работает в автономном режиме.",
+        help: "Переверните карты и найдите пары. Достаточно ли хороша твоя память, чтобы запомнить?",
+        themes_txt: ["Собственные фотографии", "Животные", "Цветы", "Фрукты", "Маша"],
+        cards: "карты",
+        player: "Игрок",
+        players: "игроки",
+        start: "Play",
+        dev: "Разработано Gérard Tyedmers.",
+        look: "Посмотри на мои другие игры:",
+        begin: "начинает.",
+        has: "теперь имеет",
+        and: "и",
+        win: "выигрывает с",
+        win2: "выигрывают с",
+        pair: "пару",
+        pairs: "пары",
+        pairs2: "парами",
+        tries: "попытки",
+        rank: "место",
+        stats: "lCards пары выявлены в lTries попытках.",
+        turn: "Очередь lPlayer.",
+        own: "Нажмите на карту, чтобы выбрать изображение.",
+        ownanz: "lAnz фотографии, необходимые для начала игры.",
+        ownanz2: "Для начала игры нужно еще lAnz фотографии.",
+        ownanz3: "Еще lAnz фотографии, необходимое для начала игры.",
+        ownanz4: "Нажмите Play, чтобы начать игру.",
+        cancel: "отменять"
     }];
 
     const cNbrSp = String.fromCharCode(160);
@@ -173,7 +205,7 @@
     // Anzahl maximal möglicher Paare
     const nMaxPairs = 24;
     // verfügbare Themen
-    const lThemes = ["photo", "animals", "flowers", "mascha"];
+    const lThemes = ["photo", "animals", "flowers", "fruits", "mascha"];
     // Ausgewähltes Thema
     let nCurrentTheme = 1;
     // Mascha ein/ausblenden
@@ -805,8 +837,10 @@
             nLang = 1;
         } else if (cLang === "fr") {
             nLang = 2;
-        }else if (cLang === "es") {
+        } else if (cLang === "es") {
             nLang = 3;
+        } else if (cLang === "ru") {
+            nLang = 4;
         }
         if (localStorageOK) {
             nSound = localStorage.getItem("s_memo_sound") === null
