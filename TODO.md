@@ -5,7 +5,7 @@
 #### Features
 - Theme: 
   - Car Brands
-  - Food
+  - ~~Fruits~~
   - ~~Own Images~~
 - Localstorage:
   - Singleplayer Scoreboard
@@ -14,10 +14,13 @@
   - ~~Sound~~
   - ~~Mascha:true~~
   - ~~Own Images~~
-- Languages:
-  - ~~French~~
-  - ~~Spanish~~
 - clean up icons: https://medium.com/swlh/are-you-using-svg-favicons-yet-a-guide-for-modern-browsers-836a6aace3df 
+- Keyboard-Controls
+  - ~~disable cards while popup score~~
+  - ~~disable matched pairs~~
+  - disable single turned card  
+  - enable arrow keys to select card
+  - control/remove focus after click
 
 ## Done
 #### Bugs
@@ -55,3 +58,7 @@
   - ~~dark/bright~~
   - ~~language~~
   - ~~own images~~
+- ~~Languages:~~
+  - ~~French~~
+  - ~~Spanish~~
+  - ~~Russian~~

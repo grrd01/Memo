@@ -50,6 +50,12 @@ header {
     bottom: 0;
 }
 
+fieldset {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
 .content {
     margin: 5px;
 }
@@ -233,8 +239,7 @@ header {
     margin-bottom: 8px;
 }
 .mini-button {
-    width: 59px;
-    height: 40px;
+    width: 60px;
     padding: 1px 0 1px 0;
     display: inline-block;
     margin-left: 1px;
@@ -246,8 +251,8 @@ header {
 }
 .close-button {
     border-radius: 20px;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -357,7 +362,7 @@ a:link {
 a:visited {
     color: #00B0FF;
 }
-a:hover {
+a:hover, a:focus {
     color: #80D8FF;
 }
 a:active {
@@ -487,6 +492,9 @@ a:active {
 .buffer {
     height: 40px;
 }
+button:focus, .flip-container:focus {
+    outline: none;
+}
 .button {
     border: 1px transparent;
     border-radius: 10px;
@@ -494,14 +502,14 @@ a:active {
     background-origin: border-box;
     background-clip: content-box, border-box;
     padding: 1px;
-    height: 40px;
-    width: 120px;
+    height: 42px;
+    width: 121px;
     margin: 5px;
     cursor: pointer;
     text-align: center;
     font-weight: bold;
 }
-.button:hover {
+.button:hover, .button:focus {
     background-image: linear-gradient(#51d1e1, #009499), linear-gradient(#a7e8f1, #00cbe6 12px, #00a4b3 100%);
 }
 .button:active {
@@ -513,10 +521,12 @@ a:active {
     pointer-events: none;
 }
 .button-span {
-    margin-top: 5px;
+    margin-top: -3px;
+    color: white;
+    font-size: large;
 }
 .button-span:active {
-    margin-top: 7px;
+    margin-top: 0;
 }
 .button-span > img {
     margin-bottom: -8px;
@@ -529,6 +539,18 @@ a:active {
 }
 #settingsgrid img {
     border-radius: 10%;
+}
+.ownimg {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: -3px;
+    transition: all .2s ease-in-out;
+}
+.ownimg:hover, .ownimg:focus, .flip-container[tabindex]:hover, .flip-container:focus {
+    filter: brightness(110%);
+    transform: scale(1.05);
 }
 .playownimg {
     display: none;
@@ -555,13 +577,13 @@ a:active {
     transform: rotate(180deg);
     transition: transform 0.25s ease;
 }
-#collapsable {
+#iCollapsable {
     max-height: 0;
     transition: max-height 0.5s ease-out, opacity 0s 0.5s, visibility 0s 0.5s;
     overflow: hidden;
     padding: 0 5px 5px 5px;
 }
-#collapsable.show {
+#iCollapsable.show {
     max-height: 900px;
     transition: max-height 0.75s ease-in;
 }
@@ -593,6 +615,8 @@ a:active {
 /* entire container, keeps perspective */
 .flip-container {
     perspective: 1000px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 
 .flip-container.turned .flipper {
@@ -662,7 +686,7 @@ body {
 .mini-buttonlist, .close-button {
     box-shadow: 0 0 0.5vmin 2px #111;
 }
-.mini-button:hover, .close-button:hover {
+.mini-button:hover, .mini-button:focus, .close-button:hover, .close-button:focus {
     background-image: linear-gradient(#555555, #383838), linear-gradient(#ccc, #555 10px, #222 100%);
 }
 .mini-button:active, .close-button:active {
@@ -704,7 +728,7 @@ body.light {
 .light .mini-buttonlist, .light .close-button {
     box-shadow: 0 0 0.5vmin 2px #aaa;
 }
-.light .mini-button:hover, .light .close-button:hover {
+.light .mini-button:hover, .light .mini-button:focus, .light .close-button:hover, .light .close-button:focus {
     background-image: linear-gradient(#fff, #ddd),
     linear-gradient(#fff, #ccc 10px, #888 100%);
 }

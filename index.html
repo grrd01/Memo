@@ -32,7 +32,7 @@
         <source src="sounds/ding.ogg" type="audio/ogg"/>
     </audio>
     <div class="page" id="iTitle">
-        <div class="content">
+        <fieldset id="iTitleFieldset" class="content">
             <header>
                 <div class="title1">
                     <svg class="shadow" viewBox="0 0 170 90">
@@ -159,15 +159,15 @@
                 </div>
                 <div class="flex-right">
                     <div class="mini-buttonlist">
-                        <div id="iInfo" class="mini-button">
+                        <button id="iInfo" class="mini-button">
                             <img class="mini-img shadow" src="images/info.svg" alt="Info">
-                        </div>
-                        <div id="iSettings" class="mini-button">
+                        </button>
+                        <button id="iSettings" class="mini-button">
                             <img class="mini-img shadow" src="images/settings.svg" alt="Settings">
-                        </div>
-                        <div id="iFullscreen" class="mini-button">
+                        </button>
+                        <button id="iFullscreen" class="mini-button">
                             <img id="img_fullscreen" class="mini-img shadow" src="images/fullscreen.svg" alt="Fullscreen">
-                        </div>
+                        </button>
                     </div>
                 </div>
             </header>
@@ -182,12 +182,12 @@
                     </div>
                     <div id="lTheme"></div>
                     <div class="mini-buttonlist">
-                        <div id="iNextTheme" class="mini-button" data-step="-1">
+                        <button id="iNextTheme" class="mini-button" data-step="-1">
                             <img class="mini-img shadow" src="images/prev.svg" alt="previous">
-                        </div>
-                        <div id="iPrevTheme" class="mini-button" data-step="1">
+                        </button>
+                        <button id="iPrevTheme" class="mini-button" data-step="1">
                             <img class="mini-img shadow" src="images/next.svg" alt="next">
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div class="control">
@@ -200,12 +200,12 @@
                     </div>
                     <div id="lCards"></div>
                     <div class="mini-buttonlist">
-                        <div id="iCardsDown" class="mini-button"  data-step="-1">
+                        <button id="iCardsDown" class="mini-button"  data-step="-1">
                             <img class="mini-img shadow" src="images/prev.svg" alt="minus">
-                        </div>
-                        <div id="iCardsUp" class="mini-button" data-step="1">
+                        </button>
+                        <button id="iCardsUp" class="mini-button" data-step="1">
                             <img class="mini-img shadow" src="images/next.svg" alt="plus">
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div class="control">
@@ -218,21 +218,21 @@
                     </div>
                     <div id="lPlayers"></div>
                     <div class="mini-buttonlist">
-                        <div id="iPlayersDown" class="mini-button"  data-step="-1">
+                        <button id="iPlayersDown" class="mini-button"  data-step="-1">
                             <img class="mini-img shadow" src="images/prev.svg" alt="minus">
-                        </div>
-                        <div id="iPlayersUp" class="mini-button" data-step="1">
+                        </button>
+                        <button id="iPlayersUp" class="mini-button" data-step="1">
                             <img class="mini-img shadow" src="images/next.svg" alt="plus">
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
             <div class="footer">
-                <div id="iStart" class="button">
+                <button id="iStart" class="button">
                     <div class="button-span"><img class="w25 shadow" src="images/next.svg" alt="Start">&nbsp;<span id="lStart">Play</span></div>
-                </div>
+                </button>
             </div>
-        </div>
+        </fieldset>
         <div id="iPopupInfo" class="overflow popup-init">
             <div class="popup">
                 <div class="popup-head"></div>
@@ -242,31 +242,31 @@
                     <p id="lLook"></p>
                     <table id="tLinks">
                         <tr>
-                            <td><a href="https://grrd01.github.io/Puzzle" target="_blank" rel="noopener"><img src="images/puzzle.svg" alt="Puzzle" class="w60 shadow"></a></td>
+                            <td><a href="https://grrd01.github.io/Puzzle" target="_blank" rel="noopener" tabindex="-1"><img src="images/puzzle.svg" alt="Puzzle" class="w60 shadow"></a></td>
                             <td><span id="iPuzzle"></span> <a href="https://grrd01.github.io/Puzzle" target="_blank" rel="noopener">grrd's Puzzle</a></td>
                         </tr>
                         <tr>
-                            <td><a href="https://grrd01.github.io/Dice/" target="_blank" rel="noopener"><img src="images/dice.svg" alt="Puzzle" class="w60 shadow"></a></td>
+                            <td><a href="https://grrd01.github.io/Dice/" target="_blank" rel="noopener" tabindex="-1"><img src="images/dice.svg" alt="Puzzle" class="w60 shadow"></a></td>
                             <td><span id="iDice"></span> <a href="https://grrd01.github.io/Dice/" target="_blank" rel="noopener">grrd's Dice</a></td>
                         </tr>
                         <tr>
-                            <td><a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener"><img src="images/4inarow.svg" alt="4 in a Row" class="w60 shadow"></a></td>
+                            <td><a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener" tabindex="-1"><img src="images/4inarow.svg" alt="4 in a Row" class="w60 shadow"></a></td>
                             <td><span id="iRow"></span> <a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener">grrd's 4 in a Row</a></td>
                         </tr>
                         <tr>
-                            <td><a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener"><img src="images/tictactoe.svg" alt="TicTacToe" class="w60 shadow"></a></td>
+                            <td><a href="https://grrd01.github.io/4inaRow/" target="_blank" rel="noopener" tabindex="-1"><img src="images/tictactoe.svg" alt="TicTacToe" class="w60 shadow"></a></td>
                             <td><span id="iTicTacToe"></span> <a href="https://grrd01.github.io/TicTacToe/" target="_blank" rel="noopener">grrd's Tic Tac Toe</a></td>
                         </tr>
                         <tr>
-                            <td><a href="mailto:grrd@gmx.net"><img src="images/mail.svg" alt="Mail" class="w60 shadow"></a></td>
+                            <td><a href="mailto:grrd@gmx.net" tabindex="-1"><img src="images/mail.svg" alt="Mail" class="w60 shadow"></a></td>
                             <td>E-mail: <a href="mailto:grrd@gmx.net">grrd@gmx.net</a></td>
                         </tr>
                     </table>
                 </div>
                 <div class="popup-footer">
-                    <div id="iInfoClose" class="button">
+                    <button id="iInfoClose" class="button">
                         <div class="button-span"><img class="w25 shadow" src="images/ok.svg" alt="OK">&nbsp;OK</div>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div class="buffer"></div>
@@ -279,117 +279,118 @@
                         <img src="images/language.svg" class="shadow settings-icon" alt="Language">
                         <div id="lLang" class="settings-label"></div>
                         <div class="mini-buttonlist">
-                            <div id="iNextLang" class="mini-button" data-step="-1">
+                            <button id="iNextLang" class="mini-button" data-step="-1">
                                 <img class="mini-img shadow" src="images/prev.svg" alt="previous">
-                            </div>
-                            <div id="iPrevLang" class="mini-button" data-step="1">
+                            </button>
+                            <button id="iPrevLang" class="mini-button" data-step="1">
                                 <img class="mini-img shadow" src="images/next.svg" alt="next">
-                            </div>
+                            </button>
                         </div>
                     </div>
                     <div class="settings-control settings">
                         <img src="images/bulp.svg" class="shadow settings-icon" alt="Style">
                         <div id="lStyle" class="settings-label"></div>
                         <div class="mini-buttonlist">
-                            <div id="iNextStyle" class="mini-button" data-step="-1">
+                            <button id="iNextStyle" class="mini-button" data-step="-1">
                                 <img class="mini-img shadow" src="images/prev.svg" alt="previous">
-                            </div>
-                            <div id="iPrevStyle" class="mini-button" data-step="1">
+                            </button>
+                            <button id="iPrevStyle" class="mini-button" data-step="1">
                                 <img class="mini-img shadow" src="images/next.svg" alt="next">
-                            </div>
+                            </button>
                         </div>
                     </div>
                     <div class="settings-control settings">
                         <img id="iSound" src="images/sound_on.svg" class="shadow settings-icon" alt="Sound">
                         <div id="lSound" class="settings-label"></div>
                         <div class="mini-buttonlist">
-                            <div id="iNextSound" class="mini-button">
+                            <button id="iNextSound" class="mini-button">
                                 <img class="mini-img shadow" src="images/prev.svg" alt="previous">
-                            </div>
-                            <div id="iPrevSound" class="mini-button">
+                            </button>
+                            <button id="iPrevSound" class="mini-button">
                                 <img class="mini-img shadow" src="images/next.svg" alt="next">
-                            </div>
+                            </button>
                         </div>
                     </div>
                     <div class="settings-control settings">
                         <img id="iOwnImg2" src="images/photo.svg" class="shadow settings-icon" alt="Own Images">
                         <div id="lOwnImg2" class="settings-label"></div>
                         <div class="mini-buttonlist">
-                            <div id="iShowOwnImg" class="mini-button">
+                            <button id="iShowOwnImg" class="mini-button">
                                 <img id="iDown" class="mini-img shadow" src="images/down.svg" alt="collapse">
-                            </div>
+                            </button>
                         </div>
                     </div>
-                    <div id="collapsable">
+                    <fieldset id="iCollapsable" disabled="disabled">
                         <div id="lOwnImg" class="popup-content">Click on a Card to choose an image.</div>
                         <p id="lOwnImgAnz" class="popup-content playownimg">4 more images needed to start the game.</p>
                         <div id="settingsgrid">
-                            <img src="images/back.svg" class="shadow w100 ownimg" alt="Click to choose your image">
+                            <button class="ownimg">
+                                <img src="images/back.svg" class="shadow w100" alt="Click to choose your image">
+                            </button>
                         </div>
-                    </div>
+                    </fieldset>
                 </div>
                 <div class="popup-footer playownimg">
-                    <div id="iSettingsPlay" class="button disabled">
+                    <button id="iSettingsPlay" class="button disabled">
                         <div class="button-span"><img class="w25 shadow" src="images/next.svg" alt="Play">&nbsp;Play</div>
-                    </div>
-                    <div id="iSettingsCancel" class="button">
+                    </button>
+                    <button id="iSettingsCancel" class="button">
                         <div class="button-span"><img class="w25 shadow" src="images/x.svg" alt="Cancel">&nbsp;Cancel</div>
-                    </div>
+                    </button>
                 </div>
                 <div class="popup-footer settings">
-                    <div id="iSettingsClose" class="button">
+                    <button id="iSettingsClose" class="button">
                         <div class="button-span"><img class="w25 shadow" src="images/ok.svg" alt="OK">&nbsp;OK</div>
-                    </div>
+                    </button>
                 </div>
             </div>
             <div class="buffer"></div>
         </div>
     </div>
     <div class="page" id="iGame">
-        <main class="content">
+        <fieldset id="iGameFieldset" class="content">
             <div class="buffer">
                 <div id="iMessage">Player 1 begins</div>
-                <div id="iClose" class="close-button">
+                <button id="iClose" class="close-button">
                     <img src="images/x.svg" alt="close">
-                </div>
+                </button>
             </div>
 
             <div id="grid"></div>
-
-            <div id="iPopupScore" class="overflow popup-init">
-                <div class="popup">
-                    <div class="popup-head"></div>
-                    <div class="popup-body">
-                        <div class="popup-content">
-                            <p id="lWinner"></p>
-                        </div>
-                        <div class="popup-content">
-                            <table id="tScore" class="w100">
-                                <thead>
-                                    <tr>
-                                        <th id="thRank"></th>
-                                        <th id="thPlayer"></th>
-                                        <th id="thPairs"></th>
-                                        <th id="thTries"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
+        </fieldset>
+        <div id="iPopupScore" class="overflow popup-init">
+            <div class="popup">
+                <div class="popup-head"></div>
+                <div class="popup-body">
+                    <div class="popup-content">
+                        <p id="lWinner"></p>
                     </div>
-                    <div class="popup-footer">
-                        <div id="iOK" class="button">
-                            <div class="button-span"><img class="w25 shadow" src="images/ok.svg" alt="OK">&nbsp;OK</div>
-                        </div>
+                    <div class="popup-content">
+                        <table id="tScore" class="w100">
+                            <thead>
+                            <tr>
+                                <th id="thRank"></th>
+                                <th id="thPlayer"></th>
+                                <th id="thPairs"></th>
+                                <th id="thTries"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                <div class="popup-footer">
+                    <button id="iOK" class="button">
+                        <div class="button-span"><img class="w25 shadow" src="images/ok.svg" alt="OK">&nbsp;OK</div>
+                    </button>
+                </div>
             </div>
-        </main>
+        </div>
     </div>
 
     <div id="iDummy" class="hidden">
-        <div class="flip-container">
+        <div class="flip-container" tabindex=0>
             <div class="flipper">
                 <div class="front">
                     <img src="images/back.svg" alt="back" class="shadow">

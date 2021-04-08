@@ -189,6 +189,7 @@
     const lDev = $("lDev");
     const $fullScreen = $("iFullscreen");
     const iSettingsPlay = $("iSettingsPlay");
+    const iCollapsable = $("iCollapsable");
 
     const lTitle2Cards = document.getElementsByClassName("title2card");
 
@@ -317,17 +318,20 @@
 
     // Popup Info
     function fShowPopupInfo() {
+        $("iTitleFieldset").disabled = true;
         iPopupInfo.classList.remove("popup-init");
         iPopupInfo.classList.remove("popup-hide");
         iPopupInfo.classList.add("popup-show");
     }
     function fHidePopupInfo() {
+        $("iTitleFieldset").disabled = false;
         iPopupInfo.classList.remove("popup-show");
         iPopupInfo.classList.add("popup-hide");
     }
     // Popup Settings
     function fShowPopupSettings() {
         fCountOwnImg();
+        $("iTitleFieldset").disabled = true;
         iPopupSettings.classList.remove("popup-init");
         iPopupSettings.classList.remove("popup-hide");
         iPopupSettings.classList.add("popup-show");
@@ -338,6 +342,7 @@
             localStorage.setItem("s_memo_style", nStyle);
             localStorage.setItem("s_memo_lang", nLang);
         }
+        $("iTitleFieldset").disabled = false;
         iPopupSettings.classList.remove("popup-show");
         iPopupSettings.classList.add("popup-hide");
         setTimeout(function () {
@@ -468,6 +473,9 @@
             // falls 2 Karten umgedreht sind
             if (lFlipped[0].getElementsByClassName("image")[0].src === lFlipped[1].getElementsByClassName("image")[0].src) {
                 // falls die zwei Karten gleich sind
+                // aufgedecktes Paar ist nicht mehr selektierbar über Keyboard
+                lFlipped[0].removeAttribute("tabindex");
+                lFlipped[1].removeAttribute("tabindex");
                 // aktueller Spieler + 1 Punkt
                 lScore[nCurrentPlayer] += 1;
                 if (lScore[nCurrentPlayer] === 1) {
@@ -498,6 +506,8 @@
         if (nSound) {
             document.getElementById("woosh_sound").play();
         }
+        // Fokus von aktueller Karte entfernen
+        document.activeElement.blur();
 
         if (oGrid.getElementsByClassName("turned").length === lAnzCards[nAnzCards]) {
             // alle Karten aufgedeckt, Spiel beendet
@@ -554,6 +564,7 @@
                     $("lWinner").innerHTML = lLoc[nLang].player + " " + lScoreBoard[0].player + " " + lLoc[nLang].win + " " + lScoreBoard[0].pairs + " " + lLoc[nLang].pairs2 + ".";
                 }
             }
+            $("iGameFieldset").disabled = true;
             iPopupScore.classList.remove("popup-init");
             iPopupScore.classList.remove("popup-hide");
             iPopupScore.classList.add("popup-show");
@@ -585,7 +596,7 @@
         nAnzOwnImg = 0;
         iSettingsPlay.classList.add("disabled");
         for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
-            if (!$("settingsgrid").children.item(nIndex).src.endsWith("images/back.svg")) {
+            if (!$("settingsgrid").getElementsByTagName("IMG").item(nIndex).src.endsWith("images/back.svg")) {
                 nAnzOwnImg += 1;
             }
         }
@@ -722,7 +733,7 @@
                 }
                 context.clearRect(0, 0, max_width, max_height);
                 context.drawImage(imageObj, (this.width / 2) - (nMin / 2) , (this.height / 2) - (nMin / 2), (nMin), (nMin), nTop, nLeft, max_width, max_height);
-                oOwnImg.src = canvas.toDataURL("image/jpeg");
+                oOwnImg.getElementsByTagName("IMG").item(0).src = canvas.toDataURL("image/jpeg");
                 if (localStorageOK) {
                     nIndex = [...oOwnImg.parentElement.children].indexOf(oOwnImg);
                     localStorage.setItem("s_memo_image" + nIndex, canvas.toDataURL("image/jpeg"));
@@ -757,7 +768,7 @@
         for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
             if (nCurrentTheme === 0) {
                 // eigene Bilder
-                if (!$("settingsgrid").children.item(nIndex).src.endsWith("images/back.svg")) {
+                if (!$("settingsgrid").getElementsByTagName("IMG").item(nIndex).src.endsWith("images/back.svg")) {
                     lPairs.push(nIndex);
                 }
             } else {
@@ -775,7 +786,7 @@
         for (nIndex = 0; nIndex < lAnzCards[nAnzCards]; nIndex += 1) {
             oFlipContainer = $("iDummy").getElementsByClassName("flip-container")[0].cloneNode(true);
             if (nCurrentTheme === 0) {
-                oFlipContainer.getElementsByClassName("image")[0].src = $("settingsgrid").children.item(lCards[nIndex]).src;
+                oFlipContainer.getElementsByClassName("image")[0].src = $("settingsgrid").getElementsByTagName("IMG").item(lCards[nIndex]).src;
             } else {
                 oFlipContainer.getElementsByClassName("image")[0].src = "images/" + lThemes[nCurrentTheme] + "/" + lCards[nIndex] + ".jpg";
             }
@@ -785,6 +796,11 @@
         for (nIndex = 0; nIndex < lFlipContainer.length; nIndex += 1) {
             // Click-Event auf Karten legen
             lFlipContainer[nIndex].onclick = fClickHandler(lFlipContainer[nIndex]);
+            lFlipContainer[nIndex].onkeyup = function(e){
+                if (e.which === 13 || e.which === 32) {
+                    fFlipCard(e.target);
+                }
+            }
         }
         fCardSize();
 
@@ -802,6 +818,7 @@
     }
 
     function fCloseScore() {
+        $("iGameFieldset").disabled = false;
         iPopupScore.classList.remove("popup-show");
         iPopupScore.classList.add("popup-hide");
         setTimeout(function () {
@@ -820,7 +837,8 @@
 
     function fStartInit() {
         if (nCurrentTheme === 0) {
-            $("collapsable").classList.add("show");
+            iCollapsable.classList.add("show");
+            iCollapsable.disabled = false;
             $("iDown").classList.add("rotate");
             iPopupSettings.classList.add("play");
             fShowPopupSettings();
@@ -894,7 +912,8 @@
             toggleFullScreen();
         });
         $("iShowOwnImg").addEventListener("click", function () {
-            $("collapsable").classList.toggle("show");
+            iCollapsable.classList.toggle("show");
+            iCollapsable.disabled = !$("iCollapsable").disabled;
             $("iDown").classList.toggle("rotate");
         });
         try {
@@ -945,7 +964,7 @@
             // eigene Bilder aus LocalStorage laden
             for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
                 if (localStorage.getItem("s_memo_image" + nIndex) !== null) {
-                    $("settingsgrid").children.item(nIndex).src = localStorage.getItem("s_memo_image" + nIndex);
+                    $("settingsgrid").getElementsByTagName("IMG").item(nIndex).src = localStorage.getItem("s_memo_image" + nIndex);
                 }
             }
         }
