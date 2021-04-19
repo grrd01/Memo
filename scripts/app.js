@@ -456,6 +456,7 @@
                 lFlipped = [];
             }
             // passende Aufgedeckte Karten nicht spielbar
+            document.activeElement.blur();
             return;
         }
 
@@ -594,7 +595,7 @@
     // Eigene Bilder zählen
     function fCountOwnImg () {
         nAnzOwnImg = 0;
-        iSettingsPlay.classList.add("disabled");
+        iSettingsPlay.disabled = true;
         for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
             if (!$("settingsgrid").getElementsByTagName("IMG").item(nIndex).src.endsWith("images/back.svg")) {
                 nAnzOwnImg += 1;
@@ -612,7 +613,7 @@
         } else {
             // genug eigene Bilder
             $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz4;
-            iSettingsPlay.classList.remove("disabled");
+            iSettingsPlay.disabled = false;
         }
     }
 
@@ -845,6 +846,107 @@
         } else {
             fStartGame();
         }
+    }
+
+    document.onkeydown = function (e) {
+        // mit Pfeiltasten navigieren
+        const cEl = document.activeElement;
+
+        let lElements;
+        let nIndexEl;
+
+        if (iPopupSettings.classList.contains("popup-show")) {
+            // im Settings-Popup
+            lElements = Array.prototype.slice.call(document.querySelectorAll("#iPopupSettings button:not(:disabled, :disabled button, .play .settings button, .playownimg button), #iPopupSettings.play .playownimg button:not(:disabled)"), 0);
+            nIndexEl = lElements.indexOf(cEl);
+            switch (e.key) {
+                case "ArrowUp":
+                case "ArrowLeft":
+                    if (nIndexEl > 0) {
+                        lElements[lElements.indexOf(cEl) - 1].focus();
+                    }
+                    break;
+                case "ArrowDown":
+                case "ArrowRight":
+                    if (nIndexEl < lElements.length - 1) {
+                        lElements[lElements.indexOf(cEl) + 1].focus();
+                    }
+                    break;
+                case "Escape":
+                    fHidePopupSettings();
+            }
+        } else if (iPopupInfo.classList.contains("popup-show")) {
+            // im Info-Popup
+            lElements = Array.prototype.slice.call(iPopupInfo.getElementsByTagName('BUTTON'), 0);
+            nIndexEl = lElements.indexOf(cEl);
+            switch (e.key) {
+                case "ArrowUp":
+                case "ArrowLeft":
+                    if (nIndexEl > 0) {
+                        lElements[lElements.indexOf(cEl) - 1].focus();
+                    }
+                    break;
+                case "ArrowDown":
+                case "ArrowRight":
+                    if (nIndexEl < lElements.length - 1) {
+                        lElements[lElements.indexOf(cEl) + 1].focus();
+                    }
+                    break;
+                case "Escape":
+                    fHidePopupInfo();
+            }
+        } else if (iPopupScore.classList.contains("popup-show")) {
+            // im Score-Popup
+            switch (e.key) {
+                case "ArrowUp":
+                case "ArrowLeft":
+                case "ArrowDown":
+                case "ArrowRight":
+                    $("iOK").focus();
+                    break;
+                case "Escape":
+                    fCloseScore();
+            }
+        } else if (iGame.classList.contains("swipe-in")) {
+            // im Game
+            lElements = Array.prototype.slice.call(document.querySelectorAll("#iClose, #grid .flip-container[tabindex = '0']"), 0);
+            nIndexEl = lElements.indexOf(cEl);
+            switch (e.key) {
+                case "ArrowUp":
+                case "ArrowLeft":
+                    if (nIndexEl > 0) {
+                        lElements[lElements.indexOf(cEl) - 1].focus();
+                    }
+                    break;
+                case "ArrowDown":
+                case "ArrowRight":
+                    if (nIndexEl < lElements.length - 1) {
+                        lElements[lElements.indexOf(cEl) + 1].focus();
+                    }
+                    break;
+                case "Escape":
+                    fQuitGame();
+            }
+        } else {
+            // auf Titel-Screen
+            lElements = Array.prototype.slice.call(document.getElementById("iTitleFieldset").getElementsByTagName('BUTTON'), 0);
+            nIndexEl = lElements.indexOf(cEl);
+            switch (e.key) {
+                case "ArrowUp":
+                case "ArrowLeft":
+                    if (nIndexEl > 0) {
+                        lElements[lElements.indexOf(cEl) - 1].focus();
+                    }
+                    break;
+                case "ArrowDown":
+                case "ArrowRight":
+                    if (nIndexEl < lElements.length - 1) {
+                        lElements[lElements.indexOf(cEl) + 1].focus();
+                    }
+            }
+        }
+
+
     }
 
     function fInit() {
