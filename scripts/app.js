@@ -316,9 +316,36 @@
         return lArray;
     }
 
+    // Eigene Bilder zählen
+    function fCountOwnImg () {
+        nAnzOwnImg = 0;
+        iSettingsPlay.disabled = true;
+        for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
+            if (!$("settingsgrid").getElementsByTagName("IMG").item(nIndex).src.endsWith("images/back.svg")) {
+                nAnzOwnImg += 1;
+            }
+        }
+        if (nAnzOwnImg === 0) {
+            // Kein eigenes Bild
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz.replace("lAnz", (lAnzCards[nAnzCards] / 2));
+        } else if ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg > 1) {
+            // mehrere eigene Bilder zu wenig
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz2.replace("lAnz", ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg));
+        } else if ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg === 1) {
+            // ein eigenes Bild zu wenig
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz3.replace("lAnz", "1");
+        } else {
+            // genug eigene Bilder
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz4;
+            iSettingsPlay.disabled = false;
+        }
+    }
+
     // Popup Info
     function fShowPopupInfo() {
         $("iTitleFieldset").disabled = true;
+        // Fix for Firefox OnKeydown
+        document.activeElement.blur();
         iPopupInfo.classList.remove("popup-init");
         iPopupInfo.classList.remove("popup-hide");
         iPopupInfo.classList.add("popup-show");
@@ -332,6 +359,8 @@
     function fShowPopupSettings() {
         fCountOwnImg();
         $("iTitleFieldset").disabled = true;
+        // Fix for Firefox OnKeydown
+        document.activeElement.blur();
         iPopupSettings.classList.remove("popup-init");
         iPopupSettings.classList.remove("popup-hide");
         iPopupSettings.classList.add("popup-show");
@@ -566,6 +595,8 @@
                 }
             }
             $("iGameFieldset").disabled = true;
+            // Fix for Firefox OnKeydown
+            document.activeElement.blur();
             iPopupScore.classList.remove("popup-init");
             iPopupScore.classList.remove("popup-hide");
             iPopupScore.classList.add("popup-show");
@@ -590,31 +621,6 @@
             oOwnImg = oCard;
             $("b_image_input").click();
         };
-    }
-
-    // Eigene Bilder zählen
-    function fCountOwnImg () {
-        nAnzOwnImg = 0;
-        iSettingsPlay.disabled = true;
-        for (nIndex = 0; nIndex < nMaxPairs; nIndex += 1) {
-            if (!$("settingsgrid").getElementsByTagName("IMG").item(nIndex).src.endsWith("images/back.svg")) {
-                nAnzOwnImg += 1;
-            }
-        }
-        if (nAnzOwnImg === 0) {
-            // Kein eigenes Bild
-            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz.replace("lAnz", (lAnzCards[nAnzCards] / 2));
-        } else if ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg > 1) {
-            // mehrere eigene Bilder zu wenig
-            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz2.replace("lAnz", ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg));
-        } else if ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg === 1) {
-            // ein eigenes Bild zu wenig
-            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz3.replace("lAnz", "1");
-        } else {
-            // genug eigene Bilder
-            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz4;
-            iSettingsPlay.disabled = false;
-        }
     }
 
     // returns a promise that resolves to true  if the browser automatically
@@ -798,7 +804,7 @@
             // Click-Event auf Karten legen
             lFlipContainer[nIndex].onclick = fClickHandler(lFlipContainer[nIndex]);
             lFlipContainer[nIndex].onkeyup = function(e){
-                if (e.which === 13 || e.which === 32) {
+                if (e.key === "Enter" || e.key === "Space" || e.key === " ") {
                     fFlipCard(e.target);
                 }
             }
@@ -874,10 +880,11 @@
                     break;
                 case "Escape":
                     fHidePopupSettings();
+                    break;
             }
         } else if (iPopupInfo.classList.contains("popup-show")) {
             // im Info-Popup
-            lElements = Array.prototype.slice.call(iPopupInfo.getElementsByTagName('BUTTON'), 0);
+            lElements = Array.prototype.slice.call(iPopupInfo.getElementsByTagName("BUTTON"), 0);
             nIndexEl = lElements.indexOf(cEl);
             switch (e.key) {
                 case "ArrowUp":
@@ -894,6 +901,7 @@
                     break;
                 case "Escape":
                     fHidePopupInfo();
+                    break;
             }
         } else if (iPopupScore.classList.contains("popup-show")) {
             // im Score-Popup
@@ -906,6 +914,7 @@
                     break;
                 case "Escape":
                     fCloseScore();
+                    break;
             }
         } else if (iGame.classList.contains("swipe-in")) {
             // im Game
@@ -926,10 +935,11 @@
                     break;
                 case "Escape":
                     fQuitGame();
+                    break;
             }
         } else {
             // auf Titel-Screen
-            lElements = Array.prototype.slice.call(document.getElementById("iTitleFieldset").getElementsByTagName('BUTTON'), 0);
+            lElements = Array.prototype.slice.call(document.getElementById("iTitleFieldset").getElementsByTagName("BUTTON"), 0);
             nIndexEl = lElements.indexOf(cEl);
             switch (e.key) {
                 case "ArrowUp":
@@ -943,6 +953,7 @@
                     if (nIndexEl < lElements.length - 1) {
                         lElements[lElements.indexOf(cEl) + 1].focus();
                     }
+                    break;
             }
         }
 
@@ -963,15 +974,15 @@
             nLang = 4;
         }
         if (localStorageOK) {
-            nSound = localStorage.getItem("s_memo_sound") === null
-                ? 1
-                : parseInt(localStorage.getItem("s_memo_sound"));
-            nStyle = localStorage.getItem("s_memo_style") === null
-                ? 1
-                : parseInt(localStorage.getItem("s_memo_style"));
-            nLang = localStorage.getItem("s_memo_lang") === null
-                ? nLang
-                : parseInt(localStorage.getItem("s_memo_lang"));
+            nSound = (
+                localStorage.getItem("s_memo_sound") === null ? 1 : parseInt(localStorage.getItem("s_memo_sound"))
+            );
+            nStyle = (
+                localStorage.getItem("s_memo_style") === null ? 1 : parseInt(localStorage.getItem("s_memo_style"))
+            );
+            nLang = (
+                localStorage.getItem("s_memo_lang") === null ? nLang : parseInt(localStorage.getItem("s_memo_lang"))
+            );
         }
         fSetLang();
 
