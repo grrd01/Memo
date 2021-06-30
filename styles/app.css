@@ -535,7 +535,7 @@ button:focus, .flip-container:focus {
     color: white;
     font-size: large;
 }
-.button-span:active {
+.button:active > .button-span {
     margin-top: 0;
 }
 .button-span > img {
