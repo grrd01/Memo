@@ -327,10 +327,10 @@
         }
         if (nAnzOwnImg === 0) {
             // Kein eigenes Bild
-            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz.replace("lAnz", (lAnzCards[nAnzCards] / 2));
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz.replace("lAnz", (lAnzCards[nAnzCards] / 2).toString());
         } else if ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg > 1) {
             // mehrere eigene Bilder zu wenig
-            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz2.replace("lAnz", ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg));
+            $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz2.replace("lAnz", ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg).toString());
         } else if ((lAnzCards[nAnzCards] / 2) - nAnzOwnImg === 1) {
             // ein eigenes Bild zu wenig
             $("lOwnImgAnz").innerHTML = lLoc[nLang].ownanz3.replace("lAnz", "1");
@@ -543,7 +543,7 @@
             // alle Karten aufgedeckt, Spiel beendet
             if (nAnzPlayer === 1) {
                 tScore.classList.add("hidden");
-                $("lWinner").innerHTML = lLoc[nLang].stats.replace("lCards", (lAnzCards[nAnzCards] / 2)).replace("lTries", (lTries[0] / 2));
+                $("lWinner").innerHTML = lLoc[nLang].stats.replace("lCards", (lAnzCards[nAnzCards] / 2).toString()).replace("lTries", (lTries[0] / 2).toString());
             } else {
                 const tHeadScore = document.createElement("tbody");
                 let tRow;
@@ -1000,11 +1000,25 @@
         // Event-Handler auf Buttons
         $("iInfo").addEventListener("click", fShowPopupInfo);
         $("iInfoClose").addEventListener("click", fHidePopupInfo);
+        iPopupInfo.addEventListener("click", function (e) {
+            if (e.target === iPopupInfo) {
+                fHidePopupInfo();
+            }
+        });
         $("iSettings").addEventListener("click", fShowPopupSettings);
         $("iSettingsClose").addEventListener("click", fHidePopupSettings);
         $("iSettingsCancel").addEventListener("click", fHidePopupSettings);
+        iPopupSettings.addEventListener("click", function (e) {
+            if (e.target === iPopupSettings) {
+                fHidePopupSettings();
+            }
+        });
         iSettingsPlay.addEventListener("click", fHidePopupSettings);
-        iSettingsPlay.addEventListener("click", fStartGame);
+        iSettingsPlay.addEventListener("click", function () {
+            setTimeout(function () {
+                fStartGame();
+            }, 600);
+        });
         $("iNextLang").addEventListener("click", fChangeLang);
         $("iPrevLang").addEventListener("click", fChangeLang);
         $("iNextStyle").addEventListener("click", fChangeStyle);
@@ -1020,6 +1034,11 @@
         $("iStart").addEventListener("click", fStartInit);
         $("iClose").addEventListener("click", fQuitGame);
         $("iOK").addEventListener("click", fCloseScore);
+        iPopupScore.addEventListener("click", function (e) {
+            if (e.target === iPopupScore) {
+                fCloseScore();
+            }
+        });
         lDev.addEventListener("click", fShowMascha);
         $fullScreen.addEventListener("click", function () {
             toggleFullScreen();
