@@ -10,7 +10,7 @@
 /*jslint devel: true, browser: true, long: true */ /*global self fetch */
 
 const CACHE_NAME = "grrds-Memo-cache";
-const CACHE_VERSION = "v4.3";
+const CACHE_VERSION = "v4.4";
 const CACHE = CACHE_NAME + "-" + CACHE_VERSION;
 
 const urlsToCache = [
@@ -121,6 +121,7 @@ const urlsToCache = [
     "images/player5.svg",
     "images/prev.svg",
     "images/puzzle.svg",
+    "images/reversi.svg",
     "images/settings.svg",
     "images/sound_off.svg",
     "images/sound_on.svg",
